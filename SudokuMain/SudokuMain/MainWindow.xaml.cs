@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
 using System.IO;
+using System.Windows.Media.Animation;
 
 namespace SudokuMain
 {
@@ -23,10 +24,12 @@ namespace SudokuMain
     public partial class MainWindow : Window
     {
         SudokuLevels game = new SudokuLevels();
+        bool animationLeftRight;
 
         public MainWindow()
         {
             InitializeComponent();
+            animationLeftRight = true;
             game.SetLevel(0, 2);
             initBoard();
             getHighScore();
@@ -126,6 +129,21 @@ namespace SudokuMain
 
         }
 
+        private void Button_Hint_Click(object sender, RoutedEventArgs e)
+        {
+            Storyboard myBoard;
+                myBoard = (Storyboard)this.Resources["showSettings"];
+                myBoard.Begin();
+
+        }
+
+        private void Button_Close_Settings(object sender, RoutedEventArgs e)
+        {
+            Storyboard myBoard;
+                myBoard = (Storyboard)this.Resources["hideSettings"];
+                myBoard.Begin();
+                animationLeftRight = true; ;
+        }
 
     }
 }
