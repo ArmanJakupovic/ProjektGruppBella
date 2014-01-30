@@ -31,7 +31,6 @@ namespace SudokuMain
             game.SetLevel(2, 3);
             initBoard();
             getHighScore();
-            saveGame();
         }
 
         //Fyller spelplanen med tecken från currentLevel.Unsolved
@@ -107,29 +106,44 @@ namespace SudokuMain
                 reader.Close();
             }
             else
-                File.CreateText("highscore.sdk");
+                File.Create("highscore.sdk");
         }
 
-        //Sparar ner spelet och dess lösning och settings
+        //Sparar ner spelet och dess lösning
         private void saveGame()
         {
             StreamWriter writer = new StreamWriter(File.Create("savedGame.sdk"));
+            writer.WriteLine("[" + game.levels[game.currentDifficulty].difficulty.ToString() + "," + game.levels[game.currentLevel].level.ToString() + "]");
             string unsolved = string.Empty;
             string solved = string.Empty;
+
+            //Skriver ner nuvarande spel
             for (int y = 0; y < 9; y++)
             {
                 for (int x = 0; x < 9; x++)
-                { 
-                    if(game.levels[game.currentLevel].Unsolved[y, x].ToString() == null)
-                        unsolved += " ";
+                {
+                    if (game.levels[game.currentLevel].Unsolved[y, x].ToString() == " ")
+                        unsolved += ".";
+                    else if (game.levels[game.currentLevel].Unsolved[y, x].Substring(0, 1) == "-")
+                        unsolved += game.levels[game.currentLevel].Unsolved[y, x].Substring(1, 1);
                     else
                         unsolved += game.levels[game.currentLevel].Unsolved[y, x].ToString();
+                }
+                writer.WriteLine(unsolved);
+                unsolved = string.Empty;
+            }
+            writer.WriteLine();//Tom rad
 
+            //Skriver ner lösningen
+            for (int y = 0; y < 9; y++)
+            {
+                for (int x = 0; x < 9; x++)
+                {
                     solved += game.levels[game.currentLevel].Solved[y, x].ToString();
                 }
+                writer.WriteLine(solved);
+                solved = string.Empty;
             }
-            writer.WriteLine(unsolved);
-            writer.WriteLine(solved);
             writer.Close();
         }
 
@@ -156,6 +170,7 @@ namespace SudokuMain
 
         private void Button_Hint_Click(object sender, RoutedEventArgs e)
         {
+            saveGame();
             Storyboard myBoard;
                 myBoard = (Storyboard)this.Resources["showSettings"];
                 myBoard.Begin();
