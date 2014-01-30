@@ -28,7 +28,7 @@ namespace SudokuMain
         public MainWindow()
         {
             InitializeComponent();
-            game.SetLevel(0, 2);
+            game.SetLevel(2, 3);
             initBoard();
             getHighScore();
             saveGame();
@@ -89,9 +89,12 @@ namespace SudokuMain
                 }
             }
 
-            string nummer = cube.GetLabelContent(lblFound);
-            //MessageBox.Show("Ruta: " + indexnr.ToString() + ", Label: " + lblFound.ToString() + ", Innehåll: " + nummer);
-            updateMatrix(indexnr, lblFound, "X");
+            if (lblFound >= 0)
+            {
+                string nummer = cube.GetLabelContent(lblFound);
+                //MessageBox.Show("Ruta: " + indexnr.ToString() + ", Label: " + lblFound.ToString() + ", Innehåll: " + nummer);
+                updateMatrix(indexnr, lblFound, "X");
+            }
         }
 
         //Hämtar highscore för den specifika banan

@@ -29,7 +29,7 @@ namespace SudokuMain
             readFromFile();             //Läs in alla banor från filen
         }
 
-        //Begär en ny bana med diff=0-3 och nr=0-5
+        //Begär en ny bana med diff=0-2 och nr=0-4
         //Om banan inte hittas sätts aktuell bana till 0 och svårighetsgrad = 0
         //Dessa finns alltid eftersom de inte läses från fil
         public void SetLevel(int diff, int nr)
@@ -37,7 +37,7 @@ namespace SudokuMain
             Level retLevel = levels.FirstOrDefault(x => x.difficulty == diff && x.level == nr);
             if (retLevel != null)
             {
-                currentLevel = nr;
+                currentLevel = levels.FindIndex(x => x.difficulty == diff && x.level == nr);
                 currentDifficulty = diff;
             }
             else
@@ -58,7 +58,7 @@ namespace SudokuMain
 
             try
             {
-                StreamReader inStream = new StreamReader(@"..\..\SudokuLevels.txt");
+                StreamReader inStream = new StreamReader(@"SudokuLevels.sdk");
 
                 string line = inStream.ReadLine();
 
