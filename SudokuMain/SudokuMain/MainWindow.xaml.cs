@@ -24,15 +24,14 @@ namespace SudokuMain
     public partial class MainWindow : Window
     {
         SudokuLevels game = new SudokuLevels();
-        bool animationLeftRight;
 
         public MainWindow()
         {
             InitializeComponent();
-            animationLeftRight = true;
             game.SetLevel(0, 2);
             initBoard();
             getHighScore();
+            saveGame();
         }
 
         //Fyller spelplanen med tecken från currentLevel.Unsolved
@@ -98,14 +97,37 @@ namespace SudokuMain
         //Hämtar highscore för den specifika banan
         private void getHighScore()
         {
-            if (File.Exists("highscore.txt"))
+            if (File.Exists("highscore.sdk"))
             {
-                StreamReader reader = new StreamReader("highscore.txt");
+                StreamReader reader = new StreamReader("highscore.sdk");
                 txtHighScore.Text = reader.ReadToEnd();
                 reader.Close();
             }
             else
-                File.CreateText("highscore.txt");
+                File.CreateText("highscore.sdk");
+        }
+
+        //Sparar ner spelet och dess lösning och settings
+        private void saveGame()
+        {
+            StreamWriter writer = new StreamWriter(File.Create("savedGame.sdk"));
+            string unsolved = string.Empty;
+            string solved = string.Empty;
+            for (int y = 0; y < 9; y++)
+            {
+                for (int x = 0; x < 9; x++)
+                { 
+                    if(game.levels[game.currentLevel].Unsolved[y, x].ToString() == null)
+                        unsolved += " ";
+                    else
+                        unsolved += game.levels[game.currentLevel].Unsolved[y, x].ToString();
+
+                    solved += game.levels[game.currentLevel].Solved[y, x].ToString();
+                }
+            }
+            writer.WriteLine(unsolved);
+            writer.WriteLine(solved);
+            writer.Close();
         }
 
         //Hantering av knappen Check som ska rätta spelplanen
@@ -142,7 +164,6 @@ namespace SudokuMain
             Storyboard myBoard;
                 myBoard = (Storyboard)this.Resources["hideSettings"];
                 myBoard.Begin();
-                animationLeftRight = true; ;
         }
 
     }
