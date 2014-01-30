@@ -218,5 +218,32 @@ namespace SudokuMain
                 }
             return errorList;
         } //CheckMatch
+
+        //Returnerar en position i matrisen som inte är satt
+        public int GetHint()
+        {
+            Random rnd = new Random();
+            bool hintExist = false;
+            List<int> hintList = new List<int>();
+            int pos = 0;
+            int retValue = -1;
+
+            //Skapar en lista med möjliga tips
+            for (int y = 0; y < 9; y++)
+                for (int x = 0; x < 9; x++)
+                {
+                    if (levels[currentLevel].Unsolved[y, x] == " ")
+                    {
+                        hintExist = true;
+                        hintList.Add(pos);
+                    }
+                    pos++;
+                }
+
+            if(hintExist)
+                retValue = rnd.Next(0, hintList.Count);
+            
+            return retValue;
+        } //GetHint
     }
 }
