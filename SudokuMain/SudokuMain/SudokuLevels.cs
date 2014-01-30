@@ -27,6 +27,7 @@ namespace SudokuMain
             levels = new List<Level>();
             levelZero();                //Hämtar en bana som finns ifall det filen med levels saknas
             readFromFile();             //Läs in alla banor från filen
+            //loadGame();
         }
 
         //Begär en ny bana med diff=0-3 och nr=0-5
@@ -48,6 +49,58 @@ namespace SudokuMain
             
         } //SetLevel
 
+        //Laddar tidigare spel
+        private void loadGame()
+        {
+            char[] delimiters = new char[] { '[', ']', ',' }; //För att ta bort oönskade tecken
+            string[] info = new string[2];
+            
+            try
+            {
+                StreamReader loadStream = new StreamReader("savedGame.sdk");
+
+                string line = loadStream.ReadLine();
+                Level newLevel = new Level();
+                string[] parts = line.Split(delimiters,
+                 StringSplitOptions.RemoveEmptyEntries);
+
+                newLevel.difficulty = Convert.ToInt16(parts[0]);
+                newLevel.level = Convert.ToInt16(parts[1]);
+
+                //Läser in spelplanen
+                for (int y = 0; y < 9; y++)
+                {
+                    line = loadStream.ReadLine();
+                    for (int x = 0; x < 9; x++)
+                    {
+                        if (char.IsDigit(line[x]))
+                            newLevel.Unsolved[y, x] = "-" + line[x].ToString();
+                        else if (line[x] == 'X')
+                            newLevel.Unsolved[y, x] = "X";
+                        else
+                            newLevel.Unsolved[y, x] = " ";
+                    }
+                }
+
+                loadStream.ReadLine(); //tomrad
+
+                //Läser in den korrekta lösningen
+                for (int y = 0; y < 9; y++)
+                {
+                    line = loadStream.ReadLine();
+                    for (int x = 0; x < 9; x++)
+                    {
+                        newLevel.Solved[y, x] = line[x].ToString();
+                    }
+                }
+                levels.Add(newLevel);
+                loadStream.Close();
+            }
+            catch (IOException e)
+            {
+                System.Windows.MessageBox.Show(e.Message + "\nFel vid laddning av tidigare spel");
+            }
+        }//laddar spel från textfil
         
         //Läser in alla nivåer från fil och lägger dessa i en lista
         private void readFromFile()
@@ -103,6 +156,7 @@ namespace SudokuMain
                     line = inStream.ReadLine(); //tomrad
                     line = inStream.ReadLine();
                 }
+                inStream.Close();
             }
             catch (IOException e)
             {
