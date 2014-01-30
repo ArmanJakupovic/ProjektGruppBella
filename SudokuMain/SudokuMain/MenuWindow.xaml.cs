@@ -46,5 +46,29 @@ namespace SudokuMain
         {
             Application.Current.Shutdown();
         }
+
+        private void btnOptions_Click(object sender, RoutedEventArgs e)
+        {
+            gridButtons.Visibility = Visibility.Collapsed;
+            gridOptions.Visibility = Visibility.Visible;
+
+            //TODO Ladda in inställningar från textfil, m.h.a klass
+        }
+
+        //Tillbaka till Menu utan att spara inställningar
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            gridButtons.Visibility = Visibility.Visible;
+            gridOptions.Visibility = Visibility.Collapsed;
+            
+            //TODO Göra så ändringar återställs. Kanske kommer hända automatiskt om vi använder en klass för att ladda in från fil.
+        }
+
+        //Tillbaka till Menu och spara inställningar
+        private void btnApply_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Applied\n (fast inte på riktigt än)");
+            //TODO använd en klass för att spara inställningar till textfil.
+        }
     }
 }
