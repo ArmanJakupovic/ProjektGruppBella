@@ -23,7 +23,7 @@ namespace SudokuMain
         public MenuWindow()
         {
             InitializeComponent();
-            if (File.Exists("TextFiles\\NamnPåSparatSpel.txt"))//Om sparat visa continue
+            if (File.Exists("savedGame.sdk"))//Om sparat visa continue
                 btnContinue.Visibility = Visibility.Visible;
             else
                 btnContinue.Visibility = Visibility.Collapsed;
@@ -38,6 +38,8 @@ namespace SudokuMain
 
         private void btnContinue_Click(Object sender, RoutedEventArgs args)
         {
+            MainWindow game = new MainWindow();
+            game.Show();
         }
 
         private void btnExit_Click(Object sender, RoutedEventArgs args)
