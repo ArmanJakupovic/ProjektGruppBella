@@ -92,7 +92,9 @@ namespace SudokuMain
             {
                 string nummer = cube.GetLabelContent(lblFound);
                 //MessageBox.Show("Ruta: " + indexnr.ToString() + ", Label: " + lblFound.ToString() + ", Innehåll: " + nummer);
-                updateMatrix(indexnr, lblFound, "X");
+                string myNr = "X";
+                openPopup(ref myNr);
+                updateMatrix(indexnr, lblFound, myNr);
             }
         }
 
