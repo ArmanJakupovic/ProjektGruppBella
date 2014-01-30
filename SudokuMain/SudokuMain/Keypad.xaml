@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="SudokuMain.Keypad"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="100">
+    <Popup Name="keypad_Popup" Width="100" Height="100" IsOpen="False" Placement="MousePoint" PopupAnimation="Slide" StaysOpen="False" AllowsTransparency="True">
+        <Popup.Effect>
+            <DropShadowEffect BlurRadius="10" ShadowDepth="10"/>
+        </Popup.Effect>
+        <UniformGrid Rows="3" Columns="3" Background="Beige">
+            <Button Name="one" Height="30" Width="30" Click="returnNumpadValue">1</Button>
+            <Button Name="two" Height="30" Width="30" Click="returnNumpadValue">2</Button>
+            <Button Name="three" Height="30" Width="30" Click="returnNumpadValue">3</Button>
+            <Button Name="four" Height="30" Width="30" Click="returnNumpadValue">4</Button>
+            <Button Name="five" Height="30" Width="30" Click="returnNumpadValue">5</Button>
+            <Button Name="six" Height="30" Width="30" Click="returnNumpadValue">6</Button>
+            <Button Name="seven" Height="30" Width="30" Click="returnNumpadValue">7</Button>
+            <Button Name="eight" Height="30" Width="30" Click="returnNumpadValue">8</Button>
+            <Button Name="nine" Height="30" Width="30" Click="returnNumpadValue">9</Button>
+        </UniformGrid>
+    </Popup>
+</UserControl>
