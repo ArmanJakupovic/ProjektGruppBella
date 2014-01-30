@@ -20,6 +20,7 @@ namespace SudokuMain
     /// </summary>
     public partial class MenuWindow : Window
     {
+        Settings _set = new Settings(); // inställningar, används vid uppstart och via funktionen btnOptions_Click
         public MenuWindow()
         {
             InitializeComponent();
@@ -47,12 +48,25 @@ namespace SudokuMain
             Application.Current.Shutdown();
         }
 
+        //Visar menyn under Options, laddar in inställningar från fil.
         private void btnOptions_Click(object sender, RoutedEventArgs e)
         {
+            _set.loadSettings();
+
             gridButtons.Visibility = Visibility.Collapsed;
             gridOptions.Visibility = Visibility.Visible;
 
-            //TODO Ladda in inställningar från textfil, m.h.a klass
+            showTimer.IsChecked = _set.getTimer();
+            enableHighscore.IsChecked = _set.getHighscore();
+            enableAnimation.IsChecked = _set.getAnimation();
+
+            int diff = _set.getDifficulty();
+            if (diff == 0)
+                difficultyBeginner.IsChecked = true;
+            else if (diff == 1)
+                difficultyExperienced.IsChecked = true;
+            else if (diff == 2)
+                difficultyVeteran.IsChecked = true;
         }
 
         //Tillbaka till Menu utan att spara inställningar
@@ -67,8 +81,21 @@ namespace SudokuMain
         //Tillbaka till Menu och spara inställningar
         private void btnApply_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Applied\n (fast inte på riktigt än)");
-            //TODO använd en klass för att spara inställningar till textfil.
+            bool time = showTimer.IsChecked == true;
+            bool score = enableHighscore.IsChecked == true;
+            bool ani = enableAnimation.IsChecked == true;
+
+            int diff = 0; //Beginner
+            if (difficultyExperienced.IsChecked == true)
+                diff = 1;
+            else if (difficultyVeteran.IsChecked == true)
+                diff = 2;
+
+            Settings set = new Settings(time, score, ani, diff);
+            set.saveSettings();
+
+            gridButtons.Visibility = Visibility.Visible;
+            gridOptions.Visibility = Visibility.Collapsed;
         }
     }
 }

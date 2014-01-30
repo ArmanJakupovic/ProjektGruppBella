@@ -56,6 +56,7 @@
     <Compile Include="Keypad.xaml.cs">
       <DependentUpon>Keypad.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="SudokuLevels.cs" />
     <Page Include="CubeWithLabels.xaml">
       <SubType>Designer</SubType>
