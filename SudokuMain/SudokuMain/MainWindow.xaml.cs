@@ -184,5 +184,30 @@ namespace SudokuMain
                 myBoard.Begin();
         }
 
+        /**************************************************************/
+        /********************-------ARMAN---------********************/
+        /**************************************************************/
+        /*Kalla på nedanstående metod för att keypaden ska poppa upp.
+         Skicka in ref till den sträng du vill ändra. I detta fallet
+         borde det vara den sträng som som X skrivs till. Det kommer
+         då att skrivas över av en siffra*/
+
+
+        /* ******************************************** 
+         Använd denna kod för att kalla på keypaden. 
+
+              string myNr = "X";
+              openPopup(ref myNr);
+ 
+       *************************************************/
+        private void openPopup(ref string myNr)
+        {
+            Keypad x = new Keypad(ref myNr);
+            x.keypad_Popup.IsOpen = true;
+        }
+        /**************************************************************/
+        /********************-------ARMAN---------********************/
+        /**************************************************************/
+
     }
 }
