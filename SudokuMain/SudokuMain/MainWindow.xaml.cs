@@ -25,7 +25,7 @@ namespace SudokuMain
     {
         SudokuLevels game = new SudokuLevels();
         Highscores _highscores = new Highscores();
-        MainWindow testWindow;
+        MainWindow ourWindow;
         private Keypad _x;
         private int _gridIndexNr;
         private int _lblFound;
@@ -37,7 +37,7 @@ namespace SudokuMain
             initBoard();
             txtHighScore.Text =  _highscores.GetHighScore(3);
             settingButtonsActivation(false);
-            testWindow = this;
+            ourWindow = this;
         }
 
         //Fyller spelplanen med tecken från currentLevel.Unsolved
@@ -102,7 +102,7 @@ namespace SudokuMain
 
             _gridIndexNr = indexnr;
             _lblFound = lblFound;
-            openPopup(ref myNr, ref _gridIndexNr, ref _lblFound, ref testWindow);
+            openPopup(ref myNr, ref _gridIndexNr, ref _lblFound, ref ourWindow);
 
             
     /*        if (lblFound >= 0)
@@ -214,9 +214,9 @@ namespace SudokuMain
          Skicka in ref till den sträng du vill ändra. I detta fallet
          borde det vara den sträng som som X skrivs till. Det kommer
          då att skrivas över av en siffra*/
-        private void openPopup(ref string myNr, ref int indexNr, ref int lblFound, ref MainWindow testWin)
+        private void openPopup(ref string myNr, ref int indexNr, ref int lblFound, ref MainWindow thisWin)
         {
-            _x = new Keypad(ref myNr, ref indexNr, ref lblFound, ref testWin);
+            _x = new Keypad(ref myNr, ref indexNr, ref lblFound, ref thisWin);
         }
 
         //Hanterar klick i keypad på MainWindow

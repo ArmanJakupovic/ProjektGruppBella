@@ -4,24 +4,88 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="116" d:DesignWidth="116">
-    <Popup Name="keypad_Popup" Width="115" Height="115" IsOpen="False" Placement="MousePoint" PopupAnimation="Slide" StaysOpen="False" AllowsTransparency="True">
+             d:DesignHeight="115" d:DesignWidth="115">
+    <Popup Name="keypad_Popup" Width="115" Height="115" IsOpen="False" Placement="MousePoint" PopupAnimation="Fade" StaysOpen="False" AllowsTransparency="True">
         <Popup.Effect>
             <DropShadowEffect BlurRadius="10" ShadowDepth="10"/>
         </Popup.Effect>
-        <UniformGrid Rows="3" Columns="3" Margin="9" Background="#FFD8B087">
+        <UniformGrid Rows="3" Columns="3" Background="#FF761212" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <!--  #FFD8B087-->
             <UniformGrid.Effect>
                 <DropShadowEffect BlurRadius="7" ShadowDepth="3"/>
             </UniformGrid.Effect>
-            <Button Name="one" Height="30" Width="30" Click="returnNumpadValue">1</Button>
-            <Button Name="two" Height="30" Width="30" Click="returnNumpadValue">2</Button>
-            <Button Name="three" Height="30" Width="30" Click="returnNumpadValue">3</Button>
-            <Button Name="four" Height="30" Width="30" Click="returnNumpadValue">4</Button>
-            <Button Name="five" Height="30" Width="30" Click="returnNumpadValue">5</Button>
-            <Button Name="six" Height="30" Width="30" Click="returnNumpadValue">6</Button>
-            <Button Name="seven" Height="30" Width="30" Click="returnNumpadValue">7</Button>
-            <Button Name="eight" Height="30" Width="30" Click="returnNumpadValue">8</Button>
-            <Button Name="nine" Height="30" Width="30" Click="returnNumpadValue">9</Button>
+            <Button Name="one" Height="30" Width="30" Click="returnNumpadValue">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="Moccasin" Offset="0.319"/>
+                        <GradientStop Color="#FFD8B087" Offset="0.016"/>
+                        <GradientStop Color="Moccasin" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background> 1</Button>
+            <Button Name="two" Height="30" Width="30" Click="returnNumpadValue">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="Moccasin" Offset="0.319"/>
+                        <GradientStop Color="#FFD8B087" Offset="0.016"/>
+                        <GradientStop Color="Moccasin" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background> 2</Button>
+            <Button Name="three" Height="30" Width="30" Click="returnNumpadValue">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="Moccasin" Offset="0.319"/>
+                        <GradientStop Color="#FFD8B087" Offset="0.016"/>
+                        <GradientStop Color="Moccasin" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background> 3</Button>
+            <Button Name="four" Height="30" Width="30" Click="returnNumpadValue">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="Moccasin" Offset="0.319"/>
+                        <GradientStop Color="#FFD8B087" Offset="0.016"/>
+                        <GradientStop Color="Moccasin" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background> 4</Button>
+            <Button Name="five" Height="30" Width="30" Click="returnNumpadValue">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="Moccasin" Offset="0.319"/>
+                        <GradientStop Color="#FFD8B087" Offset="0.016"/>
+                        <GradientStop Color="Moccasin" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background> 5</Button>
+            <Button Name="six" Height="30" Width="30" Click="returnNumpadValue">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="Moccasin" Offset="0.319"/>
+                        <GradientStop Color="#FFD8B087" Offset="0.016"/>
+                        <GradientStop Color="Moccasin" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background> 6</Button>
+            <Button Name="seven" Height="30" Width="30" Click="returnNumpadValue">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="Moccasin" Offset="0.319"/>
+                        <GradientStop Color="#FFD8B087" Offset="0.016"/>
+                        <GradientStop Color="Moccasin" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background> 7</Button>
+            <Button Name="eight" Height="30" Width="30" Click="returnNumpadValue">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="Moccasin" Offset="0.319"/>
+                        <GradientStop Color="#FFD8B087" Offset="0.016"/>
+                        <GradientStop Color="Moccasin" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background> 8</Button>
+            <Button Name="nine" Height="30" Width="30" Click="returnNumpadValue">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="Moccasin" Offset="0.319"/>
+                        <GradientStop Color="#FFD8B087" Offset="0.016"/>
+                        <GradientStop Color="Moccasin" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background> 9</Button>
         </UniformGrid>
     </Popup>
 </UserControl>

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:SudokuMain"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="SudokuMain.MainWindow"
-        Title="Sudoku - GruppBella" Height="500 " Width="600">
+        Title="Sudoku - GruppBella" Height="500 " Width="600" MinHeight="400" MinWidth="500">
 	<Window.Resources>
 		<Storyboard x:Key="showSettings">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid1">
@@ -159,22 +159,22 @@
 				<RowDefinition Height="40"/>
 				<RowDefinition Height="30"/>
 				<RowDefinition Height="40"/>
-				<RowDefinition Height="220"/>
-                <RowDefinition Height="*"></RowDefinition>
+				<RowDefinition Height="220*"/>
+                <RowDefinition Height="auto"></RowDefinition>
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 			<Label Grid.Row="0" Grid.Column="0" Content="00:00" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Background="#FF761212" Foreground="Moccasin"/>
 			<Button Name="btnHint" Grid.Row="1" Grid.Column="0" Content="Hint" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" BorderBrush="Black" Height="30" Click="Button_Hint_Click">
-				<Button.Background>
-					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-						<GradientStop Color="Moccasin" Offset="0.319"/>
-						<GradientStop Color="#FFD8B087" Offset="0.016"/>
-						<GradientStop Color="Moccasin" Offset="1"/>
-					</LinearGradientBrush>
-				</Button.Background>
-			</Button>
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="Moccasin" Offset="0.319"/>
+                        <GradientStop Color="#FFD8B087" Offset="0.016"/>
+                        <GradientStop Color="Moccasin" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
 			<Button Name="btnCheck" Grid.Row="2" Grid.Column="0" Content="Check"  FontWeight="SemiBold" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" BorderBrush="Black" Click="Button_Check_Click">
 				<Button.Background>
 					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -187,7 +187,7 @@
 			<GroupBox x:Name="grpHighScore" Grid.Row="3" Grid.Column="0" Header="Highscore" FontSize="14"  Margin="5" BorderBrush="#FF761212" IsEnabled="False">
 				<TextBlock x:Name="txtHighScore" FontSize="12"/>
 			</GroupBox>
-            <GroupBox Header="Keypad" Grid.Row="4" Grid.Column="0" Margin="5,-3,5,5" BorderBrush="#FF761212">
+            <GroupBox Header="Keypad" Grid.Row="4" Grid.Column="0" Margin="5,-3,5,5" BorderBrush="#FF761212" Visibility="Visible">
                 <UniformGrid Name="mainWindowKeypad" Rows="3" Columns="3">
                     <Button Name="one" Height="30" Width="30" Click="returnNumpadValue">1</Button>
                     <Button Name="two" Height="30" Width="30" Click="returnNumpadValue">2</Button>
