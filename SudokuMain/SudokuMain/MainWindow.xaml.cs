@@ -24,6 +24,7 @@ namespace SudokuMain
     public partial class MainWindow : Window
     {
         SudokuLevels game = new SudokuLevels();
+        MainWindow testWindow;
         private Keypad _x;
         private int _gridIndexNr;
         private int _lblFound;
@@ -35,6 +36,7 @@ namespace SudokuMain
             initBoard();
             getHighScore();
             settingButtonsActivation(false);
+            testWindow = this;
         }
 
         //Fyller spelplanen med tecken från currentLevel.Unsolved
@@ -77,13 +79,13 @@ namespace SudokuMain
         //Känner av vilken box man klickar i och hämtar rätt ruta från klassen som också läser av mousebutton
         private void grdBoard_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
-          //  string myNr = "X";
+            string myNr = "X";
             CubeWithLabels cube = sender as CubeWithLabels;
 
             int indexnr = -1;
             int lblFound = -1;
 
-     //Pausad  openPopup(ref myNr);
+            
             
             for (int ix = 0; ix < 9; ix++)
             {
@@ -99,6 +101,9 @@ namespace SudokuMain
 
             _gridIndexNr = indexnr;
             _lblFound = lblFound;
+            openPopup(ref myNr, ref _gridIndexNr, ref _lblFound, ref testWindow);
+
+            
     /*        if (lblFound >= 0)
             {
                 string nummer = cube.GetLabelContent(lblFound);
@@ -108,7 +113,7 @@ namespace SudokuMain
         }
 
         //Kallas på när knapp på keypaden trycks. Uppdaterar gridden.
-        private void markedGridPosUpdate(int indexnr, int lblFound , string myStr)
+        public void markedGridPosUpdate(int indexnr, int lblFound , string myStr)
         {
             if (lblFound >= 0)
             {
@@ -234,9 +239,9 @@ namespace SudokuMain
               openPopup(ref myNr);
  
        *************************************************/
-        private void openPopup(ref string myNr)
+        private void openPopup(ref string myNr, ref int indexNr, ref int lblFound, ref MainWindow testWin)
         {
-            _x = new Keypad(ref myNr);
+            _x = new Keypad(ref myNr, ref indexNr, ref lblFound, ref testWin);
         }
         /**************************************************************/
         /********************-------ARMAN---------********************/

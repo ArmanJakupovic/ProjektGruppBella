@@ -57,7 +57,7 @@ namespace SudokuMain
             else
                 lbl.Background = Brushes.Moccasin;
             if (error)
-                lbl.Background = Brushes.Red;
+                lbl.Background = Brushes.Tomato;
         }
 
         //Skriver innehållet i sträng nr på label ix (0-9)
