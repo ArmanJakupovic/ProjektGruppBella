@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
+using System.Windows.Media.Animation;
 
 namespace SudokuMain
 {
@@ -28,6 +29,8 @@ namespace SudokuMain
                 btnContinue.Visibility = Visibility.Visible;
             else
                 btnContinue.Visibility = Visibility.Collapsed;
+            gridOptions.Visibility = Visibility.Collapsed;
+
         }
 
         private void btnNewGame_Click(Object sender, RoutedEventArgs args)
@@ -53,8 +56,14 @@ namespace SudokuMain
         {
             _set.loadSettings();
 
-            gridButtons.Visibility = Visibility.Collapsed;
-            gridOptions.Visibility = Visibility.Visible;
+         //   gridButtons.Visibility = Visibility.Collapsed;
+         //   gridOptions.Visibility = Visibility.Collapsed;
+
+            /*******ANIMATIONER***************/
+            Storyboard myBoard;
+            myBoard = (Storyboard)this.Resources["moveButtonsDown"];
+            myBoard.Begin();
+            /******SLUT*PÅ*ANIMATIONER*******/
 
             showTimer.IsChecked = _set.getTimer();
             enableHighscore.IsChecked = _set.getHighscore();
@@ -72,9 +81,15 @@ namespace SudokuMain
         //Tillbaka till Menu utan att spara inställningar
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            gridButtons.Visibility = Visibility.Visible;
-            gridOptions.Visibility = Visibility.Collapsed;
-            
+         //   gridButtons.Visibility = Visibility.Visible;
+         //   gridOptions.Visibility = Visibility.Collapsed;
+
+            /*******ANIMATIONER***************/
+            Storyboard myBoard;
+            myBoard = (Storyboard)this.Resources["moveButtonsUp"];
+            myBoard.Begin();
+            /******SLUT*PÅ*ANIMATIONER*******/
+
             //TODO Göra så ändringar återställs. Kanske kommer hända automatiskt om vi använder en klass för att ladda in från fil.
         }
 
@@ -94,8 +109,14 @@ namespace SudokuMain
             Settings set = new Settings(time, score, ani, diff);
             set.saveSettings();
 
-            gridButtons.Visibility = Visibility.Visible;
-            gridOptions.Visibility = Visibility.Collapsed;
+        //    gridButtons.Visibility = Visibility.Visible;
+        //    gridOptions.Visibility = Visibility.Collapsed;
+
+            /*******ANIMATIONER***************/
+            Storyboard myBoard;
+            myBoard = (Storyboard)this.Resources["moveButtonsUp"];
+            myBoard.Begin();
+            /******SLUT*PÅ*ANIMATIONER*******/
         }
     }
 }
