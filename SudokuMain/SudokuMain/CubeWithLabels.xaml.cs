@@ -46,6 +46,26 @@ namespace SudokuMain
             return retValue;
         }
 
+        //Sätter en annan färg på rektangeln runt labeln. Om "active" är true blir den färgad.
+        //Är den false blir den normal igen.
+        public void setLabelBorder(int ix, bool active)
+        {
+            UniformGrid uGrd = this.field;
+            Grid grd = uGrd.Children[ix] as Grid;
+            Rectangle rectActive = grd.Children[1] as Rectangle;
+            if (active)
+            {
+                rectActive.StrokeThickness = 2;
+                rectActive.Stroke = Brushes.OrangeRed;
+                
+            }
+            else
+            {
+                rectActive.StrokeThickness = 0.6;
+                rectActive.Stroke = Brushes.Black;
+            }
+        }
+
         //Sätter bakgrunden till mörk om locked=true, annars till ljus
         //Sätter bakgrunden till röd om error=true
         private void setLabelBackground(ref Label lbl, bool locked, bool error=false)
