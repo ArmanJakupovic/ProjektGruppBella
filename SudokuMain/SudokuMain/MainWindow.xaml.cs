@@ -24,7 +24,9 @@ namespace SudokuMain
     public partial class MainWindow : Window
     {
         SudokuLevels game = new SudokuLevels();
-        Keypad _x;
+        private Keypad _x;
+        private int _gridIndexNr;
+        private int _lblFound;
 
         public MainWindow()
         {
@@ -75,7 +77,7 @@ namespace SudokuMain
         //Känner av vilken box man klickar i och hämtar rätt ruta från klassen som också läser av mousebutton
         private void grdBoard_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
-            string myNr = "X";
+          //  string myNr = "X";
             CubeWithLabels cube = sender as CubeWithLabels;
 
             int indexnr = -1;
@@ -95,11 +97,22 @@ namespace SudokuMain
                 }
             }
 
-            if (lblFound >= 0)
+            _gridIndexNr = indexnr;
+            _lblFound = lblFound;
+    /*        if (lblFound >= 0)
             {
                 string nummer = cube.GetLabelContent(lblFound);
                 //MessageBox.Show("Ruta: " + indexnr.ToString() + ", Label: " + lblFound.ToString() + ", Innehåll: " + nummer);
                 updateMatrix(indexnr, lblFound, myNr);
+            }*/
+        }
+
+        //Kallas på när knapp på keypaden trycks. Uppdaterar gridden.
+        private void markedGridPosUpdate(int indexnr, int lblFound , string myStr)
+        {
+            if (lblFound >= 0)
+            {
+                updateMatrix(indexnr, lblFound, myStr);
             }
         }
 
@@ -233,7 +246,8 @@ namespace SudokuMain
         //Hanterar klick i keypad på MainWindow
         public void returnNumpadValue(object sender, RoutedEventArgs e)
         {
-
+            Button x = sender as Button;
+            markedGridPosUpdate(_gridIndexNr, _lblFound, x.Content.ToString());
         }
     }
 }
