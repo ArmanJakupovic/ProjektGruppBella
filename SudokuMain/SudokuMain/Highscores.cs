@@ -7,9 +7,10 @@ using System.IO;
 
 namespace SudokuMain
 {
-    class SingleHighscore
+    class SingleHighscore//En lista som håller en highscore
     {
-        private string[,] _content = new string[5, 2];
+        private string[,] _content;
+        public SingleHighscore(int hsRows) { _content = new string[hsRows, 2]; }//hsRows styr storleken på highscore
         public void setContent(int x, int y, string value) { _content[x, y] = value; }
         public string getContent(int x, int y) { return _content[x, y]; }
     }
@@ -36,12 +37,11 @@ namespace SudokuMain
 
             if (File.Exists("highscore.sdk"))
             {
-
                 StreamReader reader = new StreamReader("highscore.sdk");
                 row = reader.ReadLine(); //Läser första raden [x,x] och struntar i denna
                 while (row != "")
                 {
-                    SingleHighscore newHighscore = new SingleHighscore();
+                    SingleHighscore newHighscore = new SingleHighscore(_hsSize);
                     for (int i = 0; i < _hsSize; i++)
                     {
                         row = reader.ReadLine().Replace(" ", string.Empty);//Tar bort mellanslag
@@ -57,8 +57,9 @@ namespace SudokuMain
             else
             {
                 StreamWriter writer = new StreamWriter(File.Create("highscore.sdk"));
-                //TODO implementerar standard highscores
+               //TODO! implementera kod för skrivning
                 writer.Close();
+                //loadHighscores();
             }
         }
 
@@ -69,11 +70,8 @@ namespace SudokuMain
             string strHighscore = "";
             for (int i = 0; i < _hsSize; i++)
             {
-                for (int j = 0; j < 2; j++)
-                {
-                    strHighscore += _highscoreList[index].getContent(i, j) + "\t";//namn och poäng med tab emellan
-                }
-                strHighscore += "\n";//byter rad för nästa namn
+                strHighscore += (i + 1).ToString() + ". " + _highscoreList[index].getContent(i, 0) + "\t";//namn och tab
+                strHighscore += _highscoreList[index].getContent(i, 1) + "\n";//poäng och enter
             }
             return strHighscore;
         }
