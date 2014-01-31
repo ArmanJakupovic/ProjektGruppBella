@@ -25,13 +25,14 @@ namespace SudokuMain
     {
         SudokuLevels game = new SudokuLevels();
         Keypad _x;
+        Highscores _highscores = new Highscores();
 
         public MainWindow()
         {
             InitializeComponent();
             game.SetLevel(0, 3);
+            txtHighScore.Text = _highscores.GetHighScore(3);
             initBoard();
-            getHighScore();
             settingButtonsActivation(false);
         }
 
@@ -103,18 +104,6 @@ namespace SudokuMain
             }
         }
 
-        //Hämtar highscore för den specifika banan
-        private void getHighScore()
-        {
-            if (File.Exists("highscore.sdk"))
-            {
-                StreamReader reader = new StreamReader("highscore.sdk");
-                txtHighScore.Text = reader.ReadToEnd();
-                reader.Close();
-            }
-            else
-                File.Create("highscore.sdk");
-        }
 
         //Sparar ner spelet och dess lösning
         private void saveGame()
