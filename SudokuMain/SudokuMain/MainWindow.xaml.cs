@@ -24,16 +24,19 @@ namespace SudokuMain
     public partial class MainWindow : Window
     {
         SudokuLevels game = new SudokuLevels();
-        Keypad _x;
-        Highscores _highscores = new Highscores();
+        MainWindow testWindow;
+        private Keypad _x;
+        private int _gridIndexNr;
+        private int _lblFound;
 
         public MainWindow()
         {
             InitializeComponent();
             game.SetLevel(0, 3);
-            txtHighScore.Text = _highscores.GetHighScore(3);
             initBoard();
+            getHighScore();
             settingButtonsActivation(false);
+            testWindow = this;
         }
 
         //Fyller spelplanen med tecken från currentLevel.Unsolved
@@ -82,7 +85,7 @@ namespace SudokuMain
             int indexnr = -1;
             int lblFound = -1;
 
-     //Pausad  openPopup(ref myNr);
+            
             
             for (int ix = 0; ix < 9; ix++)
             {
@@ -96,14 +99,40 @@ namespace SudokuMain
                 }
             }
 
-            if (lblFound >= 0)
+            _gridIndexNr = indexnr;
+            _lblFound = lblFound;
+            openPopup(ref myNr, ref _gridIndexNr, ref _lblFound, ref testWindow);
+
+            
+    /*        if (lblFound >= 0)
             {
                 string nummer = cube.GetLabelContent(lblFound);
                 //MessageBox.Show("Ruta: " + indexnr.ToString() + ", Label: " + lblFound.ToString() + ", Innehåll: " + nummer);
                 updateMatrix(indexnr, lblFound, myNr);
+            }*/
+        }
+
+        //Kallas på när knapp på keypaden trycks. Uppdaterar gridden.
+        public void markedGridPosUpdate(int indexnr, int lblFound , string myStr)
+        {
+            if (lblFound >= 0)
+            {
+                updateMatrix(indexnr, lblFound, myStr);
             }
         }
 
+        //Hämtar highscore för den specifika banan
+        private void getHighScore()
+        {
+            if (File.Exists("highscore.sdk"))
+            {
+                StreamReader reader = new StreamReader("highscore.sdk");
+                txtHighScore.Text = reader.ReadToEnd();
+                reader.Close();
+            }
+            else
+                File.Create("highscore.sdk");
+        }
 
         //Sparar ner spelet och dess lösning
         private void saveGame()
@@ -210,9 +239,9 @@ namespace SudokuMain
               openPopup(ref myNr);
  
        *************************************************/
-        private void openPopup(ref string myNr)
+        private void openPopup(ref string myNr, ref int indexNr, ref int lblFound, ref MainWindow testWin)
         {
-            _x = new Keypad(ref myNr);
+            _x = new Keypad(ref myNr, ref indexNr, ref lblFound, ref testWin);
         }
         /**************************************************************/
         /********************-------ARMAN---------********************/
@@ -222,7 +251,8 @@ namespace SudokuMain
         //Hanterar klick i keypad på MainWindow
         public void returnNumpadValue(object sender, RoutedEventArgs e)
         {
-
+            Button x = sender as Button;
+            markedGridPosUpdate(_gridIndexNr, _lblFound, x.Content.ToString());
         }
     }
 }
