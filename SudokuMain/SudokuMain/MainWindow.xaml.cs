@@ -24,6 +24,7 @@ namespace SudokuMain
     public partial class MainWindow : Window
     {
         SudokuLevels game = new SudokuLevels();
+        Highscores _highscores = new Highscores();
         MainWindow testWindow;
         private Keypad _x;
         private int _gridIndexNr;
@@ -34,7 +35,7 @@ namespace SudokuMain
             InitializeComponent();
             game.SetLevel(0, 3);
             initBoard();
-            getHighScore();
+            txtHighScore.Text =  _highscores.GetHighScore(3);
             settingButtonsActivation(false);
             testWindow = this;
         }
@@ -120,20 +121,6 @@ namespace SudokuMain
                 updateMatrix(indexnr, lblFound, myStr);
             }
         }
-
-        //Hämtar highscore för den specifika banan
-        private void getHighScore()
-        {
-            if (File.Exists("highscore.sdk"))
-            {
-                StreamReader reader = new StreamReader("highscore.sdk");
-                txtHighScore.Text = reader.ReadToEnd();
-                reader.Close();
-            }
-            else
-                File.Create("highscore.sdk");
-        }
-
         //Sparar ner spelet och dess lösning
         private void saveGame()
         {
