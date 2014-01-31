@@ -223,30 +223,14 @@ namespace SudokuMain
             btnBack.IsEnabled = x;
         }
 
-        /**************************************************************/
-        /********************-------ARMAN---------********************/
-        /**************************************************************/
         /*Kalla på nedanstående metod för att keypaden ska poppa upp.
          Skicka in ref till den sträng du vill ändra. I detta fallet
          borde det vara den sträng som som X skrivs till. Det kommer
          då att skrivas över av en siffra*/
-
-
-        /* ******************************************** 
-         Använd denna kod för att kalla på keypaden. 
-
-              string myNr = "X";
-              openPopup(ref myNr);
- 
-       *************************************************/
         private void openPopup(ref string myNr, ref int indexNr, ref int lblFound, ref MainWindow testWin)
         {
             _x = new Keypad(ref myNr, ref indexNr, ref lblFound, ref testWin);
         }
-        /**************************************************************/
-        /********************-------ARMAN---------********************/
-        /**************************************************************/
-
 
         //Hanterar klick i keypad på MainWindow
         public void returnNumpadValue(object sender, RoutedEventArgs e)

@@ -4,12 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="100">
-    <Popup Name="keypad_Popup" Width="100" Height="100" IsOpen="False" Placement="MousePoint" PopupAnimation="Slide" StaysOpen="False" AllowsTransparency="True">
+             d:DesignHeight="116" d:DesignWidth="116">
+    <Popup Name="keypad_Popup" Width="115" Height="115" IsOpen="False" Placement="MousePoint" PopupAnimation="Slide" StaysOpen="False" AllowsTransparency="True">
         <Popup.Effect>
             <DropShadowEffect BlurRadius="10" ShadowDepth="10"/>
         </Popup.Effect>
-        <UniformGrid Rows="3" Columns="3" Background="Beige">
+        <UniformGrid Rows="3" Columns="3" Margin="9" Background="#FFD8B087">
+            <UniformGrid.Effect>
+                <DropShadowEffect BlurRadius="7" ShadowDepth="3"/>
+            </UniformGrid.Effect>
             <Button Name="one" Height="30" Width="30" Click="returnNumpadValue">1</Button>
             <Button Name="two" Height="30" Width="30" Click="returnNumpadValue">2</Button>
             <Button Name="three" Height="30" Width="30" Click="returnNumpadValue">3</Button>
