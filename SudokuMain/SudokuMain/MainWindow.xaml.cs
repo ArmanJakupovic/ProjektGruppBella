@@ -28,7 +28,7 @@ namespace SudokuMain
         public MainWindow()
         {
             InitializeComponent();
-            game.SetLevel(2, 3);
+            game.SetLevel(0, 3);
             initBoard();
             getHighScore();
         }
