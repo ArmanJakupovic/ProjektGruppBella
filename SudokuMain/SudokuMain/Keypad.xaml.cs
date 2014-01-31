@@ -21,10 +21,13 @@ namespace SudokuMain
     public partial class Keypad : UserControl
     {
         private string _myLbl;
+        private bool _check;
         public Keypad(ref string lbl)
         {
             InitializeComponent();
             _myLbl = lbl;
+            keypad_Popup.IsOpen = true;
+            _check = false;
         }
 
         public void returnNumpadValue(object sender, RoutedEventArgs e)
@@ -32,6 +35,13 @@ namespace SudokuMain
             Button btn = sender as Button;
             _myLbl = btn.Content.ToString();
             keypad_Popup.IsOpen = false;
+            _check = true;
+            valueChoosen();
+        }
+
+        public bool valueChoosen()
+        {
+            return _check;
         }
     }
 }

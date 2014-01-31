@@ -128,17 +128,17 @@
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
             
-			<Button Grid.Row="1" Grid.Column="0" Margin="5" Content="0"/>
+			<Button Name="btnSetting1" Grid.Row="1" Grid.Column="0" Margin="5" Content="0"/>
 			<Label Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Content="Timer"/>
 
-			<Button Grid.Row="2" Grid.Column="0" Margin="5" Content="0"/>
+            <Button Name="btnSetting2" Grid.Row="2" Grid.Column="0" Margin="5" Content="0"/>
 			<Label Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Content="Something"/>
 
-			<Button Grid.Row="3" Grid.Column="0" Margin="5" Content="0"/>
+            <Button Name="btnSetting3" Grid.Row="3" Grid.Column="0" Margin="5" Content="0"/>
 			<Label Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Content="Something else"/>
 
             <Label Grid.Row="4" Grid.Column="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Content=" =)"/>
-            <Button Grid.Row="4" Grid.Column="1" Margin="5" Content="Back" Click="Button_Close_Settings"/>
+            <Button Name="btnBack" Grid.Row="4" Grid.Column="1" Margin="5" Content="Back" Click="Button_Close_Settings"/>
         </Grid>
 
 		<!--Slut på gömmande gridden-->
@@ -165,7 +165,7 @@
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
 			<Label Grid.Row="0" Grid.Column="0" Content="00:00" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Background="#FF761212" Foreground="Moccasin"/>
-			<Button Grid.Row="1" Grid.Column="0" Content="Hint" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" BorderBrush="Black" Height="30" Click="Button_Hint_Click">
+			<Button Name="btnHint" Grid.Row="1" Grid.Column="0" Content="Hint" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" BorderBrush="Black" Height="30" Click="Button_Hint_Click">
 				<Button.Background>
 					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
 						<GradientStop Color="Moccasin" Offset="0.319"/>
@@ -174,7 +174,7 @@
 					</LinearGradientBrush>
 				</Button.Background>
 			</Button>
-			<Button Grid.Row="2" Grid.Column="0" Content="Check"  FontWeight="SemiBold" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" BorderBrush="Black" Click="Button_Check_Click">
+			<Button Name="btnCheck" Grid.Row="2" Grid.Column="0" Content="Check"  FontWeight="SemiBold" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" BorderBrush="Black" Click="Button_Check_Click">
 				<Button.Background>
 					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
 						<GradientStop Color="Moccasin" Offset="0.319"/>

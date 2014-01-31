@@ -24,6 +24,7 @@ namespace SudokuMain
     public partial class MainWindow : Window
     {
         SudokuLevels game = new SudokuLevels();
+        Keypad _x;
 
         public MainWindow()
         {
@@ -31,6 +32,7 @@ namespace SudokuMain
             game.SetLevel(2, 3);
             initBoard();
             getHighScore();
+            settingButtonsActivation(false);
         }
 
         //Fyller spelplanen med tecken från currentLevel.Unsolved
@@ -73,9 +75,14 @@ namespace SudokuMain
         //Känner av vilken box man klickar i och hämtar rätt ruta från klassen som också läser av mousebutton
         private void grdBoard_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
+            string myNr = "X";
             CubeWithLabels cube = sender as CubeWithLabels;
+
             int indexnr = -1;
             int lblFound = -1;
+
+     //Pausad  openPopup(ref myNr);
+            
             for (int ix = 0; ix < 9; ix++)
             {
                 CubeWithLabels cubeCompair = grdBoard.Children[ix] as CubeWithLabels;
@@ -92,8 +99,6 @@ namespace SudokuMain
             {
                 string nummer = cube.GetLabelContent(lblFound);
                 //MessageBox.Show("Ruta: " + indexnr.ToString() + ", Label: " + lblFound.ToString() + ", Innehåll: " + nummer);
-                string myNr = "X";
-                openPopup(ref myNr);
                 updateMatrix(indexnr, lblFound, myNr);
             }
         }
@@ -174,16 +179,30 @@ namespace SudokuMain
         {
             saveGame();
             Storyboard myBoard;
-                myBoard = (Storyboard)this.Resources["showSettings"];
-                myBoard.Begin();
-
+            myBoard = (Storyboard)this.Resources["showSettings"];
+            myBoard.Begin();
+            btnHint.IsEnabled = false;
+            btnCheck.IsEnabled = false;
+            settingButtonsActivation(true);
         }
 
         private void Button_Close_Settings(object sender, RoutedEventArgs e)
         {
             Storyboard myBoard;
-                myBoard = (Storyboard)this.Resources["hideSettings"];
-                myBoard.Begin();
+            myBoard = (Storyboard)this.Resources["hideSettings"];
+            myBoard.Begin();
+            btnHint.IsEnabled = true;
+            btnCheck.IsEnabled = true;
+            settingButtonsActivation(false);
+        }
+
+        //Aktiverar/Deaktiverar alla knappar i Mainwindows settings.
+        private void settingButtonsActivation(bool x)
+        {
+            btnSetting1.IsEnabled = x;
+            btnSetting2.IsEnabled = x;
+            btnSetting3.IsEnabled = x;
+            btnBack.IsEnabled = x;
         }
 
         /**************************************************************/
@@ -204,8 +223,7 @@ namespace SudokuMain
        *************************************************/
         private void openPopup(ref string myNr)
         {
-            Keypad x = new Keypad(ref myNr);
-            x.keypad_Popup.IsOpen = true;
+            _x = new Keypad(ref myNr);
         }
         /**************************************************************/
         /********************-------ARMAN---------********************/
