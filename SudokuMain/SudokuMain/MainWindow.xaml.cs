@@ -29,6 +29,9 @@ namespace SudokuMain
         private Keypad _x;
         private int _gridIndexNr;
         private int _lblFound;
+        private CubeWithLabels prevBlockIx;
+        private int prevIx = 0;
+
 
         public MainWindow()
         {
@@ -86,7 +89,9 @@ namespace SudokuMain
             int indexnr = -1;
             int lblFound = -1;
 
-            
+            //Återställer rektangeln om det finns en gammal position lagrad
+            if (prevBlockIx != null)
+                prevBlockIx.setLabelBorder(prevIx, false);
             
             for (int ix = 0; ix < 9; ix++)
             {
@@ -96,6 +101,13 @@ namespace SudokuMain
                     //MessageBox.Show(ix.ToString());
                     indexnr = ix;
                     lblFound = cube.FindClickedLabel();
+                    //Gör så att den valda labeln blir markerad
+                    if (lblFound >= 0)
+                    {
+                        cube.setLabelBorder(lblFound, true);
+                        prevBlockIx = cube;
+                        prevIx = lblFound;
+                    }
                     break;
                 }
             }
