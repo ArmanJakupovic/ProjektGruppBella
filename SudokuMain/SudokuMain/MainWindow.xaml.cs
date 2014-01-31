@@ -229,5 +229,11 @@ namespace SudokuMain
         /********************-------ARMAN---------********************/
         /**************************************************************/
 
+
+        //Hanterar klick i keypad på MainWindow
+        public void returnNumpadValue(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
