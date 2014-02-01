@@ -7,15 +7,25 @@ using System.IO;
 
 namespace SudokuMain
 {
+    class SingleHighscore
+    {
+        private List<string> _name = new List<string>();
+        private List<int> _score = new List<int>();
+        public void LoadScore(string value, int points) { _name.Add(value); _score.Add(points); }
+        public string GetScore(int index) { return _name[index] + "\t" + _score[index].ToString(); }
+        public void InsertScore(string name, int points, int index) { _name.Insert(index, name); _score.Insert(index, points); }
+        public List<int> GetPoints() { return _score; }
+    }
+
     class Highscores
     {
-        private List<string>[,] _highscoreList;//Array med alla highscores för varje bana
+        private SingleHighscore[,] _highscoreList;//Array med alla highscores för varje bana
         private int _diff, _lvl;//Indexerar vilken lista som ska hämtas
 
         //Konstruktor
         public Highscores()
         {
-            _highscoreList = new List<string>[3,5];
+            _highscoreList = new SingleHighscore[3,5];
             _diff = 0;
             _lvl = 0;
             loadHighscores();
@@ -41,12 +51,13 @@ namespace SudokuMain
                     _diff = Convert.ToInt16(diffLvl[0]);//index för diff
                     _lvl = Convert.ToInt16(diffLvl[1]);//index för level
 
-                    List<string> newHighscore = new List<string>();
+                    SingleHighscore newHighscore = new SingleHighscore();
 
                     for (int i = 0; i < 5; i++)//Lägger fem rader i listan
                     {
                         row = reader.ReadLine();
-                        newHighscore.Add(row.Replace(Convert.ToChar(32), Convert.ToChar(9)));//byter mellanslag mot tabb
+                        string[] highScoreRow = row.Split(Convert.ToChar(32));
+                        newHighscore.LoadScore(highScoreRow[0], Convert.ToInt16(highScoreRow[1]));
                     }
                     _highscoreList[_diff, _lvl] = newHighscore;
                     row = reader.ReadLine();//släng radbytet mellan highscores
@@ -56,30 +67,33 @@ namespace SudokuMain
             }
             else
             {
-                StreamWriter writer = new StreamWriter(File.Create("highscore.sdk"));
+                saveHighscores();
+                loadHighscores();
+            }
+        }
 
-                int diff = 0;
-                int level = 0;
-                for (int i = 0; i < 15; i++)
+        //Skriver alla highscores till textfil
+        private void saveHighscores()
+        {
+            StreamWriter writer = new StreamWriter(File.Create("highscore.sdk"));
+
+            for (int i = 0; i < 3; i++)
+			{
+                for (int j = 0; j < 5; j++)
                 {
-                    if (level == 5)
+                    writer.WriteLine("[" + i + "," + j + "]");//Skriver diff och level
+                    for (int ix = 0; ix < 5; ix++)
                     {
-                        diff++;
-                        level = 0;
-                    }
-                    writer.WriteLine("[" + diff + "," + level + "]");//Skriver diff och level
-                    level++;
-                  
-                    for (int j = 0; j < 5; j++)
-                    {
-                        writer.WriteLine("-"); 
+                        if(_highscoreList[i,j] == null)
+                            writer.WriteLine("- 0"); 
+                        else
+                            writer.WriteLine(_highscoreList[i, j].GetScore(ix));
                     }
                     writer.WriteLine();//tom rad
                 }
-                writer.WriteLine();
-                writer.Close();
-                loadHighscores();
             }
+            writer.WriteLine();
+            writer.Close();
         }
 
         //Hämtar highscore för den specifika banan.
@@ -89,10 +103,25 @@ namespace SudokuMain
             string strHighscore = "";
             for (int i = 0; i < 5; i++)
             {
-                strHighscore += (i + 1).ToString() + ". " + _highscoreList[diff,lvl][i] + "\n";//namn och tab
+                strHighscore += (i + 1).ToString() + ". " + _highscoreList[diff,lvl].GetScore(i) + "\n";//namn och tab
             }
             return strHighscore;
         }
 
+        //Jämför poäng för att se om man platsar på listan
+        //Omm man platsar läggs man till
+        public void CompareScore(string name, int score, int diff, int lvl)
+        {
+            List<int> highscores = _highscoreList[diff, lvl].GetPoints();//hämtar lista med poäng för specifik bana
+            for (int i = 0; i < highscores.Count; i++)
+            {
+                if (highscores[i] < score)
+                {
+                    _highscoreList[diff, lvl].InsertScore(name, score, i);
+                    saveHighscores();
+                    break;
+                }
+            }
+        }  
     }
 }
