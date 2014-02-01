@@ -14,6 +14,7 @@ namespace SudokuMain
         public void LoadScore(string value, int points) { _name.Add(value); _score.Add(points); }
         public string GetScore(int index) { return _name[index] + "\t" + _score[index].ToString(); }
         public void InsertScore(string name, int points, int index) { _name.Insert(index, name); _score.Insert(index, points); }
+        public void RemoveLast(int index) { _name.RemoveAt(index); _score.RemoveAt(index); }
         public List<int> GetPoints() { return _score; }
     }
 
@@ -112,13 +113,13 @@ namespace SudokuMain
         //Omm man platsar läggs man till
         public void CompareScore(string name, int score, int diff, int lvl)
         {
-            List<int> highscores = _highscoreList[diff, lvl].GetPoints();//hämtar lista med poäng för specifik bana
-            for (int i = 0; i < highscores.Count; i++)
+            List<int> prevHighscore = _highscoreList[diff, lvl].GetPoints();//hämtar lista med poäng för specifik bana
+            for (int i = 0; i < prevHighscore.Count; i++)
             {
-                if (highscores[i] < score)
+                if (prevHighscore[i] < score)
                 {
-                    _highscoreList[diff, lvl].InsertScore(name, score, i);
-                    saveHighscores();
+                    _highscoreList[diff, lvl].InsertScore(name, score, i);//lägger till 
+                    _highscoreList[diff, lvl].RemoveLast(5);//petar bort sämsta i listan
                     break;
                 }
             }
