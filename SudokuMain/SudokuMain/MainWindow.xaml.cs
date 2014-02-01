@@ -38,7 +38,7 @@ namespace SudokuMain
             InitializeComponent();
             game.SetLevel(0, 3);
             initBoard();
-            txtHighScore.Text =  _highscores.GetHighScore(3);
+            txtHighScore.Text =  _highscores.GetHighScore(0,3);
             settingButtonsActivation(false);
             ourWindow = this;
         }
