@@ -241,7 +241,7 @@ namespace SudokuMain
                 }
 
             if(hintExist)
-                retValue = rnd.Next(0, hintList.Count);
+                retValue = hintList[rnd.Next(0, hintList.Count)];
             
             return retValue;
         } //GetHint

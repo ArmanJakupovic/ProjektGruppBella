@@ -83,15 +83,15 @@
 					<TranslateTransform/>
 				</TransformGroup>
 			</UniformGrid.RenderTransform>
-			<local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1"/>
-			<local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1"/>
-			<local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1"/>
-			<local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1"/>
-			<local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1"/>
-			<local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1"/>
-			<local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1"/>
-			<local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1"/>
-			<local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1"/>
+			<local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1"/>
+            <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1"/>
+            <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1"/>
+            <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1"/>
+            <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1"/>
+            <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1"/>
+            <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1"/>
+            <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1"/>
+            <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1"/>
 		</UniformGrid>
 
 		<!--Den grid som gömmer sig bakom allt-->

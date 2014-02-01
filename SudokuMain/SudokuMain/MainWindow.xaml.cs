@@ -32,10 +32,14 @@ namespace SudokuMain
         private CubeWithLabels prevBlockIx;
         private int prevIx = 0;
 
+        
+
 
         public MainWindow()
         {
             InitializeComponent();
+            EventManager.RegisterClassHandler(typeof(Window),
+            Keyboard.KeyUpEvent, new KeyEventHandler(CubeWithLabels_KeyDown_1), true);
             game.SetLevel(0, 3);
             initBoard();
             txtHighScore.Text =  _highscores.GetHighScore(0,3);
@@ -201,6 +205,19 @@ namespace SudokuMain
             btnHint.IsEnabled = false;
             btnCheck.IsEnabled = false;
             settingButtonsActivation(true);
+
+            //Nedan är koden som ska vara till denna knapp egentligen
+            //Möjligen ska det visas tydligare att man får en hint
+            int fusk = game.GetHint();
+            if (fusk >= 0)
+            {
+                int x = fusk % 9;
+                int y = fusk / 9;
+                int block = (y / 3) * 3 + (x / 3);
+                int ruta = (y % 3) * 3 + (x % 3);
+                string value = game.levels[game.currentLevel].Solved[y, x];
+                updateMatrix(block, ruta, value);
+            }
         }
 
         private void Button_Close_Settings(object sender, RoutedEventArgs e)
@@ -237,5 +254,84 @@ namespace SudokuMain
             Button x = sender as Button;
             markedGridPosUpdate(_gridIndexNr, _lblFound, x.Content.ToString());
         }
+
+        
+        //Låter användaren skriva in siffor med tangentbordet
+        //Det går att göra det möjligt att navigera med piltangenterna men det
+        //blir komplicerat eftersom MainWindow består av block
+        private void CubeWithLabels_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            string value=" ";
+
+            switch (e.Key)
+            {
+                case Key.NumPad1:
+                case Key.D1:
+                    {
+                        value = "1";
+                        break;
+                    }
+                case Key.NumPad2:
+                case Key.D2:
+                    {
+                        value = "2";
+                        break;
+                    }
+                case Key.NumPad3:
+                case Key.D3:
+                    {
+                        value = "3";
+                        break;
+                    }
+                case Key.NumPad4:
+                case Key.D4:
+                    {
+                        value = "4";
+                        break;
+                    }
+                case Key.NumPad5:
+                case Key.D5:
+                    {
+                        value = "5";
+                        break;
+                    }
+                case Key.NumPad6:
+                case Key.D6:
+                    {
+                        value = "6";
+                        break;
+                    }
+                case Key.NumPad7:
+                case Key.D7:
+                    {
+                        value = "7";
+                        break;
+                    }
+                case Key.NumPad8:
+                case Key.D8:
+                    {
+                        value = "8";
+                        break;
+                    }
+                case Key.NumPad9:
+                case Key.D9:
+                    {
+                        value = "9";
+                        break;
+                    }
+                
+                default:
+                    {
+                        value = " ";
+                        break;
+                    }
+                    
+            }
+            
+            if (prevBlockIx != null && prevIx >= 0)
+            {
+                updateMatrix(_gridIndexNr, _lblFound, value);
+            }
+        } //CubeWithLabels_KeyDown_1
     }
 }
