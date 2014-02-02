@@ -12,7 +12,7 @@ namespace SudokuMain
         // klassen ska kunna läsa och skriva till filen settings.sdk
         bool _timer;
         bool _highScore;
-        bool _animation;
+        bool _panel;
         int _difficulty;
 
         //konstruktor för inladdning
@@ -26,15 +26,15 @@ namespace SudokuMain
         *************************************************************************************/
         public bool getTimer() { return _timer; }
         public bool getHighscore() { return _highScore; }
-        public bool getAnimation() { return _animation; }
+        public bool getPanel() { return _panel; }
         public int getDifficulty() { return Convert.ToInt16(_difficulty); }
 
         //Konstruktor för användarinput
-        public Settings(bool time, bool score, bool ani, int diff)
+        public Settings(bool time, bool score, bool panel, int diff)
         {
             _timer = time;
             _highScore = score;
-            _animation = ani;
+            _panel = panel;
             _difficulty = diff; // 0 = beginner, 1 = experienced, 2 = veteran 
         }
 
@@ -44,7 +44,7 @@ namespace SudokuMain
             StreamWriter writer = new StreamWriter(File.Create("settings.sdk"));
             writer.WriteLine(_timer);
             writer.WriteLine(_highScore);
-            writer.WriteLine(_animation);
+            writer.WriteLine(_panel);
             writer.WriteLine(_difficulty);
             writer.Close();
         }
@@ -57,7 +57,7 @@ namespace SudokuMain
                 StreamReader reader = new StreamReader("settings.sdk");
                 _timer = Convert.ToBoolean(reader.ReadLine());
                 _highScore = Convert.ToBoolean(reader.ReadLine());
-                _animation = Convert.ToBoolean(reader.ReadLine());
+                _panel = Convert.ToBoolean(reader.ReadLine());
                 _difficulty = Convert.ToInt16(reader.ReadLine());
                 reader.Close();
             }
