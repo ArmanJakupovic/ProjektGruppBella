@@ -9,13 +9,13 @@ namespace SudokuMain
 {
     class SingleHighscore
     {
-        private List<string> _name = new List<string>();
-        private List<int> _score = new List<int>();
-        public void LoadScore(string value, int points) { _name.Add(value); _score.Add(points); }
-        public string GetScore(int index) { return _name[index] + "\t" + _score[index].ToString(); }
-        public void InsertScore(string name, int points, int index) { _name.Insert(index, name); _score.Insert(index, points); }
-        public void RemoveLast(int index) { _name.RemoveAt(index); _score.RemoveAt(index); }
-        public List<int> GetPoints() { return _score; }
+        private List<string> _name = new List<string>();//lista med namn
+        private List<int> _score = new List<int>();//lista med poäng
+        public void LoadScore(string value, int points) { _name.Add(value); _score.Add(points); }//Ladda in till listorna
+        public string GetScore(int index) { return _name[index] + "\t" + _score[index].ToString(); }//Returnerar en sträng med namn och poäng
+        public void InsertScore(string name, int points, int index) { _name.Insert(index, name); _score.Insert(index, points); }//Placerar en ny person på listan
+        public void RemoveLast(int index) { _name.RemoveAt(index); _score.RemoveAt(index); }//Tar bort en person från listan på indexets plats. Ämnat för sista personen
+        public List<int> GetPoints() { return _score; } //Returnerar en lista med poäng
     }
 
     class Highscores
