@@ -67,7 +67,7 @@ namespace SudokuMain
 
             showTimer.IsChecked = _set.getTimer();
             enableHighscore.IsChecked = _set.getHighscore();
-            enableAnimation.IsChecked = _set.getAnimation();
+            enablePanel.IsChecked = _set.getPanel();
 
             int diff = _set.getDifficulty();
             if (diff == 0)
@@ -98,7 +98,7 @@ namespace SudokuMain
         {
             bool time = showTimer.IsChecked == true;
             bool score = enableHighscore.IsChecked == true;
-            bool ani = enableAnimation.IsChecked == true;
+            bool panel = enablePanel.IsChecked == true;
 
             int diff = 0; //Beginner
             if (difficultyExperienced.IsChecked == true)
@@ -106,7 +106,7 @@ namespace SudokuMain
             else if (difficultyVeteran.IsChecked == true)
                 diff = 2;
 
-            Settings set = new Settings(time, score, ani, diff);
+            Settings set = new Settings(time, score, panel, diff);
             set.saveSettings();
 
         //    gridButtons.Visibility = Visibility.Visible;

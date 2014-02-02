@@ -25,6 +25,7 @@ namespace SudokuMain
     {
         SudokuLevels game = new SudokuLevels();
         Highscores _highscores = new Highscores();
+        Settings _mainSettings = new Settings();
         MainWindow ourWindow;
         private Keypad _x;
         private int _gridIndexNr;
@@ -38,12 +39,13 @@ namespace SudokuMain
         public MainWindow()
         {
             InitializeComponent();
+            //_mainSettings.loadSettings();
+            gameSettings();
             EventManager.RegisterClassHandler(typeof(Window),
             Keyboard.KeyUpEvent, new KeyEventHandler(CubeWithLabels_KeyDown_1), true);
             game.SetLevel(0, 3);
             initBoard();
             txtHighScore.Text =  _highscores.GetHighScore(0,3);
-            settingButtonsActivation(false);
             ourWindow = this;
         }
 
@@ -187,7 +189,7 @@ namespace SudokuMain
             }
 
         }
-
+        
         private void Button_Hint_Click(object sender, RoutedEventArgs e)
         {
             //Nedan är koden som ska vara till denna knapp egentligen
@@ -204,36 +206,67 @@ namespace SudokuMain
             }
         }
 
-        private void Button_Settings_Click(object sender, RoutedEventArgs e)
+        //Klick på Inställningar (kugghjulet), laddar in inställningar och utför min animation.
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
+            _mainSettings.loadSettings();
+            showTimerMain.IsChecked = _mainSettings.getTimer();
+            enableHighscoreMain.IsChecked = _mainSettings.getHighscore();
+            enablePanelMain.IsChecked = _mainSettings.getPanel();
+
             saveGame();
             Storyboard myBoard;
             myBoard = (Storyboard)this.Resources["showSettings"];
             myBoard.Begin();
             btnHint.IsEnabled = false;
             btnCheck.IsEnabled = false;
-            settingButtonsActivation(true);
         }
 
-        private void Button_Close_Settings(object sender, RoutedEventArgs e)
+        //Sparar de nya inställningarna medan spelet är igång, återgå till spelet.
+        private void btnSettings_Apply_Click(object sender, RoutedEventArgs e)
         {
+            bool time = showTimerMain.IsChecked == true;
+            bool score = enableHighscoreMain.IsChecked == true;
+            bool panel = enablePanelMain.IsChecked == true;
+
+            Settings set = new Settings(time, score, panel, game.currentDifficulty); // här är jag inte helt hundra med game.currentDifficulty, för att konstruktorn ska fungera måste jag ha ett värde.
+            set.saveSettings();
+
+            _mainSettings.loadSettings();
+            gameSettings();
+            //TODO nya inställningar ska appliceras på klocka, scoreboard och sifferpanelen.
+            
             Storyboard myBoard;
             myBoard = (Storyboard)this.Resources["hideSettings"];
             myBoard.Begin();
             btnHint.IsEnabled = true;
             btnCheck.IsEnabled = true;
-            settingButtonsActivation(false);
         }
 
-        //Aktiverar/Deaktiverar alla knappar i Mainwindows settings.
-        private void settingButtonsActivation(bool x)
+        //Avbryter menyn Settings och återgår till spelet utan förändring av inställningar
+        private void btnSettings_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            btnSetting1.IsEnabled = x;
-            btnSetting2.IsEnabled = x;
-            btnSetting3.IsEnabled = x;
-            btnBack.IsEnabled = x;
+            //TODO trigga animering etc, EJ spara Settings
+            Storyboard myBoard;
+            myBoard = (Storyboard)this.Resources["hideSettings"];
+            myBoard.Begin();
+            btnHint.IsEnabled = true;
+            btnCheck.IsEnabled = true;
         }
-
+        //Visar eller gömmer Klocka, highscore och sifferpanel
+        private void gameSettings()
+        {
+            if (_mainSettings.getTimer())
+                lblClock.Visibility = Visibility.Visible;
+            else lblClock.Visibility = Visibility.Collapsed;
+            if (_mainSettings.getHighscore())
+                grpHighScore.Visibility = Visibility.Visible;
+            else grpHighScore.Visibility = Visibility.Collapsed;
+            if (_mainSettings.getPanel())
+                keyPad_static.Visibility = Visibility.Visible;
+            else keyPad_static.Visibility = Visibility.Collapsed;
+        }
+        
         /*Kalla på nedanstående metod för att keypaden ska poppa upp.
          Skicka in ref till den sträng du vill ändra. I detta fallet
          borde det vara den sträng som som X skrivs till. Det kommer
