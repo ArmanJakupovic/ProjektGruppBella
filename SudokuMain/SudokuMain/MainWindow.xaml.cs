@@ -119,14 +119,6 @@ namespace SudokuMain
             _gridIndexNr = indexnr;
             _lblFound = lblFound;
             openPopup(ref myNr, ref _gridIndexNr, ref _lblFound, ref ourWindow);
-
-            
-    /*        if (lblFound >= 0)
-            {
-                string nummer = cube.GetLabelContent(lblFound);
-                //MessageBox.Show("Ruta: " + indexnr.ToString() + ", Label: " + lblFound.ToString() + ", Innehåll: " + nummer);
-                updateMatrix(indexnr, lblFound, myNr);
-            }*/
         }
 
         //Kallas på när knapp på keypaden trycks. Uppdaterar gridden.
@@ -198,14 +190,6 @@ namespace SudokuMain
 
         private void Button_Hint_Click(object sender, RoutedEventArgs e)
         {
-            saveGame();
-            Storyboard myBoard;
-            myBoard = (Storyboard)this.Resources["showSettings"];
-            myBoard.Begin();
-            btnHint.IsEnabled = false;
-            btnCheck.IsEnabled = false;
-            settingButtonsActivation(true);
-
             //Nedan är koden som ska vara till denna knapp egentligen
             //Möjligen ska det visas tydligare att man får en hint
             int fusk = game.GetHint();
@@ -218,6 +202,17 @@ namespace SudokuMain
                 string value = game.levels[game.currentLevel].Solved[y, x];
                 updateMatrix(block, ruta, value);
             }
+        }
+
+        private void Button_Settings_Click(object sender, RoutedEventArgs e)
+        {
+            saveGame();
+            Storyboard myBoard;
+            myBoard = (Storyboard)this.Resources["showSettings"];
+            myBoard.Begin();
+            btnHint.IsEnabled = false;
+            btnCheck.IsEnabled = false;
+            settingButtonsActivation(true);
         }
 
         private void Button_Close_Settings(object sender, RoutedEventArgs e)

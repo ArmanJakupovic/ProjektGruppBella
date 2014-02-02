@@ -4,86 +4,85 @@
         xmlns:local="clr-namespace:SudokuMain"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="SudokuMain.MainWindow"
         Title="Sudoku - GruppBella" Height="500 " Width="600" MinHeight="400" MinWidth="500">
-	<Window.Resources>
-		<Storyboard x:Key="showSettings">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid1">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0">
-					<EasingDoubleKeyFrame.EasingFunction>
-						<ExponentialEase EasingMode="EaseIn"/>
-					</EasingDoubleKeyFrame.EasingFunction>
-				</EasingDoubleKeyFrame>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="153">
-					<EasingDoubleKeyFrame.EasingFunction>
-						<ExponentialEase EasingMode="EaseIn"/>
-					</EasingDoubleKeyFrame.EasingFunction>
-				</EasingDoubleKeyFrame>
-			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Direction)" Storyboard.TargetName="grid1">
-				<SplineDoubleKeyFrame KeyTime="0" Value="315"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="180"/>
-			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)" Storyboard.TargetName="grid1">
-				<SplineDoubleKeyFrame KeyTime="0" Value="5"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="17"/>
-			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.ShadowDepth)" Storyboard.TargetName="grid1">
-				<SplineDoubleKeyFrame KeyTime="0" Value="5"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="3"/>
-			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid1">
-				<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
-			</DoubleAnimationUsingKeyFrames>
-		</Storyboard>
-		<Storyboard x:Key="hideSettings">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid1">
-				<SplineDoubleKeyFrame KeyTime="0" Value="156"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
-					<EasingDoubleKeyFrame.EasingFunction>
-						<ExponentialEase EasingMode="EaseIn"/>
-					</EasingDoubleKeyFrame.EasingFunction>
-				</EasingDoubleKeyFrame>
-			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Direction)" Storyboard.TargetName="grid1">
-				<SplineDoubleKeyFrame KeyTime="0" Value="180"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="315"/>
-			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)" Storyboard.TargetName="grid1">
-				<SplineDoubleKeyFrame KeyTime="0" Value="17"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="5"/>
-			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.ShadowDepth)" Storyboard.TargetName="grid1">
-				<SplineDoubleKeyFrame KeyTime="0" Value="3"/>
-				<SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="5"/>
-			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid1">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
-			</DoubleAnimationUsingKeyFrames>
-		</Storyboard>
-	</Window.Resources>
-	<Window.Triggers>
-		<EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
-	</Window.Triggers>
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="500*"/>
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="450*"/>
-			<ColumnDefinition Width="150*"/>
-		</Grid.ColumnDefinitions>
+    <Window.Resources>
+        <Storyboard x:Key="showSettings">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="153">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Direction)" Storyboard.TargetName="grid1">
+                <SplineDoubleKeyFrame KeyTime="0" Value="315"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="180"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)" Storyboard.TargetName="grid1">
+                <SplineDoubleKeyFrame KeyTime="0" Value="5"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="17"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.ShadowDepth)" Storyboard.TargetName="grid1">
+                <SplineDoubleKeyFrame KeyTime="0" Value="5"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="3"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="hideSettings">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid1">
+                <SplineDoubleKeyFrame KeyTime="0" Value="156"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Direction)" Storyboard.TargetName="grid1">
+                <SplineDoubleKeyFrame KeyTime="0" Value="180"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="315"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)" Storyboard.TargetName="grid1">
+                <SplineDoubleKeyFrame KeyTime="0" Value="17"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="5"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.ShadowDepth)" Storyboard.TargetName="grid1">
+                <SplineDoubleKeyFrame KeyTime="0" Value="3"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="5"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
+    </Window.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="500*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="450*"/>
+            <ColumnDefinition Width="150*"/>
+        </Grid.ColumnDefinitions>
 
-		<UniformGrid Grid.Row="0" Grid.Column="0" Columns="3" Rows="3" Background="Moccasin" x:Name="grdBoard" RenderTransformOrigin="0.5,0.5">
-			<UniformGrid.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</UniformGrid.RenderTransform>
-			<local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1"/>
+        <UniformGrid Grid.Row="0" Grid.Column="0" Columns="3" Rows="3" Background="Moccasin" x:Name="grdBoard" RenderTransformOrigin="0.5,0.5">
+            <UniformGrid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </UniformGrid.RenderTransform>
             <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1"/>
             <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1"/>
             <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1"/>
@@ -92,81 +91,106 @@
             <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1"/>
             <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1"/>
             <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1"/>
-		</UniformGrid>
+            <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1"/>
+        </UniformGrid>
 
-		<!--Den grid som gömmer sig bakom allt-->
+        <!--Den grid som gömmer sig bakom allt-->
 
-		<Grid x:Name="grid" Grid.Row="0" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
-			<Grid.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</Grid.RenderTransform>
-			<Grid.Background>
-				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-					<GradientStop Color="#FF403932" Offset="0"/>
-					<GradientStop Color="#FFD8B087" Offset="0.987"/>
-					<GradientStop Color="#FF443C35" Offset="1"/>
-					<GradientStop Color="#FFC09C78" Offset="0.013"/>
-					<GradientStop Color="#FFBD9770" Offset="0.642"/>
-					<GradientStop Color="#FFBD9770" Offset="0.349"/>
-				</LinearGradientBrush>
-			</Grid.Background>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="10"/>
-				<RowDefinition Height="30"/>
-				<RowDefinition Height="30"/>
-				<RowDefinition Height="30"/>
-				<RowDefinition Height="30"/>
-				<RowDefinition Height="*"/>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="30"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-            
-			<Button Name="btnSetting1" Grid.Row="1" Grid.Column="0" Margin="5" Content="0"/>
-			<Label Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Content="Timer"/>
+        <Grid x:Name="grid" Grid.Row="0" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF403932" Offset="0"/>
+                    <GradientStop Color="#FFD8B087" Offset="0.987"/>
+                    <GradientStop Color="#FF443C35" Offset="1"/>
+                    <GradientStop Color="#FFC09C78" Offset="0.013"/>
+                    <GradientStop Color="#FFBD9770" Offset="0.642"/>
+                    <GradientStop Color="#FFBD9770" Offset="0.349"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Name="btnSetting1" Grid.Row="1" Grid.Column="0" Margin="5" Content="0"/>
+            <Label Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Content="Timer"/>
 
             <Button Name="btnSetting2" Grid.Row="2" Grid.Column="0" Margin="5" Content="0"/>
-			<Label Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Content="Something"/>
+            <Label Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Content="Something"/>
 
             <Button Name="btnSetting3" Grid.Row="3" Grid.Column="0" Margin="5" Content="0"/>
-			<Label Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Content="Something else"/>
+            <Label Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Content="Something else"/>
 
             <Label Grid.Row="4" Grid.Column="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Content=" =)"/>
             <Button Name="btnBack" Grid.Row="4" Grid.Column="1" Margin="5" Content="Back" Click="Button_Close_Settings"/>
         </Grid>
 
-		<!--Slut på gömmande gridden-->
-        
-		<Grid x:Name="grid1" Grid.Row="0" Grid.Column="1" Background="#FFD8B087" RenderTransformOrigin="0.5,0.5">
-			<Grid.Effect>
-				<DropShadowEffect/>
-			</Grid.Effect>
-			<Grid.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform/>
-					<SkewTransform/>
-					<RotateTransform/>
-					<TranslateTransform/>
-				</TransformGroup>
-			</Grid.RenderTransform>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="40"/>
-				<RowDefinition Height="30"/>
-				<RowDefinition Height="40"/>
-				<RowDefinition Height="220*"/>
+        <!--Slut på gömmande gridden-->
+
+        <Grid x:Name="grid1" Grid.Row="0" Grid.Column="1" Background="#FFD8B087" RenderTransformOrigin="0.5,0.5">
+            <Grid.Effect>
+                <DropShadowEffect/>
+            </Grid.Effect>
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="220*"/>
                 <RowDefinition Height="auto"></RowDefinition>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-			<Label Grid.Row="0" Grid.Column="0" Content="00:00" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Background="#FF761212" Foreground="Moccasin"/>
-			<Button Name="btnHint" Grid.Row="1" Grid.Column="0" Content="Hint" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" BorderBrush="Black" Height="30" Click="Button_Hint_Click">
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0" Background="#FF761212">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="110*"></ColumnDefinition>
+                    <ColumnDefinition Width="40"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="00:00" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Background="#FF761212" Foreground="Moccasin"/>
+                <Button Grid.Row="0" Grid.Column="1" BorderThickness="0" IsHitTestVisible="True" Click="Button_Settings_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Images/setting-icon2.png" Stretch="Uniform">
+                            <ImageBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.8" ScaleY="0.8"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ImageBrush.RelativeTransform>
+                        </ImageBrush>
+                    </Button.Background>
+                </Button>
+            </Grid>
+
+            <Button Name="btnHint" Grid.Row="1" Grid.Column="0" Content="Hint" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" BorderBrush="Black" Height="30" Click="Button_Hint_Click">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                         <GradientStop Color="Moccasin" Offset="0.319"/>
@@ -175,18 +199,18 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-			<Button Name="btnCheck" Grid.Row="2" Grid.Column="0" Content="Check"  FontWeight="SemiBold" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" BorderBrush="Black" Click="Button_Check_Click">
-				<Button.Background>
-					<LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-						<GradientStop Color="Moccasin" Offset="0.319"/>
-						<GradientStop Color="#FFD8B087" Offset="0.016"/>
-						<GradientStop Color="Moccasin" Offset="1"/>
-					</LinearGradientBrush>
-				</Button.Background>
-			</Button>
-			<GroupBox x:Name="grpHighScore" Grid.Row="3" Grid.Column="0" Header="Highscore" FontSize="14"  Margin="5" BorderBrush="#FF761212" IsEnabled="False">
-				<TextBlock x:Name="txtHighScore" FontSize="12"/>
-			</GroupBox>
+            <Button Name="btnCheck" Grid.Row="2" Grid.Column="0" Content="Check"  FontWeight="SemiBold" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" BorderBrush="Black" Click="Button_Check_Click">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="Moccasin" Offset="0.319"/>
+                        <GradientStop Color="#FFD8B087" Offset="0.016"/>
+                        <GradientStop Color="Moccasin" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <GroupBox x:Name="grpHighScore" Grid.Row="3" Grid.Column="0" Header="Highscore" FontSize="14"  Margin="5" BorderBrush="#FF761212" IsEnabled="False">
+                <TextBlock x:Name="txtHighScore" FontSize="12"/>
+            </GroupBox>
             <GroupBox Header="Keypad" Grid.Row="4" Grid.Column="0" Margin="5,-3,5,5" BorderBrush="#FF761212" Visibility="Visible">
                 <UniformGrid Name="mainWindowKeypad" Rows="3" Columns="3">
                     <Button Name="one" Height="30" Width="30" Click="returnNumpadValue">
@@ -196,7 +220,8 @@
                                 <GradientStop Color="#FFD8B087" Offset="0.016"/>
                                 <GradientStop Color="Moccasin" Offset="1"/>
                             </LinearGradientBrush>
-                        </Button.Background> 1</Button>
+                        </Button.Background> 1
+                    </Button>
                     <Button Name="two" Height="30" Width="30" Click="returnNumpadValue">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -204,7 +229,8 @@
                                 <GradientStop Color="#FFD8B087" Offset="0.016"/>
                                 <GradientStop Color="Moccasin" Offset="1"/>
                             </LinearGradientBrush>
-                        </Button.Background> 2</Button>
+                        </Button.Background> 2
+                    </Button>
                     <Button Name="three" Height="30" Width="30" Click="returnNumpadValue">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -212,7 +238,8 @@
                                 <GradientStop Color="#FFD8B087" Offset="0.016"/>
                                 <GradientStop Color="Moccasin" Offset="1"/>
                             </LinearGradientBrush>
-                        </Button.Background> 3</Button>
+                        </Button.Background> 3
+                    </Button>
                     <Button Name="four" Height="30" Width="30" Click="returnNumpadValue">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -220,7 +247,8 @@
                                 <GradientStop Color="#FFD8B087" Offset="0.016"/>
                                 <GradientStop Color="Moccasin" Offset="1"/>
                             </LinearGradientBrush>
-                        </Button.Background> 4</Button>
+                        </Button.Background> 4
+                    </Button>
                     <Button Name="five" Height="30" Width="30" Click="returnNumpadValue">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -228,7 +256,8 @@
                                 <GradientStop Color="#FFD8B087" Offset="0.016"/>
                                 <GradientStop Color="Moccasin" Offset="1"/>
                             </LinearGradientBrush>
-                        </Button.Background> 5</Button>
+                        </Button.Background> 5
+                    </Button>
                     <Button Name="six" Height="30" Width="30" Click="returnNumpadValue">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -236,7 +265,8 @@
                                 <GradientStop Color="#FFD8B087" Offset="0.016"/>
                                 <GradientStop Color="Moccasin" Offset="1"/>
                             </LinearGradientBrush>
-                        </Button.Background> 6</Button>
+                        </Button.Background> 6
+                    </Button>
                     <Button Name="seven" Height="30" Width="30" Click="returnNumpadValue">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -244,7 +274,8 @@
                                 <GradientStop Color="#FFD8B087" Offset="0.016"/>
                                 <GradientStop Color="Moccasin" Offset="1"/>
                             </LinearGradientBrush>
-                        </Button.Background> 7</Button>
+                        </Button.Background> 7
+                    </Button>
                     <Button Name="eight" Height="30" Width="30" Click="returnNumpadValue">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -252,7 +283,8 @@
                                 <GradientStop Color="#FFD8B087" Offset="0.016"/>
                                 <GradientStop Color="Moccasin" Offset="1"/>
                             </LinearGradientBrush>
-                        </Button.Background> 8</Button>
+                        </Button.Background> 8
+                    </Button>
                     <Button Name="nine" Height="30" Width="30" Click="returnNumpadValue">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -260,9 +292,10 @@
                                 <GradientStop Color="#FFD8B087" Offset="0.016"/>
                                 <GradientStop Color="Moccasin" Offset="1"/>
                             </LinearGradientBrush>
-                        </Button.Background> 9</Button>
+                        </Button.Background> 9
+                    </Button>
                 </UniformGrid>
             </GroupBox>
-		</Grid>
-	</Grid>
+        </Grid>
+    </Grid>
 </Window>

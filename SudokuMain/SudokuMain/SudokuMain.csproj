@@ -121,6 +121,8 @@
     <Resource Include="Images\loggo.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\setting-icon.png" />
+    <Resource Include="Images\setting-icon2.png" />
     <Content Include="SudokuLevels.sdk">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
