@@ -39,7 +39,7 @@ namespace SudokuMain
         public MainWindow()
         {
             InitializeComponent();
-            //_mainSettings.loadSettings();
+            _mainSettings.loadSettings();
             gameSettings();
             EventManager.RegisterClassHandler(typeof(Window),
             Keyboard.KeyUpEvent, new KeyEventHandler(CubeWithLabels_KeyDown_1), true);
