@@ -125,7 +125,7 @@ namespace SudokuMain
         }
 
         //Raderar på där markören är vid högerklick.
-        private void grdBoard_RightLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void grdBoard_RightButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (_lblFound >= 0)
             {
