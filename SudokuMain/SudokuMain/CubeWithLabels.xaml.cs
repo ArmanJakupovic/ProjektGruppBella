@@ -118,6 +118,5 @@ namespace SudokuMain
             }
 
         } //Label_MouseLeftButtonDown_1
-
     }
 }

@@ -31,6 +31,7 @@ namespace SudokuMain
         private int _gridIndexNr;
         private int _lblFound;
         private CubeWithLabels prevBlockIx;
+        private CubeWithLabels cube;
         private int prevIx = 0;
 
         
@@ -91,7 +92,7 @@ namespace SudokuMain
         private void grdBoard_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
             string myNr = "X";
-            CubeWithLabels cube = sender as CubeWithLabels;
+            cube = sender as CubeWithLabels;
 
             int indexnr = -1;
             int lblFound = -1;
@@ -122,6 +123,15 @@ namespace SudokuMain
             _gridIndexNr = indexnr;
             _lblFound = lblFound;
             openPopup(ref myNr, ref _gridIndexNr, ref _lblFound, ref ourWindow);
+        }
+
+        //Raderar på där markören är vid högerklick.
+        private void grdBoard_RightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (_lblFound >= 0)
+            {
+                updateMatrix(_gridIndexNr, _lblFound, " ");
+            }
         }
 
         //Kallas på när knapp på keypaden trycks. Uppdaterar gridden.
@@ -307,60 +317,70 @@ namespace SudokuMain
                 case Key.D1:
                     {
                         value = "1";
+                        _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                 case Key.NumPad2:
                 case Key.D2:
                     {
                         value = "2";
+                        _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                 case Key.NumPad3:
                 case Key.D3:
                     {
                         value = "3";
+                        _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                 case Key.NumPad4:
                 case Key.D4:
                     {
                         value = "4";
+                        _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                 case Key.NumPad5:
                 case Key.D5:
                     {
                         value = "5";
+                        _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                 case Key.NumPad6:
                 case Key.D6:
                     {
                         value = "6";
+                        _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                 case Key.NumPad7:
                 case Key.D7:
                     {
                         value = "7";
+                        _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                 case Key.NumPad8:
                 case Key.D8:
                     {
                         value = "8";
+                        _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                 case Key.NumPad9:
                 case Key.D9:
                     {
                         value = "9";
+                        _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                 
                 default:
                     {
                         value = " ";
+                        _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                     
