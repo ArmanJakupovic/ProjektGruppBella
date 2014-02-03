@@ -41,6 +41,12 @@
 				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
 			</DoubleAnimationUsingKeyFrames>
+			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridDifficulty">
+				<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"/>
+			</ObjectAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridDifficulty">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
 		<Storyboard x:Key="moveButtonsUp">
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="gridButtons">
@@ -77,6 +83,12 @@
 				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridDifficulty">
+				<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"/>
+			</ObjectAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridDifficulty">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
         
@@ -175,6 +187,93 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Storyboard x:Key="moveButtonsDownDiffUpp">
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="gridButtons">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<ExponentialEase EasingMode="EaseOut"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="140"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridButtons">
+        		<DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="{x:Static Visibility.Visible}"/>
+        		<DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Collapsed}"/>
+        	</ObjectAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridButtons">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="1">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<ExponentialEase EasingMode="EaseOut"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridDifficulty">
+        		<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"/>
+        		<DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="{x:Static Visibility.Visible}"/>
+        	</ObjectAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridDifficulty">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<ExponentialEase EasingMode="EaseIn"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="gridDifficulty">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="141"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="141"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<ExponentialEase EasingMode="EaseIn"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        	<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridOptions">
+        		<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"/>
+        	</ObjectAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridOptions">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="moveButtonsUpDiffDown">
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="gridButtons">
+        		<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="140"/>
+        		<SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridButtons">
+        		<DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Collapsed}"/>
+        		<DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="{x:Static Visibility.Visible}"/>
+        		<DiscreteObjectKeyFrame KeyTime="0:0:0.6" Value="{x:Static Visibility.Visible}"/>
+        	</ObjectAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridButtons">
+        		<SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+        		<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+        		<SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridDifficulty">
+        		<DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="{x:Static Visibility.Visible}"/>
+        		<DiscreteObjectKeyFrame KeyTime="0:0:0.6" Value="{x:Static Visibility.Collapsed}"/>
+        	</ObjectAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridDifficulty">
+        		<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+        		<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+        		<SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="gridDifficulty">
+        		<SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+        		<SplineDoubleKeyFrame KeyTime="0:0:0.3" Value="141"/>
+        		<SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="141"/>
+        	</DoubleAnimationUsingKeyFrames>
+        	<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="gridOptions">
+        		<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"/>
+        	</ObjectAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridOptions">
+        		<SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
 
         <!--Slut på ny still för knappar-->
 
@@ -253,6 +352,32 @@
             <Button x:Name="btnCancel" Grid.Column="1" Grid.Row="3" BorderBrush="Black" Click="btnCancel_Click" Height="30" Content="Cancel" Margin="0.5,0,0.5,0" Style="{StaticResource InformButton}"></Button>
             <Button x:Name="btnApply" Grid.Column="2" Grid.Row="3" BorderBrush="Black" Click="btnApply_Click" Height="30" Content="Apply" Margin="0.5,0,0.5,0" Style="{StaticResource InformButton}"></Button>
 		</Grid>
+        
+        <Grid Name="gridDifficulty" Grid.Row="1" Grid.Column="1" Margin="5" RenderTransformOrigin="0.5,0.5">
+        	<Grid.RenderTransform>
+        		<TransformGroup>
+        			<ScaleTransform/>
+        			<SkewTransform/>
+        			<RotateTransform/>
+        			<TranslateTransform/>
+        		</TransformGroup>
+        	</Grid.RenderTransform>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30*"></ColumnDefinition>
+                <ColumnDefinition Width="30*"></ColumnDefinition>
+                <ColumnDefinition Width="30*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0" Grid.Column="1" Height="30" Style="{StaticResource InformButton}" Click="buttonDiff_Click">Beginner</Button>
+            <Button Grid.Row="1" Grid.Column="1" Height="30" Style="{StaticResource InformButton}" Click="buttonDiff_Click">Experienced</Button>
+            <Button Grid.Row="2" Grid.Column="1" Height="30" Style="{StaticResource InformButton}" Click="buttonDiff_Click">Veteran</Button>
+            <Button Grid.Row="3" Grid.Column="1" Height="30" Style="{StaticResource InformButton}" Click="buttonBack_Click">Back</Button>
+        </Grid>
 
 	</Grid>
 </Window>

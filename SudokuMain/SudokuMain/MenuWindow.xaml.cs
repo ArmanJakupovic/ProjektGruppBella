@@ -31,12 +31,22 @@ namespace SudokuMain
                 btnContinue.Visibility = Visibility.Collapsed;
             gridOptions.Visibility = Visibility.Collapsed;
 
+           //Initierar visibiliteten för de olika menyerna.
+            gridButtons.Visibility = Visibility.Visible;
+            gridDifficulty.Visibility = Visibility.Collapsed;
+            gridOptions.Visibility = Visibility.Collapsed;
+            //Slut
         }
 
         private void btnNewGame_Click(Object sender, RoutedEventArgs args)
         {
+            Storyboard myBoard;
+            myBoard = (Storyboard)this.Resources["moveButtonsDownDiffUpp"];
+            myBoard.Begin();
+
+            /*
             MainWindow game = new MainWindow();
-            game.Show();
+            game.Show();*/
             //this.Hide();
         }
 
@@ -93,6 +103,13 @@ namespace SudokuMain
             //TODO Göra så ändringar återställs. Kanske kommer hända automatiskt om vi använder en klass för att ladda in från fil.
         }
 
+        private void buttonBack_Click(object sender, RoutedEventArgs e)
+        {
+            Storyboard myBoard;
+            myBoard = (Storyboard)this.Resources["moveButtonsUpDiffDown"];
+            myBoard.Begin();
+        }
+
         //Tillbaka till Menu och spara inställningar
         private void btnApply_Click(object sender, RoutedEventArgs e)
         {
@@ -117,6 +134,15 @@ namespace SudokuMain
             myBoard = (Storyboard)this.Resources["moveButtonsUp"];
             myBoard.Begin();
             /******SLUT*PÅ*ANIMATIONER*******/
+        }
+
+        //Svårighetsgraden sparas ej utan knapparna startar endast spelet.
+        //Detta behöver hanteras.
+        private void buttonDiff_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow game = new MainWindow();
+            game.Show();
+            //this.Hide();
         }
     }
 }
