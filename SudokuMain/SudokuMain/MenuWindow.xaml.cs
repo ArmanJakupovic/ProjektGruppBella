@@ -52,7 +52,7 @@ namespace SudokuMain
 
         private void btnContinue_Click(Object sender, RoutedEventArgs args)
         {
-            MainWindow game = new MainWindow();
+            MainWindow game = new MainWindow(true);
             game.Show();
         }
 
@@ -142,6 +142,10 @@ namespace SudokuMain
         {
             MainWindow game = new MainWindow();
             game.Show();
+
+            Storyboard myBoard;
+            myBoard = (Storyboard)this.Resources["moveButtonsUpDiffDown"];
+            myBoard.Begin();
             //this.Hide();
         }
     }

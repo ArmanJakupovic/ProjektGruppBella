@@ -23,7 +23,7 @@ namespace SudokuMain
     /// </summary>
     public partial class MainWindow : Window
     {
-        SudokuLevels game = new SudokuLevels();
+        SudokuLevels game;
         Highscores _highscores = new Highscores();
         Settings _mainSettings = new Settings();
         MainWindow ourWindow;
@@ -36,9 +36,10 @@ namespace SudokuMain
         
 
 
-        public MainWindow()
+        public MainWindow(bool loadGame = false)
         {
             InitializeComponent();
+            game = new SudokuLevels(loadGame);
             _mainSettings.loadSettings();
             gameSettings();
             EventManager.RegisterClassHandler(typeof(Window),
@@ -135,10 +136,18 @@ namespace SudokuMain
         private void saveGame()
         {
             StreamWriter writer = new StreamWriter(File.Create("savedGame.sdk"));
-            writer.WriteLine("[" + game.levels[game.currentDifficulty].difficulty.ToString() + "," + game.levels[game.currentLevel].level.ToString() + "]");
             string unsolved = string.Empty;
             string solved = string.Empty;
 
+            //Skriver ner settings
+            writer.WriteLine(_mainSettings.getTimer().ToString());
+            writer.WriteLine(_mainSettings.getHighscore().ToString());
+            writer.WriteLine(_mainSettings.getPanel().ToString());
+            writer.WriteLine();//tomrad
+
+            //Skriver diff,level
+            writer.WriteLine("[" + game.levels[game.currentDifficulty].difficulty.ToString() + "," + game.levels[game.currentLevel].level.ToString() + "]");
+           
             //Skriver ner nuvarande spel
             for (int y = 0; y < 9; y++)
             {
@@ -146,8 +155,6 @@ namespace SudokuMain
                 {
                     if (game.levels[game.currentLevel].Unsolved[y, x].ToString() == " ")
                         unsolved += ".";
-                    else if (game.levels[game.currentLevel].Unsolved[y, x].Substring(0, 1) == "-")
-                        unsolved += game.levels[game.currentLevel].Unsolved[y, x].Substring(1, 1);
                     else
                         unsolved += game.levels[game.currentLevel].Unsolved[y, x].ToString();
                 }
@@ -166,6 +173,9 @@ namespace SudokuMain
                 writer.WriteLine(solved);
                 solved = string.Empty;
             }
+            writer.WriteLine();//Tom rad
+            writer.WriteLine("TID");
+            writer.WriteLine();
             writer.Close();
         }
 
@@ -361,5 +371,11 @@ namespace SudokuMain
                 updateMatrix(_gridIndexNr, _lblFound, value);
             }
         } //CubeWithLabels_KeyDown_1
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            saveGame();
+            base.OnClosing(e);
+        } 
     }
 }

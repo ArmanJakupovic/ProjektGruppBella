@@ -22,11 +22,15 @@ namespace SudokuMain
     {
         private SingleHighscore[,] _highscoreList;//Array med alla highscores för varje bana
         private int _diff, _lvl;//Indexerar vilken lista som ska hämtas
+        private int _numberOfLvls, _numberOfNames;//antal banor per svårighetsgrad. antal namn per highscore
 
         //Konstruktor
         public Highscores()
         {
-            _highscoreList = new SingleHighscore[3,5];
+            
+            _numberOfLvls = 5;
+            _numberOfNames = 5;
+            _highscoreList = new SingleHighscore[3,_numberOfLvls];
             _diff = 0;
             _lvl = 0;
             loadHighscores();
@@ -54,7 +58,7 @@ namespace SudokuMain
 
                     SingleHighscore newHighscore = new SingleHighscore();
 
-                    for (int i = 0; i < 5; i++)//Lägger fem rader i listan
+                    for (int i = 0; i < _numberOfNames; i++)//Lägger fem rader i listan
                     {
                         row = reader.ReadLine();
                         string[] highScoreRow = row.Split(Convert.ToChar(32));
@@ -80,10 +84,10 @@ namespace SudokuMain
 
             for (int i = 0; i < 3; i++)
 			{
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < _numberOfLvls; j++)
                 {
                     writer.WriteLine("[" + i + "," + j + "]");//Skriver diff och level
-                    for (int ix = 0; ix < 5; ix++)
+                    for (int ix = 0; ix < _numberOfNames; ix++)
                     {
                         if(_highscoreList[i,j] == null)
                             writer.WriteLine("- 0"); 
@@ -102,7 +106,7 @@ namespace SudokuMain
         public string GetHighScore(int diff, int lvl)
         {
             string strHighscore = "";
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < _numberOfNames; i++)
             {
                 strHighscore += (i + 1).ToString() + ". " + _highscoreList[diff,lvl].GetScore(i) + "\n";//namn och tab
             }
@@ -111,18 +115,24 @@ namespace SudokuMain
 
         //Jämför poäng för att se om man platsar på listan
         //Omm man platsar läggs man till
-        public void CompareScore(string name, int score, int diff, int lvl)
+        public int CompareScore(int score, int diff, int lvl)
         {
             List<int> prevHighscore = _highscoreList[diff, lvl].GetPoints();//hämtar lista med poäng för specifik bana
             for (int i = 0; i < prevHighscore.Count; i++)
             {
                 if (prevHighscore[i] < score)
                 {
-                    _highscoreList[diff, lvl].InsertScore(name, score, i);//lägger till 
-                    _highscoreList[diff, lvl].RemoveLast(5);//petar bort sämsta i listan
-                    break;
+                    return i;
                 }
             }
-        }  
+            return -1;
+        } 
+ 
+        //Placerar personen i listan och petar bort den sista personen
+        public void InsertToHighscore(string name, int score, int diff, int lvl, int index)
+        {
+            _highscoreList[diff, lvl].InsertScore(name, score, index);//lägger till 
+            _highscoreList[diff, lvl].RemoveLast(_numberOfNames);//petar bort sämsta i listan
+        }
     }
 }

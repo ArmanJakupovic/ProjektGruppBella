@@ -20,14 +20,16 @@ namespace SudokuMain
         public int currentDifficulty;
         public List<Level> levels;
 
-        public SudokuLevels()
+        public SudokuLevels(bool load = false)
         {
             currentLevel = 0;
             currentDifficulty = 0;
             levels = new List<Level>();
             levelZero();                //Hämtar en bana som finns ifall det filen med levels saknas
-            readFromFile();             //Läs in alla banor från filen
-            //loadGame();
+            if(!load)
+                readFromFile();             //Läs in alla banor från filen
+            else
+                loadGame();//Laddar tidagare spel från fil
         }
 
         //Begär en ny bana med diff=0-2 och nr=0-4
@@ -59,10 +61,16 @@ namespace SudokuMain
             {
                 StreamReader loadStream = new StreamReader("savedGame.sdk");
 
+                //Settings
+                loadStream.ReadLine();
+                loadStream.ReadLine();
+                loadStream.ReadLine();
+                loadStream.ReadLine();//tomrad
+
                 string line = loadStream.ReadLine();
                 Level newLevel = new Level();
                 string[] parts = line.Split(delimiters,
-                 StringSplitOptions.RemoveEmptyEntries);
+                StringSplitOptions.RemoveEmptyEntries);
 
                 newLevel.difficulty = Convert.ToInt16(parts[0]);
                 newLevel.level = Convert.ToInt16(parts[1]);
@@ -70,15 +78,24 @@ namespace SudokuMain
                 //Läser in spelplanen
                 for (int y = 0; y < 9; y++)
                 {
+                    int extraIndex = 0;
                     line = loadStream.ReadLine();
-                    for (int x = 0; x < 9; x++)
+                    for (int x = 0; x < line.Length; x++)
                     {
-                        if (char.IsDigit(line[x]))
-                            newLevel.Unsolved[y, x] = "-" + line[x].ToString();
-                        else if (line[x] == 'X')
-                            newLevel.Unsolved[y, x] = "X";
-                        else
-                            newLevel.Unsolved[y, x] = " ";
+                        if (char.IsDigit(line[x]))//Om egen tillagd siffre
+                            newLevel.Unsolved[y, x+extraIndex] = line[x].ToString();
+                        else if (line[x] == '-')//Om fast siffra
+                        {
+                            newLevel.Unsolved[y, x+extraIndex] = "-" + line[++x].ToString();
+                            extraIndex--;
+                        }
+                        else if (line[x] == '/')//Om felaktig siffra
+                        {
+                            newLevel.Unsolved[y, x + extraIndex] = "/" + line[++x].ToString();
+                            extraIndex--;
+                        }
+                        else//Tom ruta
+                            newLevel.Unsolved[y, x+extraIndex] = " ";
                     }
                 }
 
