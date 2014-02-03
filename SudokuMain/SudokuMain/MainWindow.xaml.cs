@@ -31,6 +31,7 @@ namespace SudokuMain
         private int _gridIndexNr;
         private int _lblFound;
         private CubeWithLabels prevBlockIx;
+        private CubeWithLabels cube;
         private int prevIx = 0;
 
         
@@ -90,7 +91,7 @@ namespace SudokuMain
         private void grdBoard_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
             string myNr = "X";
-            CubeWithLabels cube = sender as CubeWithLabels;
+            cube = sender as CubeWithLabels;
 
             int indexnr = -1;
             int lblFound = -1;
@@ -121,6 +122,15 @@ namespace SudokuMain
             _gridIndexNr = indexnr;
             _lblFound = lblFound;
             openPopup(ref myNr, ref _gridIndexNr, ref _lblFound, ref ourWindow);
+        }
+
+        //Raderar på där markören är vid högerklick.
+        private void grdBoard_RightLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (_lblFound >= 0)
+            {
+                updateMatrix(_gridIndexNr, _lblFound, " ");
+            }
         }
 
         //Kallas på när knapp på keypaden trycks. Uppdaterar gridden.
