@@ -35,14 +35,14 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="grid1">
-            	<DiscreteObjectKeyFrame KeyTime="0:0:0.6" Value="{x:Static Visibility.Visible}"/>
-            	<DiscreteObjectKeyFrame KeyTime="0:0:0.7" Value="{x:Static Visibility.Collapsed}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.6" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.7" Value="{x:Static Visibility.Collapsed}"/>
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="hideSettings">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid1">
-            	<SplineDoubleKeyFrame KeyTime="0:0:0.1" Value="156"/>
-            	<SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.1" Value="156"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Direction)" Storyboard.TargetName="grid1">
                 <SplineDoubleKeyFrame KeyTime="0" Value="180"/>
@@ -58,12 +58,12 @@
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid1">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0.005"/>
-            	<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
-            	<EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="grid1">
-            	<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"/>
-            	<DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{x:Static Visibility.Visible}"/>
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
 
@@ -344,8 +344,9 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="110*"></ColumnDefinition>
-                    <ColumnDefinition Width="40"></ColumnDefinition>
+                    <ColumnDefinition Width="40*"></ColumnDefinition>
+                    <ColumnDefinition Width="30"></ColumnDefinition>
+                    <ColumnDefinition Width="30"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Label Name="lblClock" Grid.Row="0" Grid.Column="0" Content="00:00" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Background="#FF761212" Foreground="Moccasin"/>
                 <Button Grid.Row="0" Grid.Column="1" BorderThickness="0" IsHitTestVisible="True" Click="btnSettings_Click" Style="{StaticResource ImageButton}">
@@ -361,6 +362,14 @@
                             </ImageBrush.RelativeTransform>
                         </ImageBrush>
                     </Button.Background>
+                </Button>
+                <Button Grid.Row="0" Grid.Column="2" BorderThickness="0" Style="{StaticResource ImageButton}" Click="btnHelp_Click" Background="Transparent" FontWeight="Bold" FontFamily="Verdana" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                    <Button.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                            <GradientStop Color="#FFD8B087" Offset="0"/>
+                            <GradientStop Color="#FFAC7E4F" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Foreground> ?
                 </Button>
             </Grid>
 

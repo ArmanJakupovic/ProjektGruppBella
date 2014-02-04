@@ -396,6 +396,12 @@ namespace SudokuMain
         {
             saveGame();
             base.OnClosing(e);
-        } 
+        }
+
+        //Förklaring till hur spelet fungerar hamnar här.
+        private void btnHelp_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
