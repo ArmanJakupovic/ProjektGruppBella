@@ -27,7 +27,6 @@ namespace SudokuMain
         //Konstruktor
         public Highscores()
         {
-            
             _numberOfLvls = 5;
             _numberOfNames = 5;
             _highscoreList = new SingleHighscore[3,_numberOfLvls];

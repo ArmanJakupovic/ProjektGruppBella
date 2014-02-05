@@ -51,6 +51,57 @@ namespace SudokuMain
             
         } //SetLevel
 
+        //Sparar ner spelet och dess lösning, settings och tid.
+        public void SaveGame(Settings _mainSettings)
+        {
+            StreamWriter writer = new StreamWriter(File.Create("savedGame.sdk"));
+            string unsolved = string.Empty;
+            string solved = string.Empty;
+
+            //Skriver ner settings
+            for (int i = 0; i < 3; i++)
+            {
+                writer.WriteLine(_mainSettings.getTimer().ToString());
+                writer.WriteLine(_mainSettings.getHighscore().ToString());
+                writer.WriteLine(_mainSettings.getPanel().ToString());
+                
+            }
+            writer.WriteLine();//tomrad
+
+            //Skriver diff,level
+            writer.WriteLine("[" + levels[currentDifficulty].difficulty.ToString() + "," + levels[currentLevel].level.ToString() + "]");
+
+            //Skriver ner nuvarande spel
+            for (int y = 0; y < 9; y++)
+            {
+                for (int x = 0; x < 9; x++)
+                {
+                    if (levels[currentLevel].Unsolved[y, x].ToString() == " ")
+                        unsolved += ".";
+                    else
+                        unsolved += levels[currentLevel].Unsolved[y, x].ToString();
+                }
+                writer.WriteLine(unsolved);
+                unsolved = string.Empty;
+            }
+            writer.WriteLine();//Tom rad
+
+            //Skriver ner lösningen
+            for (int y = 0; y < 9; y++)
+            {
+                for (int x = 0; x < 9; x++)
+                {
+                    solved += levels[currentLevel].Solved[y, x].ToString();
+                }
+                writer.WriteLine(solved);
+                solved = string.Empty;
+            }
+            writer.WriteLine();//Tom rad
+            writer.WriteLine("TID");
+            writer.WriteLine();
+            writer.Close();
+        }
+
         //Laddar tidigare spel
         private void loadGame()
         {
@@ -62,9 +113,12 @@ namespace SudokuMain
                 StreamReader loadStream = new StreamReader("savedGame.sdk");
 
                 //Settings
-                loadStream.ReadLine();
-                loadStream.ReadLine();
-                loadStream.ReadLine();
+                for (int i = 0; i < 3; i++)
+                {
+                    loadStream.ReadLine();
+                    loadStream.ReadLine();
+                    loadStream.ReadLine();
+                }
                 loadStream.ReadLine();//tomrad
 
                 string line = loadStream.ReadLine();

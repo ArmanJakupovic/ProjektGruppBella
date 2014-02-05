@@ -23,11 +23,13 @@ namespace SudokuMain
     /// </summary>
     public partial class MainWindow : Window
     {
-        SudokuLevels game;
-        Highscores _highscores = new Highscores();
-        Settings _mainSettings = new Settings();
-        MainWindow ourWindow;
-        private Keypad _x;
+        SudokuLevels game;//Sudoku spelet
+        Highscores _highscores = new Highscores();//Lista med highscore för varje Sudoku
+        Settings _mainSettings = new Settings();//Inställningar för spelet
+        MainWindow ourWindow;// Kopia av MainWindow
+        private Keypad _x;//Popup input
+
+        //Medlemsvariabler
         private int _gridIndexNr;
         private int _lblFound;
         private CubeWithLabels prevBlockIx;
@@ -40,7 +42,7 @@ namespace SudokuMain
         public MainWindow(bool loadGame = false)
         {
             InitializeComponent();
-            game = new SudokuLevels(loadGame);
+            game = new SudokuLevels(loadGame);//loadGame = true omm man tryckt på continue i föregående fönster
             _mainSettings.loadSettings();
             gameSettings();
             EventManager.RegisterClassHandler(typeof(Window),
@@ -145,52 +147,7 @@ namespace SudokuMain
                 updateMatrix(indexnr, lblFound, myStr);
             }
         }
-        //Sparar ner spelet och dess lösning
-        private void saveGame()
-        {
-            StreamWriter writer = new StreamWriter(File.Create("savedGame.sdk"));
-            string unsolved = string.Empty;
-            string solved = string.Empty;
-
-            //Skriver ner settings
-            writer.WriteLine(_mainSettings.getTimer().ToString());
-            writer.WriteLine(_mainSettings.getHighscore().ToString());
-            writer.WriteLine(_mainSettings.getPanel().ToString());
-            writer.WriteLine();//tomrad
-
-            //Skriver diff,level
-            writer.WriteLine("[" + game.levels[game.currentDifficulty].difficulty.ToString() + "," + game.levels[game.currentLevel].level.ToString() + "]");
-           
-            //Skriver ner nuvarande spel
-            for (int y = 0; y < 9; y++)
-            {
-                for (int x = 0; x < 9; x++)
-                {
-                    if (game.levels[game.currentLevel].Unsolved[y, x].ToString() == " ")
-                        unsolved += ".";
-                    else
-                        unsolved += game.levels[game.currentLevel].Unsolved[y, x].ToString();
-                }
-                writer.WriteLine(unsolved);
-                unsolved = string.Empty;
-            }
-            writer.WriteLine();//Tom rad
-
-            //Skriver ner lösningen
-            for (int y = 0; y < 9; y++)
-            {
-                for (int x = 0; x < 9; x++)
-                {
-                    solved += game.levels[game.currentLevel].Solved[y, x].ToString();
-                }
-                writer.WriteLine(solved);
-                solved = string.Empty;
-            }
-            writer.WriteLine();//Tom rad
-            writer.WriteLine("TID");
-            writer.WriteLine();
-            writer.Close();
-        }
+      
 
         //Hantering av knappen Check som ska rätta spelplanen
         //Den hämtar en lista med alla positioner som är felaktiga och
@@ -253,7 +210,6 @@ namespace SudokuMain
             enableHighscoreMain.IsChecked = _mainSettings.getHighscore();
             enablePanelMain.IsChecked = _mainSettings.getPanel();
 
-            saveGame();
             Storyboard myBoard;
             myBoard = (Storyboard)this.Resources["showSettings"];
             myBoard.Begin();
@@ -406,7 +362,7 @@ namespace SudokuMain
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            saveGame();
+            game.SaveGame(_mainSettings);
             base.OnClosing(e);
         }
 
