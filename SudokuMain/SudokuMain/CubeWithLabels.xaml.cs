@@ -56,8 +56,8 @@ namespace SudokuMain
             Rectangle rectActive = grd.Children[1] as Rectangle;
             if (active)
             {
-                rectActive.StrokeThickness = 2;
-                rectActive.Stroke = Brushes.OrangeRed;
+                rectActive.StrokeThickness = 3;
+                rectActive.Stroke = new SolidColorBrush(Color.FromRgb(118, 18, 18)); ;
                 
             }
             else
