@@ -33,6 +33,7 @@ namespace SudokuMain
         private CubeWithLabels prevBlockIx;
         private CubeWithLabels cube;
         private int prevIx = 0;
+        private Storyboard _myBoard;
 
         
 
@@ -254,9 +255,8 @@ namespace SudokuMain
             enablePanelMain.IsChecked = _mainSettings.getPanel();
 
             saveGame();
-            Storyboard myBoard;
-            myBoard = (Storyboard)this.Resources["showSettings"];
-            myBoard.Begin();
+            _myBoard = (Storyboard)this.Resources["showSettings"];
+            _myBoard.Begin();
             btnHint.IsEnabled = false;
             btnCheck.IsEnabled = false;
         }
@@ -274,10 +274,8 @@ namespace SudokuMain
             _mainSettings.loadSettings();
             gameSettings();
             //TODO nya inställningar ska appliceras på klocka, scoreboard och sifferpanelen.
-            
-            Storyboard myBoard;
-            myBoard = (Storyboard)this.Resources["hideSettings"];
-            myBoard.Begin();
+            _myBoard = (Storyboard)this.Resources["hideSettings"];
+            _myBoard.Begin();
             btnHint.IsEnabled = true;
             btnCheck.IsEnabled = true;
         }
@@ -286,9 +284,8 @@ namespace SudokuMain
         private void btnSettings_Cancel_Click(object sender, RoutedEventArgs e)
         {
             //TODO trigga animering etc, EJ spara Settings
-            Storyboard myBoard;
-            myBoard = (Storyboard)this.Resources["hideSettings"];
-            myBoard.Begin();
+            _myBoard = (Storyboard)this.Resources["hideSettings"];
+            _myBoard.Begin();
             btnHint.IsEnabled = true;
             btnCheck.IsEnabled = true;
         }
