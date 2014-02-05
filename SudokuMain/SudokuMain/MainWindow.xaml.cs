@@ -23,18 +23,17 @@ namespace SudokuMain
     /// </summary>
     public partial class MainWindow : Window
     {
-        SudokuLevels game;//Sudoku spelet
-        Highscores _highscores = new Highscores();//Lista med highscore för varje Sudoku
-        Settings _mainSettings = new Settings();//Inställningar för spelet
-        MainWindow ourWindow;// Kopia av MainWindow
-        private Keypad _x;//Popup input
-
-        //Medlemsvariabler
+        SudokuLevels game;
+        Highscores _highscores = new Highscores();
+        Settings _mainSettings = new Settings();
+        MainWindow ourWindow;
+        private Keypad _x;
         private int _gridIndexNr;
         private int _lblFound;
         private CubeWithLabels prevBlockIx;
         private CubeWithLabels cube;
         private int prevIx = 0;
+        private Storyboard _myBoard;
 
         
 
@@ -42,7 +41,7 @@ namespace SudokuMain
         public MainWindow(bool loadGame = false)
         {
             InitializeComponent();
-            game = new SudokuLevels(loadGame);//loadGame = true omm man tryckt på continue i föregående fönster
+            game = new SudokuLevels(loadGame);
             _mainSettings.loadSettings();
             gameSettings();
             EventManager.RegisterClassHandler(typeof(Window),
@@ -147,7 +146,6 @@ namespace SudokuMain
                 updateMatrix(indexnr, lblFound, myStr);
             }
         }
-      
 
         //Hantering av knappen Check som ska rätta spelplanen
         //Den hämtar en lista med alla positioner som är felaktiga och
@@ -210,9 +208,8 @@ namespace SudokuMain
             enableHighscoreMain.IsChecked = _mainSettings.getHighscore();
             enablePanelMain.IsChecked = _mainSettings.getPanel();
 
-            Storyboard myBoard;
-            myBoard = (Storyboard)this.Resources["showSettings"];
-            myBoard.Begin();
+            _myBoard = (Storyboard)this.Resources["showSettings"];
+            _myBoard.Begin();
             btnHint.IsEnabled = false;
             btnCheck.IsEnabled = false;
         }
@@ -230,10 +227,8 @@ namespace SudokuMain
             _mainSettings.loadSettings();
             gameSettings();
             //TODO nya inställningar ska appliceras på klocka, scoreboard och sifferpanelen.
-            
-            Storyboard myBoard;
-            myBoard = (Storyboard)this.Resources["hideSettings"];
-            myBoard.Begin();
+            _myBoard = (Storyboard)this.Resources["hideSettings"];
+            _myBoard.Begin();
             btnHint.IsEnabled = true;
             btnCheck.IsEnabled = true;
         }
@@ -242,9 +237,8 @@ namespace SudokuMain
         private void btnSettings_Cancel_Click(object sender, RoutedEventArgs e)
         {
             //TODO trigga animering etc, EJ spara Settings
-            Storyboard myBoard;
-            myBoard = (Storyboard)this.Resources["hideSettings"];
-            myBoard.Begin();
+            _myBoard = (Storyboard)this.Resources["hideSettings"];
+            _myBoard.Begin();
             btnHint.IsEnabled = true;
             btnCheck.IsEnabled = true;
         }

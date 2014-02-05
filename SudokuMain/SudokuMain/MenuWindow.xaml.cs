@@ -22,6 +22,7 @@ namespace SudokuMain
     public partial class MenuWindow : Window
     {
         Settings _set = new Settings(); // inställningar, används vid uppstart och via funktionen btnOptions_Click
+        private Storyboard _myBoard;
         public MenuWindow()
         {
             InitializeComponent();
@@ -40,9 +41,8 @@ namespace SudokuMain
 
         private void btnNewGame_Click(Object sender, RoutedEventArgs args)
         {
-            Storyboard myBoard;
-            myBoard = (Storyboard)this.Resources["moveButtonsDownDiffUpp"];
-            myBoard.Begin();
+            _myBoard = (Storyboard)this.Resources["moveButtonsDownDiffUpp"];
+            _myBoard.Begin();
 
             /*
             MainWindow game = new MainWindow();
@@ -70,9 +70,8 @@ namespace SudokuMain
          //   gridOptions.Visibility = Visibility.Collapsed;
 
             /*******ANIMATIONER***************/
-            Storyboard myBoard;
-            myBoard = (Storyboard)this.Resources["moveButtonsDown"];
-            myBoard.Begin();
+            _myBoard = (Storyboard)this.Resources["moveButtonsDown"];
+            _myBoard.Begin();
             /******SLUT*PÅ*ANIMATIONER*******/
 
             showTimer.IsChecked = _set.getTimer();
@@ -95,9 +94,8 @@ namespace SudokuMain
          //   gridOptions.Visibility = Visibility.Collapsed;
 
             /*******ANIMATIONER***************/
-            Storyboard myBoard;
-            myBoard = (Storyboard)this.Resources["moveButtonsUp"];
-            myBoard.Begin();
+            _myBoard = (Storyboard)this.Resources["moveButtonsUp"];
+            _myBoard.Begin();
             /******SLUT*PÅ*ANIMATIONER*******/
 
             //TODO Göra så ändringar återställs. Kanske kommer hända automatiskt om vi använder en klass för att ladda in från fil.
@@ -105,9 +103,8 @@ namespace SudokuMain
 
         private void buttonBack_Click(object sender, RoutedEventArgs e)
         {
-            Storyboard myBoard;
-            myBoard = (Storyboard)this.Resources["moveButtonsUpDiffDown"];
-            myBoard.Begin();
+            _myBoard = (Storyboard)this.Resources["moveButtonsUpDiffDown"];
+            _myBoard.Begin();
         }
 
         //Tillbaka till Menu och spara inställningar
@@ -130,9 +127,8 @@ namespace SudokuMain
         //    gridOptions.Visibility = Visibility.Collapsed;
 
             /*******ANIMATIONER***************/
-            Storyboard myBoard;
-            myBoard = (Storyboard)this.Resources["moveButtonsUp"];
-            myBoard.Begin();
+            _myBoard = (Storyboard)this.Resources["moveButtonsUp"];
+            _myBoard.Begin();
             /******SLUT*PÅ*ANIMATIONER*******/
         }
 
@@ -143,9 +139,8 @@ namespace SudokuMain
             MainWindow game = new MainWindow();
             game.Show();
 
-            Storyboard myBoard;
-            myBoard = (Storyboard)this.Resources["moveButtonsUpDiffDown"];
-            myBoard.Begin();
+            _myBoard = (Storyboard)this.Resources["moveButtonsUpDiffDown"];
+            _myBoard.Begin();
             //this.Hide();
         }
     }
