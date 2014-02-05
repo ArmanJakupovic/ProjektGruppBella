@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
+using System.Windows.Media.Animation;
 
 namespace SudokuMain
 {
@@ -98,6 +99,25 @@ namespace SudokuMain
             else
                 setLabelBackground(ref lbl, false);
                 lbl.Content = value;
+        }
+
+        //Gör en färganimation på vald cell
+        public void animateCell(int ix)
+        {
+            UniformGrid uGrd = this.field;
+            Grid grd = uGrd.Children[ix] as Grid;
+            Label lbl = grd.Children[0] as Label;
+            
+            SolidColorBrush myBrush = new SolidColorBrush();
+
+            ColorAnimation cellAnimation = new ColorAnimation();
+            cellAnimation.From = Colors.Moccasin;
+            cellAnimation.To = Colors.Yellow;
+            cellAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(1250));
+            cellAnimation.AutoReverse = true;
+
+            myBrush.BeginAnimation(SolidColorBrush.ColorProperty, cellAnimation);
+            lbl.Background = myBrush;
         }
 
         //Registrerar vilken label man klickat på. Main håller reda på vilket block man klickat på

@@ -213,10 +213,10 @@ namespace SudokuMain
 
         }
         
+        //Hämtar en korrekt siffra och stoppar in den på en slumpmässigt 
+        //vald position som är tom.
         private void Button_Hint_Click(object sender, RoutedEventArgs e)
         {
-            //Nedan är koden som ska vara till denna knapp egentligen
-            //Möjligen ska det visas tydligare att man får en hint
             int fusk = game.GetHint();
             if (fusk >= 0)
             {
@@ -225,7 +225,23 @@ namespace SudokuMain
                 int block = (y / 3) * 3 + (x / 3);
                 int ruta = (y % 3) * 3 + (x % 3);
                 string value = game.levels[game.currentLevel].Solved[y, x];
+                
+                //Tar bort fokus från den förra rutan
+                if (prevBlockIx != null)
+                    prevBlockIx.setLabelBorder(prevIx, false);
+
                 updateMatrix(block, ruta, value);
+
+                CubeWithLabels blockIndex = grdBoard.Children[block] as CubeWithLabels;
+                blockIndex.animateCell(ruta);
+
+                //Sätter fokus på den nya rutan
+                blockIndex.setLabelBorder(ruta, true);
+
+                prevBlockIx = blockIndex;
+                _gridIndexNr = block;
+                prevIx = ruta;
+                _lblFound = ruta;
             }
         }
 
@@ -320,84 +336,67 @@ namespace SudokuMain
                 case Key.D1:
                     {
                         value = "1";
-                        if(_mainSettings.getPanel())
-                            _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                 case Key.NumPad2:
                 case Key.D2:
                     {
                         value = "2";
-                        if (_mainSettings.getPanel())
-                            _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                 case Key.NumPad3:
                 case Key.D3:
                     {
                         value = "3";
-                        if (_mainSettings.getPanel())
-                            _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                 case Key.NumPad4:
                 case Key.D4:
                     {
                         value = "4";
-                        if (_mainSettings.getPanel())
-                            _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                 case Key.NumPad5:
                 case Key.D5:
                     {
                         value = "5";
-                        if (_mainSettings.getPanel())
-                            _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                 case Key.NumPad6:
                 case Key.D6:
                     {
                         value = "6";
-                        if (_mainSettings.getPanel())
-                            _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                 case Key.NumPad7:
                 case Key.D7:
                     {
                         value = "7";
-                        if (_mainSettings.getPanel())
-                            _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                 case Key.NumPad8:
                 case Key.D8:
                     {
                         value = "8";
-                        if (_mainSettings.getPanel())
-                            _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                 case Key.NumPad9:
                 case Key.D9:
                     {
                         value = "9";
-                        if (_mainSettings.getPanel())
-                            _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                 
                 default:
                     {
                         value = " ";
-                        if (_mainSettings.getPanel())
-                            _x.keypad_Popup.IsOpen = false;
                         break;
                     }
                     
             }
+
+            if (_x != null && _x.keypad_Popup.IsOpen)
+                _x.keypad_Popup.IsOpen = false;
             
             if (prevBlockIx != null && prevIx >= 0)
             {
