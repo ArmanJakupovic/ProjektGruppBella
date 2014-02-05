@@ -122,7 +122,10 @@ namespace SudokuMain
 
             _gridIndexNr = indexnr;
             _lblFound = lblFound;
-            openPopup(ref myNr, ref _gridIndexNr, ref _lblFound, ref ourWindow);
+            if (_mainSettings.getPanel())
+            {
+                openPopup(ref myNr, ref _gridIndexNr, ref _lblFound, ref ourWindow);
+            }
         }
 
         //Raderar på där markören är vid högerklick.
@@ -282,7 +285,7 @@ namespace SudokuMain
             if (_mainSettings.getHighscore())
                 grpHighScore.Visibility = Visibility.Visible;
             else grpHighScore.Visibility = Visibility.Collapsed;
-            if (_mainSettings.getPanel())
+            if (!_mainSettings.getPanel())
                 keyPad_static.Visibility = Visibility.Visible;
             else keyPad_static.Visibility = Visibility.Collapsed;
         }

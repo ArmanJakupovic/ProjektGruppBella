@@ -310,7 +310,7 @@
             </Grid.ColumnDefinitions>
             <CheckBox x:Name="showTimerMain" Grid.Column="0" Grid.Row="1" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Show timer" Margin="0,0,1,0"/>
             <CheckBox x:Name="enableHighscoreMain" Grid.Column="0" Grid.Row="2" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Enable highscore"/>
-            <CheckBox x:Name="enablePanelMain" Grid.Column="0" Grid.Row="3" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Enable panel"/>
+            <CheckBox x:Name="enablePanelMain" Grid.Column="0" Grid.Row="3" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Popup input"/>
             <Button x:Name="BtnSettings_Cancel" Grid.Column="0" Grid.Row="5" BorderBrush="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="btnSettings_Cancel_Click" Content="Cancel" Style="{StaticResource InformButton}"/>
             <Button x:Name="BtnSettings_Apply" Grid.Column="0" Grid.Row="4" BorderBrush="Black" VerticalAlignment="Stretch" Click="btnSettings_Apply_Click" Content="Apply" Style="{StaticResource InformButton}"/>
         </Grid>
