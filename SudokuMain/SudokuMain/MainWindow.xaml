@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:SudokuMain"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="SudokuMain.MainWindow"
-        Title="Sudoku - GruppBella" Height="500 " Width="600" MinHeight="420" MinWidth="500">
+        Title="Sudoku - GruppBella" Height="500 " Width="600" MinHeight="420" MinWidth="500" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Storyboard x:Key="showSettings">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid1">
