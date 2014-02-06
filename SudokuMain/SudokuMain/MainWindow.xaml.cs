@@ -50,6 +50,7 @@ namespace SudokuMain
             initBoard();
             txtHighScore.Text =  _highscores.GetHighScore(0,3);
             ourWindow = this;
+            initInfoLabel();
         }
 
         //Fyller spelplanen med tecken från currentLevel.Unsolved
@@ -389,6 +390,27 @@ namespace SudokuMain
         private void btnHelp_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        //Hämtar information om labels och initierar dem.
+        private void initInfoLabel()
+        {
+            int x = _mainSettings.getDifficulty();
+            switch (x)
+            {
+                case 0:
+                    currentDiff.Content = "Difficulty: Beginner";
+                    break;
+                case 1:
+                    currentDiff.Content = "Difficulty: Experienced";
+                    break;
+                case 2:
+                    currentDiff.Content = "Difficulty: Veteran";
+                    break;
+                default:
+                    currentDiff.Content = "ERROR";
+                    break;
+            }
         }
     }
 }
