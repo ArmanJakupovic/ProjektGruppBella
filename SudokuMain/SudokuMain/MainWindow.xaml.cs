@@ -375,8 +375,20 @@ namespace SudokuMain
             
             if (isOk)
             {
-                //Här blir det ett anrop till GameOver-Form eller nåt
-                MessageBox.Show("Game Over!", "Den här skylten ska givetvis bytas ut...");
+             /*   //Här blir det ett anrop till GameOver-Form eller nåt
+                MessageBox.Show("Game Over!", "Den här skylten ska givetvis bytas ut...");*/
+
+                //Visar den nya boxen. 
+                string btnClicked = SdkMsgBox.ShowBox("You cheated ffs!!", "Oh come on...", "Are you freaking kidding me?", "Images\\cerealGuy.png", "Yes", "No");
+                if (btnClicked == "left")
+                {
+                    
+                }
+                else
+                {
+                    
+                }
+
             }
         }
 

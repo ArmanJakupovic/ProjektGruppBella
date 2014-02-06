@@ -57,6 +57,9 @@
     <Compile Include="Keypad.xaml.cs">
       <DependentUpon>Keypad.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SdkMsgBox.xaml.cs">
+      <DependentUpon>SdkMsgBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="SudokuLevels.cs" />
     <Page Include="CubeWithLabels.xaml">
@@ -83,6 +86,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MenuWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SdkMsgBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,6 +130,9 @@
   <ItemGroup>
     <Resource Include="Images\setting-icon.png" />
     <Resource Include="Images\setting-icon2.png" />
+    <Resource Include="Images\cerealGuy.png" />
+    <Resource Include="Images\sadFace.png" />
+    <Resource Include="Images\sPanda.png" />
     <Content Include="SudokuLevels.sdk">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
