@@ -87,6 +87,7 @@ namespace SudokuMain
                 game.levels[game.currentLevel].Unsolved[y, x] = value;
                 updateBoard(y, x, value);
             }
+            checkFinished();
         }
 
         //Känner av vilken box man klickar i och hämtar rätt ruta från klassen som också läser av mousebutton
@@ -353,6 +354,30 @@ namespace SudokuMain
                 updateMatrix(_gridIndexNr, _lblFound, value);
             }
         } //CubeWithLabels_KeyDown_1
+
+        private void checkFinished()
+        {
+            bool isOk = true;
+            string chkValue;
+            for (int y = 0; y < 9; y++)
+                for (int x = 0; x < 9; x++)
+                {
+                    chkValue = game.levels[game.currentLevel].Unsolved[y, x];
+                    if (game.levels[game.currentLevel].Unsolved[y, x].Length > 1)
+                        chkValue = game.levels[game.currentLevel].Unsolved[y, x].Substring(1, 1);
+                    if (game.levels[game.currentLevel].Solved[y, x] != chkValue)
+                    {
+                        isOk = false;
+                        break;
+                    }
+                }
+            
+            if (isOk)
+            {
+                //Här blir det ett anrop till GameOver-Form eller nåt
+                MessageBox.Show("Game Over!", "Den här skylten ska givetvis bytas ut...");
+            }
+        }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {

@@ -112,8 +112,8 @@ namespace SudokuMain
 
             ColorAnimation cellAnimation = new ColorAnimation();
             cellAnimation.From = Colors.Moccasin;
-            cellAnimation.To = Colors.Black;
-            cellAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(600));
+            cellAnimation.To = Colors.Yellow;
+            cellAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(1250));
             cellAnimation.AutoReverse = true;
 
             myBrush.BeginAnimation(SolidColorBrush.ColorProperty, cellAnimation);
