@@ -379,6 +379,8 @@ namespace SudokuMain
                 MessageBox.Show("Game Over!", "Den här skylten ska givetvis bytas ut...");*/
 
                 //Visar den nya boxen. 
+                //Det går kalla på en highsScoreBox också med SdkMsgBox.showHighScoreBox.
+                //Den returnerar ett namn istället. 
                 string btnClicked = SdkMsgBox.ShowBox("You cheated ffs!!", "Oh come on...", "Y u no play fair!?", 
                     "Images\\WhyYouNo.png", "Message", "Yes", true, "No", true);
                 if (btnClicked == "left")
@@ -389,7 +391,6 @@ namespace SudokuMain
                 {
                     
                 }
-
             }
         }
 

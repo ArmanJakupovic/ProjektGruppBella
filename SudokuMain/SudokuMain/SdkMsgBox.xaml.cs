@@ -20,10 +20,13 @@ namespace SudokuMain
     public partial class SdkMsgBox : Window
     {
         static string button_id;
+        private bool hScoreCheck;
+        static string name;
         static SdkMsgBox _myMsgBox;
         public SdkMsgBox()
         {
             InitializeComponent();
+            hScoreCheck = false;
         }
 
         ///<summary>
@@ -32,6 +35,8 @@ namespace SudokuMain
         public static string ShowBox(string txtMessage)
         {
             _myMsgBox = new SdkMsgBox();
+            _myMsgBox.stackPanBtn.Visibility = Visibility.Visible;
+            _myMsgBox.stackPanTxtBox.Visibility = Visibility.Collapsed;
             _myMsgBox.msgBoxTextBlock.Text = txtMessage;
             _myMsgBox.ShowDialog();
             return button_id;
@@ -43,6 +48,8 @@ namespace SudokuMain
         public static string ShowBox(string txtMessage, string txtTitle)
         {
             _myMsgBox = new SdkMsgBox();
+            _myMsgBox.stackPanBtn.Visibility = Visibility.Visible;
+            _myMsgBox.stackPanTxtBox.Visibility = Visibility.Collapsed;
             _myMsgBox.msgBoxTextBlock.Text = txtMessage;
             _myMsgBox.Title = txtTitle;
             _myMsgBox.ShowDialog();
@@ -55,6 +62,8 @@ namespace SudokuMain
         public static string ShowBox(string txtMessage, string txtTitle, string txtBelowImage)
         {
             _myMsgBox = new SdkMsgBox();
+            _myMsgBox.stackPanBtn.Visibility = Visibility.Visible;
+            _myMsgBox.stackPanTxtBox.Visibility = Visibility.Collapsed;
             _myMsgBox.msgBoxTextBlock.Text = txtMessage;
             _myMsgBox.Title = txtTitle;
             _myMsgBox.msgBoxBelowImage.Text = txtBelowImage;
@@ -68,6 +77,8 @@ namespace SudokuMain
         public static string ShowBox(string txtMessage, string txtTitle, string txtBelowImage, string pathToImage)
         {
             _myMsgBox = new SdkMsgBox();
+            _myMsgBox.stackPanBtn.Visibility = Visibility.Visible;
+            _myMsgBox.stackPanTxtBox.Visibility = Visibility.Collapsed;
             _myMsgBox.msgBoxTextBlock.Text = txtMessage;
             _myMsgBox.Title = txtTitle;
             _myMsgBox.msgBoxBelowImage.Text = txtBelowImage;
@@ -82,6 +93,8 @@ namespace SudokuMain
         public static string ShowBox(string txtMessage, string txtTitle, string txtBelowImage, string pathToImage, string groupBoxMessage, string txtLeftBtn, string txtRightBtn)
         {
             _myMsgBox = new SdkMsgBox();
+            _myMsgBox.stackPanBtn.Visibility = Visibility.Visible;
+            _myMsgBox.stackPanTxtBox.Visibility = Visibility.Collapsed;
             _myMsgBox.msgBoxTextBlock.Text = txtMessage;
             _myMsgBox.Title = txtTitle;
             _myMsgBox.msgBoxBelowImage.Text = txtBelowImage;
@@ -99,6 +112,8 @@ namespace SudokuMain
         public static string ShowBox(string txtMessage, string txtTitle, string txtBelowImage, string pathToImage, string groupBoxMessage, string txtLeftBtn, bool leftButtonActive, string txtRightBtn, bool RightButtonActive)
         {
             _myMsgBox = new SdkMsgBox();
+            _myMsgBox.stackPanBtn.Visibility = Visibility.Visible;
+            _myMsgBox.stackPanTxtBox.Visibility = Visibility.Collapsed;
             _myMsgBox.msgBoxTextBlock.Text = txtMessage;
             _myMsgBox.Title = txtTitle;
             _myMsgBox.msgBoxBelowImage.Text = txtBelowImage;
@@ -119,11 +134,13 @@ namespace SudokuMain
 
         ///<summary>
         /// Ändra meddelande, titel, texten under bilden, bilden i form av Images\\minBild.png, groupBoxens meddelande, knapparnas innehåll samt hurvida de ska vara aktiva,
-        /// storleken på fönstret. 
+        /// storleken på fönstret. Returnerar "left" eller "right"
         ///</summary>
         public static string ShowBox(string txtMessage, string txtTitle, string txtBelowImage, string pathToImage, string groupBoxMessage, string txtLeftBtn, bool leftButtonActive, string txtRightBtn, bool RightButtonActive, int height, int width)
         {
             _myMsgBox = new SdkMsgBox();
+            _myMsgBox.stackPanBtn.Visibility = Visibility.Visible;
+            _myMsgBox.stackPanTxtBox.Visibility = Visibility.Collapsed;
             _myMsgBox.msgBoxTextBlock.Text = txtMessage;
             _myMsgBox.Title = txtTitle;
             _myMsgBox.msgBoxBelowImage.Text = txtBelowImage;
@@ -144,6 +161,26 @@ namespace SudokuMain
             return button_id;
         }
 
+        ///<summary>
+        ///         ///<summary>
+        /// Ändra meddelande, titel, texten under bilden, bilden i form av Images\\minBild.png, 
+        /// groupBoxens meddelande, returnerar ett det namn som fyllt i boxen. 
+        ///</summary>
+        public static string showHighScoreBox(string txtMessage, string txtTitle, string txtBelowImage, string pathToImage, string groupBoxMessage)
+        {
+            _myMsgBox = new SdkMsgBox();
+            _myMsgBox.hScoreCheck = true;
+            _myMsgBox.stackPanBtn.Visibility = Visibility.Collapsed;
+            _myMsgBox.stackPanTxtBox.Visibility = Visibility.Visible;
+            _myMsgBox.msgBoxTextBlock.Text = txtMessage;
+            _myMsgBox.Title = txtTitle;
+            _myMsgBox.msgBoxBelowImage.Text = txtBelowImage;
+            _myMsgBox.msgBoxImage.Source = new BitmapImage(new Uri(@pathToImage, UriKind.Relative));
+            _myMsgBox.msgBoxGroupBox.Header = groupBoxMessage;
+            _myMsgBox.ShowDialog();
+            return name;
+        }
+
         private void btnLeftIsClicked(object sender, EventArgs e)
         {
             button_id = "left";
@@ -152,7 +189,15 @@ namespace SudokuMain
 
         private void btnRightIsClicked(object sender, EventArgs e)
         {
-            button_id = "right";
+            if (_myMsgBox.hScoreCheck)
+            {
+                name = _myMsgBox.stackPanTxtBoxBox.Text;
+                _myMsgBox.hScoreCheck = false;
+            }
+            else
+            {
+                button_id = "right";
+            }
             this.Close();
         }
     }
