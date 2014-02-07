@@ -77,7 +77,7 @@ namespace SudokuMain
         }
 
         ///<summary>
-        /// Här kan allt ändras. Om bilden önskas att ändras bör det ske i formatet Images\\minBild.png
+        /// Ändra meddelande, titel, texten under bilden, bilden i form av Images\\minBild.png, groupBoxens meddelande, knapparnas innehåll. 
         ///</summary>
         public static string ShowBox(string txtMessage, string txtTitle, string txtBelowImage, string pathToImage, string groupBoxMessage, string txtLeftBtn, string txtRightBtn)
         {
@@ -89,6 +89,57 @@ namespace SudokuMain
             _myMsgBox.msgBoxGroupBox.Header = groupBoxMessage;
             _myMsgBox.leftBtn.Content = txtLeftBtn;
             _myMsgBox.rightBtn.Content = txtRightBtn;
+            _myMsgBox.ShowDialog();
+            return button_id;
+        }
+
+        ///<summary>
+        /// Ändra meddelande, titel, texten under bilden, bilden i form av Images\\minBild.png, groupBoxens meddelande, knapparnas innehåll samt hurvida de ska vara aktiva.
+        ///</summary>
+        public static string ShowBox(string txtMessage, string txtTitle, string txtBelowImage, string pathToImage, string groupBoxMessage, string txtLeftBtn, bool leftButtonActive, string txtRightBtn, bool RightButtonActive)
+        {
+            _myMsgBox = new SdkMsgBox();
+            _myMsgBox.msgBoxTextBlock.Text = txtMessage;
+            _myMsgBox.Title = txtTitle;
+            _myMsgBox.msgBoxBelowImage.Text = txtBelowImage;
+            _myMsgBox.msgBoxImage.Source = new BitmapImage(new Uri(@pathToImage, UriKind.Relative));
+            _myMsgBox.msgBoxGroupBox.Header = groupBoxMessage;
+            _myMsgBox.leftBtn.Content = txtLeftBtn;
+            _myMsgBox.rightBtn.Content = txtRightBtn;
+            if (leftButtonActive)
+                _myMsgBox.leftBtn.Visibility = Visibility.Visible;
+            else
+                _myMsgBox.leftBtn.Visibility = Visibility.Collapsed; ;
+            if (RightButtonActive)
+                _myMsgBox.rightBtn.Visibility = Visibility.Visible;
+            else _myMsgBox.rightBtn.Visibility = Visibility.Collapsed;
+            _myMsgBox.ShowDialog();
+            return button_id;
+        }
+
+        ///<summary>
+        /// Ändra meddelande, titel, texten under bilden, bilden i form av Images\\minBild.png, groupBoxens meddelande, knapparnas innehåll samt hurvida de ska vara aktiva,
+        /// storleken på fönstret. 
+        ///</summary>
+        public static string ShowBox(string txtMessage, string txtTitle, string txtBelowImage, string pathToImage, string groupBoxMessage, string txtLeftBtn, bool leftButtonActive, string txtRightBtn, bool RightButtonActive, int height, int width)
+        {
+            _myMsgBox = new SdkMsgBox();
+            _myMsgBox.msgBoxTextBlock.Text = txtMessage;
+            _myMsgBox.Title = txtTitle;
+            _myMsgBox.msgBoxBelowImage.Text = txtBelowImage;
+            _myMsgBox.msgBoxImage.Source = new BitmapImage(new Uri(@pathToImage, UriKind.Relative));
+            _myMsgBox.msgBoxGroupBox.Header = groupBoxMessage;
+            _myMsgBox.leftBtn.Content = txtLeftBtn;
+            _myMsgBox.rightBtn.Content = txtRightBtn;
+            if (leftButtonActive)
+                _myMsgBox.leftBtn.Visibility = Visibility.Visible;
+            else
+                _myMsgBox.leftBtn.Visibility = Visibility.Collapsed; ;
+            if (RightButtonActive)
+                _myMsgBox.rightBtn.Visibility = Visibility.Visible;
+            else _myMsgBox.rightBtn.Visibility = Visibility.Collapsed;
+            _myMsgBox.Height = height;
+            _myMsgBox.Width = width;
             _myMsgBox.ShowDialog();
             return button_id;
         }
