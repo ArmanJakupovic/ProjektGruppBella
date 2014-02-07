@@ -133,6 +133,8 @@
     <Resource Include="Images\cerealGuy.png" />
     <Resource Include="Images\sadFace.png" />
     <Resource Include="Images\sPanda.png" />
+    <Resource Include="Images\WhyYouNo.png" />
+    <Resource Include="Images\goodJobFace.png" />
     <Content Include="SudokuLevels.sdk">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

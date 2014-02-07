@@ -379,7 +379,7 @@ namespace SudokuMain
                 MessageBox.Show("Game Over!", "Den här skylten ska givetvis bytas ut...");*/
 
                 //Visar den nya boxen. 
-                string btnClicked = SdkMsgBox.ShowBox("You cheated ffs!!", "Oh come on...", "Are you freaking kidding me?", "Images\\cerealGuy.png", "Yes", "No");
+                string btnClicked = SdkMsgBox.ShowBox("You cheated ffs!!", "Oh come on...", "Y u no play fair!?", "Images\\WhyYouNo.png", "Message", "Yes", "No");
                 if (btnClicked == "left")
                 {
                     
