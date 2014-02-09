@@ -43,17 +43,13 @@ namespace SudokuMain
         {
             _myBoard = (Storyboard)this.Resources["moveButtonsDownDiffUpp"];
             _myBoard.Begin();
-
-            /*
-            MainWindow game = new MainWindow();
-            game.Show();*/
-            //this.Hide();
         }
 
         private void btnContinue_Click(Object sender, RoutedEventArgs args)
         {
             MainWindow game = new MainWindow(true);
             game.Show();
+            this.Close();
         }
 
         private void btnExit_Click(Object sender, RoutedEventArgs args)

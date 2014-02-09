@@ -60,7 +60,7 @@ namespace SudokuMain
                     for (int i = 0; i < _numberOfNames; i++)//Lägger fem rader i listan
                     {
                         row = reader.ReadLine();
-                        string[] highScoreRow = row.Split(Convert.ToChar(32));
+                        string[] highScoreRow = row.Split(Convert.ToChar(9));
                         newHighscore.LoadScore(highScoreRow[0], Convert.ToInt16(highScoreRow[1]));
                     }
                     _highscoreList[_diff, _lvl] = newHighscore;
@@ -89,7 +89,7 @@ namespace SudokuMain
                     for (int ix = 0; ix < _numberOfNames; ix++)
                     {
                         if(_highscoreList[i,j] == null)
-                            writer.WriteLine("- 0"); 
+                            writer.WriteLine("-\t0"); 
                         else
                             writer.WriteLine(_highscoreList[i, j].GetScore(ix));
                     }
@@ -132,6 +132,7 @@ namespace SudokuMain
         {
             _highscoreList[diff, lvl].InsertScore(name, score, index);//lägger till 
             _highscoreList[diff, lvl].RemoveLast(_numberOfNames);//petar bort sämsta i listan
+            saveHighscores();
         }
     }
 }

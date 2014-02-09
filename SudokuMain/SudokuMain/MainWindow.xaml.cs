@@ -35,6 +35,7 @@ namespace SudokuMain
         private int prevIx = 0;
         private Storyboard _myBoard;
         private bool _gameFinished;
+        private int _score, _hintCount = 0;
 
         
 
@@ -176,6 +177,7 @@ namespace SudokuMain
         //vald position som är tom.
         private void Button_Hint_Click(object sender, RoutedEventArgs e)
         {
+            _hintCount++;//Räknar antal hint-tryck
             int fusk = game.GetHint();
             if (fusk >= 0)
             {
@@ -384,6 +386,17 @@ namespace SudokuMain
                 
                 File.Delete("savedGame.sdk");//Tar bort eventuellt sparat spel
                 _gameFinished = true;//Indikerar att spelet är avslutat (kommer inte spara om man trycker X)
+
+                _score = (100/*Tid egentligen*/ * (_mainSettings.getDifficulty() + 1)) / (_hintCount/2);//räknar ut score
+                int placement = _highscores.CompareScore(_score, _mainSettings.getDifficulty(), 3);//Ev highscore
+
+                if (placement != -1)//Om highscore
+                {
+                    string name = SdkMsgBox.showHighScoreBox("You made it to the highscore!","Highscore!","Type your name:","Images\\goodJobFace.png","Message");
+                    _highscores.InsertToHighscore(name.ToUpper().Substring(0,3), _score, _mainSettings.getDifficulty(), 3, placement);
+                    txtHighScore.Text = _highscores.GetHighScore(_mainSettings.getDifficulty(), 3);
+                }
+
                 //Visar den nya boxen. 
                 //Det går kalla på en highsScoreBox också med SdkMsgBox.showHighScoreBox.
                 //Den returnerar ett namn istället. 
