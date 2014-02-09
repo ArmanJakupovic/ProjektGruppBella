@@ -399,23 +399,25 @@ namespace SudokuMain
 
                 if (placement != -1)//Om highscore
                 {
-                    string name = SdkMsgBox.showHighScoreBox("You made it to the highscore!","Highscore!","Type your name:","Images\\goodJobFace.png","Message");
-                    _highscores.InsertToHighscore(name.ToUpper().Substring(0,3), _score, _mainSettings.getDifficulty(), 3, placement);
+                    string name = SdkMsgBox.showHighScoreBox("You made it to the highscore!", "Highscore!", "Type your name:", "Images\\goodJobFace.png", "Message");
+                    _highscores.InsertToHighscore(name.ToUpper().Substring(0, 3), _score, _mainSettings.getDifficulty(), 3, placement);
                     txtHighScore.Text = _highscores.GetHighScore(_mainSettings.getDifficulty(), 3);
-                }
-
-                //Visar den nya boxen. 
-                //Det går kalla på en highsScoreBox också med SdkMsgBox.showHighScoreBox.
-                //Den returnerar ett namn istället. 
-                string btnClicked = SdkMsgBox.ShowBox("You cheated ffs!!", "Oh come on...", "Y u no play fair!?", 
-                    "Images\\WhyYouNo.png", "Message", "Yes", true, "No", true);
-                if (btnClicked == "left")
-                {
-                    
                 }
                 else
                 {
-                    
+                    //Visar den nya boxen. 
+                    //Det går kalla på en highsScoreBox också med SdkMsgBox.showHighScoreBox.
+                    //Den returnerar ett namn istället. 
+                    string btnClicked = SdkMsgBox.ShowBox("You cheated ffs!!", "Oh come on...", "Y u no play fair!?",
+                        "Images\\WhyYouNo.png", "Message", "Yes", true, "No", true);
+                    if (btnClicked == "left")
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
                 }
             }
         }
