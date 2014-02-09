@@ -349,7 +349,7 @@
                     <ColumnDefinition Width="30"></ColumnDefinition>
                     <ColumnDefinition Width="30"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Name="lblClock" Grid.Row="0" Grid.Column="0" Content="00:00" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Background="#FF761212" Foreground="Moccasin"/>
+                <Label Name="lblClock" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Background="#FF761212" Foreground="Moccasin"/>
                 <Button Grid.Row="0" Grid.Column="1" BorderThickness="0" IsHitTestVisible="True" Click="btnSettings_Click" Style="{StaticResource ImageButton}">
                     <Button.Background>
                         <ImageBrush ImageSource="Images/setting-icon2.png" Stretch="Uniform">

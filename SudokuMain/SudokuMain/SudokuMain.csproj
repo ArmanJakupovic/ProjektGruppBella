@@ -62,6 +62,7 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="SudokuLevels.cs" />
+    <Compile Include="Time.cs" />
     <Page Include="CubeWithLabels.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

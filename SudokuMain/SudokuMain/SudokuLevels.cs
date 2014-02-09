@@ -52,20 +52,22 @@ namespace SudokuMain
         } //SetLevel
 
         //Sparar ner spelet och dess lösning, settings och tid.
-        public void SaveGame(Settings _mainSettings)
+        public void SaveGame(Settings _mainSettings, Time _time)
         {
             StreamWriter writer = new StreamWriter(File.Create("savedGame.sdk"));
             string unsolved = string.Empty;
             string solved = string.Empty;
 
+            //Skriver ner time
+                writer.WriteLine(_time.getSeconds());
+                writer.WriteLine(_time.getMinutes());
+                writer.WriteLine(_time.getHours());
+            writer.WriteLine();//tomrad
+
             //Skriver ner settings
-            for (int i = 0; i < 3; i++)
-            {
                 writer.WriteLine(_mainSettings.getTimer().ToString());
                 writer.WriteLine(_mainSettings.getHighscore().ToString());
                 writer.WriteLine(_mainSettings.getPanel().ToString());
-                
-            }
             writer.WriteLine();//tomrad
 
             //Skriver diff,level
@@ -97,8 +99,6 @@ namespace SudokuMain
                 solved = string.Empty;
             }
             writer.WriteLine();//Tom rad
-            writer.WriteLine("TID");
-            writer.WriteLine();
             writer.Close();
         }
 
@@ -111,14 +111,16 @@ namespace SudokuMain
             try
             {
                 StreamReader loadStream = new StreamReader("savedGame.sdk");
+                //Time INGET HÄNDER DOCK.
+                   loadStream.ReadLine();
+                   loadStream.ReadLine();
+                   loadStream.ReadLine();
+                loadStream.ReadLine();//tomrad
 
                 //Settings
-                for (int i = 0; i < 3; i++)
-                {
                     loadStream.ReadLine();
                     loadStream.ReadLine();
                     loadStream.ReadLine();
-                }
                 loadStream.ReadLine();//tomrad
 
                 string line = loadStream.ReadLine();
