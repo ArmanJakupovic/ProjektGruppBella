@@ -138,6 +138,7 @@ namespace SudokuMain
         {
             MainWindow game = new MainWindow();
             game.Show();
+            this.Close();
 
             _myBoard = (Storyboard)this.Resources["moveButtonsUpDiffDown"];
             _myBoard.Begin();

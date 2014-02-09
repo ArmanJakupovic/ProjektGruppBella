@@ -23,17 +23,18 @@ namespace SudokuMain
     /// </summary>
     public partial class MainWindow : Window
     {
-        SudokuLevels game;
-        Highscores _highscores = new Highscores();
-        Settings _mainSettings = new Settings();
+        SudokuLevels game;//Spelbräda
+        Highscores _highscores = new Highscores();//Alla highscores
+        Settings _mainSettings = new Settings();//Inställningar för spelet
         MainWindow ourWindow;
-        private Keypad _x;
+        private Keypad _x;//Popup fönster
         private int _gridIndexNr;
         private int _lblFound;
         private CubeWithLabels prevBlockIx;
         private CubeWithLabels cube;
         private int prevIx = 0;
         private Storyboard _myBoard;
+        private bool _gameFinished;
 
         
 
@@ -41,16 +42,17 @@ namespace SudokuMain
         public MainWindow(bool loadGame = false)
         {
             InitializeComponent();
-            game = new SudokuLevels(loadGame);
-            _mainSettings.loadSettings();
-            gameSettings();
+            _gameFinished = false;
+            game = new SudokuLevels(loadGame);//Init spelbräde. Antingen tidigare spel eller från textfilen
+            _mainSettings.loadSettings();//läser in inställningar från fil
+            gameSettings();//tilldelar inställningarna till spelet
             EventManager.RegisterClassHandler(typeof(Window),
             Keyboard.KeyUpEvent, new KeyEventHandler(CubeWithLabels_KeyDown_1), true);
-            game.SetLevel(0, 3);
-            initBoard();
-            txtHighScore.Text =  _highscores.GetHighScore(0,3);
+            game.SetLevel(_mainSettings.getDifficulty(), 3);//Läser in vilken bana som ska spelas
+            initBoard();//Fyller spelbrädet
+            txtHighScore.Text =  _highscores.GetHighScore(_mainSettings.getDifficulty(),3);//fyller highscore för specifik bana
             ourWindow = this;
-            initInfoLabel();
+            initInfoLabel();//Skriver ut vilken svårighetsgrad och bana som spelas
         }
 
         //Fyller spelplanen med tecken från currentLevel.Unsolved
@@ -355,7 +357,8 @@ namespace SudokuMain
                 updateMatrix(_gridIndexNr, _lblFound, value);
             }
         } //CubeWithLabels_KeyDown_1
-
+        
+        //Kontrollerar om spelet är färdigspelat eller inte
         private void checkFinished()
         {
             bool isOk = true;
@@ -378,6 +381,9 @@ namespace SudokuMain
              /*   //Här blir det ett anrop till GameOver-Form eller nåt
                 MessageBox.Show("Game Over!", "Den här skylten ska givetvis bytas ut...");*/
 
+                
+                File.Delete("savedGame.sdk");//Tar bort eventuellt sparat spel
+                _gameFinished = true;//Indikerar att spelet är avslutat (kommer inte spara om man trycker X)
                 //Visar den nya boxen. 
                 //Det går kalla på en highsScoreBox också med SdkMsgBox.showHighScoreBox.
                 //Den returnerar ett namn istället. 
@@ -394,9 +400,13 @@ namespace SudokuMain
             }
         }
 
+        //Hanterar stänging med hjälp av X uppe i högra hörnet
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            game.SaveGame(_mainSettings);
+            if(!_gameFinished)//Om spelet är färdigspelat sparas det inte ner
+                game.SaveGame(_mainSettings);
+            MenuWindow menu = new MenuWindow();
+            menu.Show();
             base.OnClosing(e);
         }
 
