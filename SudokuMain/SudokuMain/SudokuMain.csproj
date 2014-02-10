@@ -138,6 +138,8 @@
     <Resource Include="Images\goodJobFace.png" />
     <Resource Include="Images\LearningFace.png" />
     <Resource Include="Images\icon.png" />
+    <Resource Include="Images\btnPause-icon3.png" />
+    <Resource Include="Images\btnPlay-icon2.png" />
     <Content Include="SudokuLevels.sdk">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

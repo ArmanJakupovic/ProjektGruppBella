@@ -579,5 +579,23 @@ namespace SudokuMain
             else // 6
                 lblClock.Content = ""+_timeHours + ":" + _timeMinutes + ":" + _timeSeconds;
         }
+
+        //Pausar spelet och startar pausat spel
+        private void btnPausePlay_Click(Object sender, RoutedEventArgs args)
+        {
+            Button button = (Button)sender;
+            if (button.Name == "btnPlay")
+            {
+                dispatch.Start();
+                btnPlay.Visibility = Visibility.Hidden;
+                btnPause.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                dispatch.Stop();
+                btnPlay.Visibility = Visibility.Visible;
+                btnPause.Visibility = Visibility.Hidden;
+            }
+        }
     }
 }
