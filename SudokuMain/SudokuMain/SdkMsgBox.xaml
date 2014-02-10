@@ -139,7 +139,7 @@
                 <Button Name="rightBtn" Width="100" Height="30" Margin="5" Style="{StaticResource InformButton}" Click="btnRightIsClicked">No</Button>
             </StackPanel>
             <StackPanel Name="stackPanTxtBox" Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Visible">
-                <TextBox Name="stackPanTxtBoxBox" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="-5,0,0,0" Width="175" Height="30" Background="Moccasin" BorderBrush="Black" BorderThickness="1" FontSize="14" MaxLength="10"></TextBox>
+                <TextBox Name="stackPanTxtBoxBox" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="-5,0,0,0" Width="175" Height="30" Background="Moccasin" BorderBrush="Black" BorderThickness="1" FontSize="14" MaxLength="3"></TextBox>
                 <Button Name="rightBtnOk" Width="40" Height="30" Margin="5" Style="{StaticResource InformButton}" Click="btnRightIsClicked">OK</Button>
             </StackPanel>
             <TextBlock Name="msgBoxBelowImage" Grid.Row="0" Grid.Column="0" Margin="2,3,10,4" TextWrapping="Wrap" Background="Transparent" VerticalAlignment="Top" HorizontalAlignment="Center" Focusable="False" IsHitTestVisible="False" AllowDrop="True">Are you seriouse!?</TextBlock>
