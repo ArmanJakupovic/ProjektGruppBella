@@ -117,10 +117,10 @@
                 <ColumnDefinition Width="100*"></ColumnDefinition>
                 <ColumnDefinition Width="220*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Image Name="msgBoxImage" Grid.Row="0" Grid.Column="0" Source="Images\cerealGuy.png" Stretch="Fill" Margin="2"></Image>
-            <Rectangle Grid.Row="0" Grid.Column="0" Stroke="Black" StrokeThickness="2" Margin="2"></Rectangle>
-            <GroupBox Name="msgBoxGroupBox" Header="Message" Grid.Row="0" Grid.Column="1" BorderBrush="#FF761212" Margin="1,-5,5,0">
-                <TextBlock Name="msgBoxTextBlock" Background="Transparent" TextWrapping="Wrap">This is a messagebox</TextBlock>
+            <Image Name="msgBoxImage" Grid.Row="0" Grid.Column="0" Source="Images\cerealGuy.png" Stretch="Fill" Margin="2,5,2,2"></Image>
+            <Rectangle Grid.Row="0" Grid.Column="0" Stroke="Black" StrokeThickness="2" Margin="2,5,2,2"></Rectangle>
+            <GroupBox Name="msgBoxGroupBox" Header="Message" Grid.Row="0" Grid.Column="1" BorderBrush="#FF761212" Margin="1,0,5,0" FontFamily="Verdana" FontWeight="Bold">
+                <TextBox Name="msgBoxTextBlock" Background="Transparent" TextWrapping="Wrap" AllowDrop="False" IsHitTestVisible="True" BorderThickness="0" IsTabStop="False" IsReadOnly="True" VerticalScrollBarVisibility="Auto" Focusable="False" FontFamily="Verdana" FontWeight="Normal">This is a messagebox</TextBox>
             </GroupBox>
         </Grid>
         <!--Slut på toppen-->
@@ -142,7 +142,7 @@
                 <TextBox Name="stackPanTxtBoxBox" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="-5,0,0,0" Width="175" Height="30" Background="Moccasin" BorderBrush="Black" BorderThickness="1" FontSize="14" MaxLength="3"></TextBox>
                 <Button Name="rightBtnOk" Width="40" Height="30" Margin="5" Style="{StaticResource InformButton}" Click="btnRightIsClicked">OK</Button>
             </StackPanel>
-            <TextBlock Name="msgBoxBelowImage" Grid.Row="0" Grid.Column="0" Margin="2,3,10,4" TextWrapping="Wrap" Background="Transparent" VerticalAlignment="Top" HorizontalAlignment="Center" Focusable="False" IsHitTestVisible="False" AllowDrop="True">Are you seriouse!?</TextBlock>
+            <TextBlock Name="msgBoxBelowImage" Grid.Row="0" Grid.Column="0" Margin="2,3,10,4" TextWrapping="Wrap" Background="Transparent" VerticalAlignment="Top" HorizontalAlignment="Center" Focusable="False" IsHitTestVisible="False" AllowDrop="True" FontFamily="Verdana">Are you seriouse!?</TextBlock>
         </Grid>
         <!--Slut på nedre delen-->
     </Grid>

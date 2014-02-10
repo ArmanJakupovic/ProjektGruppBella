@@ -417,7 +417,7 @@ namespace SudokuMain
                     //Det går kalla på en highsScoreBox också med SdkMsgBox.showHighScoreBox.
                     //Den returnerar ett namn istället. 
                     string btnClicked = SdkMsgBox.ShowBox("You cheated ffs!!", "Oh come on...", "Y u no play fair!?",
-                        "Images\\WhyYouNo.png", "Message", "Yes", true, "No", true);
+                        "Images\\WhyYouNo.png", "Message", "Yes", "No", true, true);
                     if (btnClicked == "left")
                     {
 
@@ -443,7 +443,10 @@ namespace SudokuMain
         //Förklaring till hur spelet fungerar hamnar här.
         private void btnHelp_Click(object sender, RoutedEventArgs e)
         {
-            
+            string rules = "A sudoku board consists of a 9x9 grid. The grid is divided into 3x3 blocks called regions." 
+            + " A region may or may not have cells which are considered unchangable, in our game they are represented by a darker background color."
+            + " The purpose of the game is to make sure that each block contains the numbers  1 trough 9. Each cell number must be unique for that specific row and column.";
+            SdkMsgBox.ShowBox(rules, "", "I know how to play...", "Images\\LearningFace.png", "The rules of Sudoku", "Got it!", "", true, false, 1.35, 1.35);
         }
 
         //Hämtar information om difficulty och level labels och initierar dem.
