@@ -8,39 +8,39 @@
     <Grid>
         <UniformGrid Name="field" Columns="3" Rows="3">
             <Grid>
-                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Content="1" FontWeight="Normal" Background="#FFD8B087" MouseLeftButtonDown="Label_MouseLeftButtonDown_1"></Label>
+                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Content="1" FontWeight="Normal" Background="#FFD8B087" MouseLeftButtonDown="Label_MouseLeftButtonDown_1" FontFamily="Verdana"></Label>
                 <Rectangle Stroke="Black" StrokeThickness="0.6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Rectangle>
             </Grid>
             <Grid>
-                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Content="2" FontWeight="Normal" MouseLeftButtonDown="Label_MouseLeftButtonDown_1"></Label>
+                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Content="2" FontWeight="Normal" MouseLeftButtonDown="Label_MouseLeftButtonDown_1" FontFamily="Verdana"></Label>
                 <Rectangle Stroke="Black" StrokeThickness="0.6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Rectangle>
             </Grid>
             <Grid>
-                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Content="3" FontWeight="Normal" MouseLeftButtonDown="Label_MouseLeftButtonDown_1"></Label>
+                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Content="3" FontWeight="Normal" MouseLeftButtonDown="Label_MouseLeftButtonDown_1" FontFamily="Verdana"></Label>
                 <Rectangle Stroke="Black" StrokeThickness="0.6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Rectangle>
             </Grid>
             <Grid>
-                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Content="4" FontWeight="Normal" MouseLeftButtonDown="Label_MouseLeftButtonDown_1"></Label>
+                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Content="4" FontWeight="Normal" MouseLeftButtonDown="Label_MouseLeftButtonDown_1" FontFamily="Verdana"></Label>
                 <Rectangle Stroke="Black" StrokeThickness="0.6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Rectangle>
             </Grid>
             <Grid>
-                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Content="5" FontWeight="Normal" MouseLeftButtonDown="Label_MouseLeftButtonDown_1"></Label>
+                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Content="5" FontWeight="Normal" MouseLeftButtonDown="Label_MouseLeftButtonDown_1" FontFamily="Verdana"></Label>
                 <Rectangle Stroke="Black" StrokeThickness="0.6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Rectangle>
             </Grid>
             <Grid>
-                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Content="6" FontWeight="Normal" MouseLeftButtonDown="Label_MouseLeftButtonDown_1"></Label>
+                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Content="6" FontWeight="Normal" MouseLeftButtonDown="Label_MouseLeftButtonDown_1" FontFamily="Verdana"></Label>
                 <Rectangle Stroke="Black" StrokeThickness="0.6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Rectangle>
             </Grid>
             <Grid>
-                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Content="7" FontWeight="Normal" MouseLeftButtonDown="Label_MouseLeftButtonDown_1"></Label>
+                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Content="7" FontWeight="Normal" MouseLeftButtonDown="Label_MouseLeftButtonDown_1" FontFamily="Verdana"></Label>
                 <Rectangle Stroke="Black" StrokeThickness="0.6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Rectangle>
             </Grid>
             <Grid>
-                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Content="8" FontWeight="Normal" MouseLeftButtonDown="Label_MouseLeftButtonDown_1"></Label>
+                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Content="8" FontWeight="Normal" MouseLeftButtonDown="Label_MouseLeftButtonDown_1" FontFamily="Verdana"></Label>
                 <Rectangle Stroke="Black" StrokeThickness="0.6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Rectangle>
             </Grid>
             <Grid>
-                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Content="9" FontWeight="Normal" MouseLeftButtonDown="Label_MouseLeftButtonDown_1"></Label>
+                <Label HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="24" Content="9" FontWeight="Normal" MouseLeftButtonDown="Label_MouseLeftButtonDown_1" FontFamily="Verdana"></Label>
                 <Rectangle Stroke="Black" StrokeThickness="0.6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></Rectangle>
             </Grid>
         </UniformGrid>
