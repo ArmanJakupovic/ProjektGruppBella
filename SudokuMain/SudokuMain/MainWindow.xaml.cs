@@ -24,6 +24,7 @@ namespace SudokuMain
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region constans
         SudokuLevels game = new SudokuLevels();//Spelbräda
         Highscores _highscores = new Highscores();//Alla highscores
         Settings _mainSettings = new Settings();//Inställningar för spelet
@@ -42,7 +43,8 @@ namespace SudokuMain
         private int _timeSeconds;
         private int _timeMinutes;
         private int _timeHours;
-        
+        private bool _rightClickMemory;
+        #endregion
 
 
         public MainWindow(bool loadGame = false)
@@ -69,6 +71,7 @@ namespace SudokuMain
             initInfoLabel();//Skriver ut vilken svårighetsgrad och bana som spelas
             dispatch = new DispatcherTimer();
             startTimer(); //startar klockan
+            _rightClickMemory = false;
         }
 
         //Fyller spelplanen med tecken från currentLevel.Unsolved
@@ -113,6 +116,7 @@ namespace SudokuMain
         private void grdBoard_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
             string myNr = "X";
+            _rightClickMemory = false;
             cube = sender as CubeWithLabels;
 
             int indexnr = -1;
@@ -149,13 +153,56 @@ namespace SudokuMain
             }
         }
 
-        //Raderar på där markören är vid högerklick.
+        //Raderar där markören är vid dubbel högerklick.
         private void grdBoard_RightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (_lblFound >= 0)
-            {
-                updateMatrix(_gridIndexNr, _lblFound, " ");
-            }
+                cube = sender as CubeWithLabels;
+                int indexnr = -1;
+                int lblFound = -1;
+
+                if (prevBlockIx != null)
+                    prevBlockIx.setLabelBorder(prevIx, false);
+                for (int ix = 0; ix < 9; ix++)
+                {
+                    CubeWithLabels cubeCompair = grdBoard.Children[ix] as CubeWithLabels;
+                    if (cubeCompair == cube)
+                    {
+                        //MessageBox.Show(ix.ToString());
+                        indexnr = ix;
+                        lblFound = cube.FindClickedLabel();
+                        //Gör så att den valda labeln blir markerad
+                        if (lblFound >= 0)
+                        {
+                            cube.setLabelBorder(lblFound, true);
+                            prevBlockIx = cube;
+                            prevIx = lblFound;
+                        }
+                        break;
+                    }
+                }
+
+                if (_rightClickMemory && _gridIndexNr == indexnr)
+                {
+                    if (_lblFound == lblFound)
+                    {
+                        if (_lblFound >= 0)
+                        {
+                            updateMatrix(_gridIndexNr, _lblFound, " ");
+                            _rightClickMemory = false;
+                        }
+                    }
+                    else
+                    {
+                        _rightClickMemory = false;
+                    }
+                }
+                else
+                {
+                    _rightClickMemory = true;
+                }
+
+                _gridIndexNr = indexnr;
+                _lblFound = lblFound;
         }
 
         //Kallas på när knapp på keypaden trycks. Uppdaterar gridden.
@@ -443,10 +490,13 @@ namespace SudokuMain
         //Förklaring till hur spelet fungerar hamnar här.
         private void btnHelp_Click(object sender, RoutedEventArgs e)
         {
-            string rules = "A sudoku board consists of a 9x9 grid. The grid is divided into 3x3 blocks called regions." 
+            string rules = " A sudoku board consists of a 9x9 grid. The grid is divided into 3x3 blocks called regions." 
             + " A region may or may not have cells which are considered unchangable, in our game they are represented by a darker background color."
-            + " The purpose of the game is to make sure that each block contains the numbers  1 trough 9. Each cell number must be unique for that specific row and column.";
-            SdkMsgBox.ShowBox(rules, "", "I know how to play...", "Images\\LearningFace.png", "The rules of Sudoku", "Got it!", "", true, false, 1.35, 1.35);
+            + " The purpose of the game is to make sure that each block contains the numbers  1 trough 9. Each cell number must be unique for that specific row and column."
+            + "||"
+            + " --Click on desired cell with left mouse button to show input menu (if chosen in options). Choose a number.||"
+            + " --Double click with right mouse button on desired cell to erase previously chosen number";
+            SdkMsgBox.ShowBox(rules.Replace("|", "\n"), "How to", "I know how to play...", "Images\\LearningFace.png", "The rules of Sudoku", "Got it!", "", true, false, 1.8, 1.6);
         }
 
         //Hämtar information om difficulty och level labels och initierar dem.
