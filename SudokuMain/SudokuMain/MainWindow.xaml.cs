@@ -443,10 +443,10 @@ namespace SudokuMain
         //Förklaring till hur spelet fungerar hamnar här.
         private void btnHelp_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
-        //Hämtar information om labels och initierar dem.
+        //Hämtar information om difficulty och level labels och initierar dem.
         private void initInfoLabel()
         {
             int x = _mainSettings.getDifficulty();
