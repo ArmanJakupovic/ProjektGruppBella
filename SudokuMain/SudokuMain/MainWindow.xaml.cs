@@ -24,7 +24,7 @@ namespace SudokuMain
     /// </summary>
     public partial class MainWindow : Window
     {
-        SudokuLevels game;//Spelbräda
+        SudokuLevels game = new SudokuLevels();//Spelbräda
         Highscores _highscores = new Highscores();//Alla highscores
         Settings _mainSettings = new Settings();//Inställningar för spelet
         Time _time = new Time(); //Tid
@@ -49,8 +49,16 @@ namespace SudokuMain
         {
             InitializeComponent();
             _gameFinished = false;
-            game = new SudokuLevels(loadGame);//Init spelbräde. Antingen tidigare spel eller från textfilen
-            _mainSettings.loadSettings();//läser in inställningar från fil
+            if (!loadGame)
+            {
+                game.ReadFromFile();//Läs in alla banor från filen
+                _mainSettings.loadSettings();//läser in inställningar från fil
+            }
+            else
+            {
+                game.LoadGame(ref _mainSettings, ref _time);//Laddar tidagare spel från fil
+            }
+
             gameSettings();//tilldelar inställningarna till spelet
             EventManager.RegisterClassHandler(typeof(Window),
             Keyboard.KeyUpEvent, new KeyEventHandler(CubeWithLabels_KeyDown_1), true);
