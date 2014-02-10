@@ -44,6 +44,7 @@ namespace SudokuMain
         private int _timeMinutes;
         private int _timeHours;
         private bool _rightClickMemory;
+        private bool _leftClickMemory;
         #endregion
 
 
@@ -72,6 +73,7 @@ namespace SudokuMain
             dispatch = new DispatcherTimer();
             startTimer(); //startar klockan
             _rightClickMemory = false;
+            _leftClickMemory = false;
         }
 
         //Fyller spelplanen med tecken från currentLevel.Unsolved
@@ -116,7 +118,7 @@ namespace SudokuMain
         private void grdBoard_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
         {
             string myNr = "X";
-            _rightClickMemory = false;
+            _leftClickMemory = true;
             cube = sender as CubeWithLabels;
 
             int indexnr = -1;
@@ -181,7 +183,8 @@ namespace SudokuMain
                     }
                 }
 
-                if (_rightClickMemory && _gridIndexNr == indexnr)
+            //Nedanstående kod kontrollerar om det är OK att radera vid dubbel högerklick
+                if ((_rightClickMemory || _leftClickMemory) && _gridIndexNr == indexnr)
                 {
                     if (_lblFound == lblFound)
                     {
@@ -189,11 +192,13 @@ namespace SudokuMain
                         {
                             updateMatrix(_gridIndexNr, _lblFound, " ");
                             _rightClickMemory = false;
+                            _leftClickMemory = false;
                         }
                     }
                     else
                     {
                         _rightClickMemory = false;
+                        _leftClickMemory = false;
                     }
                 }
                 else
