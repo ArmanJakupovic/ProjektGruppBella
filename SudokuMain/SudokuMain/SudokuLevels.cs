@@ -20,16 +20,12 @@ namespace SudokuMain
         public int currentDifficulty;
         public List<Level> levels;
 
-        public SudokuLevels(bool load = false)
+        public SudokuLevels()
         {
             currentLevel = 0;
             currentDifficulty = 0;
             levels = new List<Level>();
             levelZero();                //Hämtar en bana som finns ifall det filen med levels saknas
-            if(!load)
-                readFromFile();             //Läs in alla banor från filen
-            else
-                loadGame();//Laddar tidagare spel från fil
         }
 
         //Begär en ny bana med diff=0-2 och nr=0-4
@@ -48,7 +44,7 @@ namespace SudokuMain
                 currentLevel = 0;
                 currentDifficulty = 0;
             }
-            
+
         } //SetLevel
 
         //Sparar ner spelet och dess lösning, settings och tid.
@@ -59,15 +55,15 @@ namespace SudokuMain
             string solved = string.Empty;
 
             //Skriver ner time
-                writer.WriteLine(_time.getSeconds());
-                writer.WriteLine(_time.getMinutes());
-                writer.WriteLine(_time.getHours());
+            writer.WriteLine(_time.getSeconds());
+            writer.WriteLine(_time.getMinutes());
+            writer.WriteLine(_time.getHours());
             writer.WriteLine();//tomrad
 
             //Skriver ner settings
-                writer.WriteLine(_mainSettings.getTimer().ToString());
-                writer.WriteLine(_mainSettings.getHighscore().ToString());
-                writer.WriteLine(_mainSettings.getPanel().ToString());
+            writer.WriteLine(_mainSettings.getTimer().ToString());
+            writer.WriteLine(_mainSettings.getHighscore().ToString());
+            writer.WriteLine(_mainSettings.getPanel().ToString());
             writer.WriteLine();//tomrad
 
             //Skriver diff,level
@@ -103,24 +99,24 @@ namespace SudokuMain
         }
 
         //Laddar tidigare spel
-        private void loadGame()
+        public void LoadGame(ref Settings setting, ref Time clock)
         {
             char[] delimiters = new char[] { '[', ']', ',' }; //För att ta bort oönskade tecken
             string[] info = new string[2];
-            
+
             try
             {
                 StreamReader loadStream = new StreamReader("savedGame.sdk");
                 //Time INGET HÄNDER DOCK.
-                   loadStream.ReadLine();
-                   loadStream.ReadLine();
-                   loadStream.ReadLine();
+                loadStream.ReadLine();
+                loadStream.ReadLine();
+                loadStream.ReadLine();
                 loadStream.ReadLine();//tomrad
 
                 //Settings
-                    loadStream.ReadLine();
-                    loadStream.ReadLine();
-                    loadStream.ReadLine();
+                loadStream.ReadLine();
+                loadStream.ReadLine();
+                loadStream.ReadLine();
                 loadStream.ReadLine();//tomrad
 
                 string line = loadStream.ReadLine();
@@ -139,10 +135,10 @@ namespace SudokuMain
                     for (int x = 0; x < line.Length; x++)
                     {
                         if (char.IsDigit(line[x]))//Om egen tillagd siffre
-                            newLevel.Unsolved[y, x+extraIndex] = line[x].ToString();
+                            newLevel.Unsolved[y, x + extraIndex] = line[x].ToString();
                         else if (line[x] == '-')//Om fast siffra
                         {
-                            newLevel.Unsolved[y, x+extraIndex] = "-" + line[++x].ToString();
+                            newLevel.Unsolved[y, x + extraIndex] = "-" + line[++x].ToString();
                             extraIndex--;
                         }
                         else if (line[x] == '/')//Om felaktig siffra
@@ -151,7 +147,7 @@ namespace SudokuMain
                             extraIndex--;
                         }
                         else//Tom ruta
-                            newLevel.Unsolved[y, x+extraIndex] = " ";
+                            newLevel.Unsolved[y, x + extraIndex] = " ";
                     }
                 }
 
@@ -174,9 +170,9 @@ namespace SudokuMain
                 System.Windows.MessageBox.Show(e.Message + "\nFel vid laddning av tidigare spel");
             }
         }//laddar spel från textfil
-        
+
         //Läser in alla nivåer från fil och lägger dessa i en lista
-        private void readFromFile()
+        public void ReadFromFile()
         {
             char[] delimiters = new char[] { '[', ']', ',' }; //För att ta bort oönskade tecken
             string[] info = new string[2];
@@ -267,24 +263,24 @@ namespace SudokuMain
                 {"8", "1", "4", "3", "6", "5", "9", "7", "2"},
                 {"9", "2", "5", "8", "7", "1", "6", "4", "3"}
                 };
-            
+
             levels.Add(levelZero);
         } //levelZero
 
-        
+
         //Skapar en lista med index på alla positioner som är felaktiga
         public List<int> CheckMatch()
         {
             List<int> errorList = new List<int>();
             string nr;
-            int index=0;
+            int index = 0;
 
-            for(int y = 0; y < 9; y++)
+            for (int y = 0; y < 9; y++)
                 for (int x = 0; x < 9; x++)
                 {
-                    nr = levels[currentLevel].Unsolved[y,x];
-                    if(levels[currentLevel].Unsolved[y,x].Length>1)
-                        nr = levels[currentLevel].Unsolved[y,x].Substring(1,1);
+                    nr = levels[currentLevel].Unsolved[y, x];
+                    if (levels[currentLevel].Unsolved[y, x].Length > 1)
+                        nr = levels[currentLevel].Unsolved[y, x].Substring(1, 1);
                     if (nr != " " && nr != levels[currentLevel].Solved[y, x])
                         errorList.Add(index);
                     index++;
@@ -313,9 +309,9 @@ namespace SudokuMain
                     pos++;
                 }
 
-            if(hintExist)
+            if (hintExist)
                 retValue = hintList[rnd.Next(0, hintList.Count)];
-            
+
             return retValue;
         } //GetHint
     }
