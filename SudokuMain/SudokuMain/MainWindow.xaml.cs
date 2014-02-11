@@ -571,7 +571,7 @@ namespace SudokuMain
         //Hämtar information om difficulty och level labels och initierar dem.
         private void initInfoLabel()
         {
-            int x = game.levels[game.currentLevel].difficulty;
+            int x = _mainSettings.getDifficulty();
             switch (x)
             {
                 case 0:
