@@ -66,9 +66,9 @@ namespace SudokuMain
             gameSettings();//tilldelar inställningarna till spelet
             EventManager.RegisterClassHandler(typeof(Window),
             Keyboard.KeyUpEvent, new KeyEventHandler(CubeWithLabels_KeyDown_1), true);
-            game.SetLevel(_mainSettings.getDifficulty(), 3);//Läser in vilken bana som ska spelas
+            game.SetLevel(_mainSettings.getDifficulty(), 0);//Läser in vilken bana som ska spelas
             initBoard();//Fyller spelbrädet
-            txtHighScore.Text =  _highscores.GetHighScore(_mainSettings.getDifficulty(),3);//fyller highscore för specifik bana
+            txtHighScore.Text = _highscores.GetHighScore(game.levels[game.currentLevel].difficulty, game.levels[game.currentLevel].level);//fyller highscore för specifik bana
             ourWindow = this;
             initInfoLabel();//Skriver ut vilken svårighetsgrad och bana som spelas
             dispatch = new DispatcherTimer();
@@ -477,33 +477,37 @@ namespace SudokuMain
             {
              /*   //Här blir det ett anrop till GameOver-Form eller nåt
                 MessageBox.Show("Game Over!", "Den här skylten ska givetvis bytas ut...");*/
-
+                int level = game.levels[game.currentLevel].level;
+                int diff = game.levels[game.currentLevel].difficulty;
                 dispatch.Stop(); //Stannar klockan
-                
+                string mess;
+
+                if (hasCheated)
+                    mess = "Cheater";
+                else
+                    mess = "Too slow";
+
                 File.Delete("savedGame.sdk");//Tar bort eventuellt sparat spel
                 _gameFinished = true;//Indikerar att spelet är avslutat (kommer inte spara om man trycker X)
 
-                _score = (100/*Tid egentligen*/ * (_mainSettings.getDifficulty() + 1)) / (_hintCount/2);//räknar ut score
-                int placement = _highscores.CompareScore(_score, _mainSettings.getDifficulty(), 3);//Ev highscore
+                //_score = (100/*Tid egentligen*/ * (_mainSettings.getDifficulty() + 1)) / (_hintCount/2);//räknar ut score
+                _score = (_timeHours * 3600) + (_timeMinutes * 60) + _timeSeconds;
+
+                int placement = _highscores.CompareScore(_score, diff, level);//Ev highscore
 
                 if (placement != -1 && !hasCheated)//Om highscore och ej har fuskat
                 {
                     string name = SdkMsgBox.showHighScoreBox("You made it to the highscore!", "Highscore!", "Type your name:", "Images\\goodJobFace.png", "Message");
-                    _highscores.InsertToHighscore(name.ToUpper().Substring(0, 3), _score, _mainSettings.getDifficulty(), 3, placement);
-                    txtHighScore.Text = _highscores.GetHighScore(_mainSettings.getDifficulty(), 3);
+                    _highscores.InsertToHighscore(name.ToUpper().Substring(0, 3), _score, diff, level, placement);
+                    txtHighScore.Text = _highscores.GetHighScore(diff, level);
+                    mess = "Winner!";
                 }
-                else
-                {
+                
                     //Visar den nya boxen. 
                     //Det går kalla på en highsScoreBox också med SdkMsgBox.showHighScoreBox.
                     //Den returnerar ett namn istället. 
-                    int level = game.levels[game.currentLevel].level;
-                    int diff = game.levels[game.currentLevel].difficulty;
-                    string mess;
-                    if (hasCheated)
-                        mess = "Cheater";
-                    else
-                        mess = "Too slow";
+                    
+                    
                     string btnClicked = SdkMsgBox.ShowBox("Play this level again or try next?", "Game over", mess,
                         "Images\\WhyYouNo.png", "Message", "Retry", "Next", true, true);
                     if (btnClicked == "left")
@@ -522,7 +526,7 @@ namespace SudokuMain
                         }
                         newGame(diff, level);
                     }
-                }
+                
             }
         }
 
@@ -649,13 +653,14 @@ namespace SudokuMain
                 game.ReadFromFile();
             game.SetLevel(diff, level);
             initBoard();//Fyller spelbrädet
-            txtHighScore.Text = _highscores.GetHighScore(_mainSettings.getDifficulty(), 3);//fyller highscore för specifik bana
+            txtHighScore.Text = _highscores.GetHighScore(game.levels[game.currentLevel].difficulty, game.levels[game.currentLevel].level);//fyller highscore för specifik bana
             ourWindow = this;
             initInfoLabel();//Skriver ut vilken svårighetsgrad och bana som spelas
             _timeHours = 0;
             _timeMinutes = 0;
             _timeSeconds = 0;
             hasCheated = false;
+            _gameFinished = false;
             dispatch.Start();
         }
     }
