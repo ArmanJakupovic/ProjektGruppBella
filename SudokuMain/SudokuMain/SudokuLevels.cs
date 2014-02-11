@@ -164,6 +164,7 @@ namespace SudokuMain
                 }
                 levels.Add(newLevel);
                 loadStream.Close();
+                currentLevel = 1;
             }
             catch (IOException e)
             {

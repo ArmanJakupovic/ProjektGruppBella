@@ -176,6 +176,7 @@ namespace SudokuMain
             _myMsgBox.msgBoxBelowImage.Text = txtBelowImage;
             _myMsgBox.msgBoxImage.Source = new BitmapImage(new Uri(@pathToImage, UriKind.Relative));
             _myMsgBox.msgBoxGroupBox.Header = groupBoxMessage;
+            _myMsgBox.stackPanTxtBoxBox.Focus();
             _myMsgBox.ShowDialog();
             return name;
         }

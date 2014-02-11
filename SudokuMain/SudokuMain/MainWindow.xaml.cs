@@ -57,16 +57,18 @@ namespace SudokuMain
             {
                 game.ReadFromFile();//Läs in alla banor från filen
                 _mainSettings.loadSettings();//läser in inställningar från fil
+                game.SetLevel(_mainSettings.getDifficulty(), 0);//Läser in vilken bana som ska spelas
             }
             else
             {
                 game.LoadGame(ref _mainSettings, ref _time);//Laddar tidagare spel från fil
+                
             }
 
             gameSettings();//tilldelar inställningarna till spelet
             EventManager.RegisterClassHandler(typeof(Window),
             Keyboard.KeyUpEvent, new KeyEventHandler(CubeWithLabels_KeyDown_1), true);
-            game.SetLevel(_mainSettings.getDifficulty(), 0);//Läser in vilken bana som ska spelas
+            
             initBoard();//Fyller spelbrädet
             txtHighScore.Text = _highscores.GetHighScore(game.levels[game.currentLevel].difficulty, game.levels[game.currentLevel].level);//fyller highscore för specifik bana
             ourWindow = this;
@@ -512,7 +514,7 @@ namespace SudokuMain
                         "Images\\WhyYouNo.png", "Message", "Retry", "Next", true, true);
                     if (btnClicked == "left")
                     {
-                        newGame(diff, level);
+                        
                     }
                     else
                     {
@@ -524,9 +526,20 @@ namespace SudokuMain
                             if (diff > 2)
                                 diff = 0;
                         }
-                        newGame(diff, level);
                     }
-                
+                    //Tömmer arrayen med lösningar
+                    for (int y = 0; y < 9; y++)
+                        for (int x = 0; x < 9; x++)
+                        {
+                            if (game.levels[game.currentLevel].Unsolved[y, x].Length > 1)
+                            {
+                                if (game.levels[game.currentLevel].Unsolved[y, x].Substring(0, 1) == "/")
+                                    game.levels[game.currentLevel].Unsolved[y, x] = " ";
+                            }
+                            else
+                                game.levels[game.currentLevel].Unsolved[y, x] = " ";
+                        }
+                    newGame(diff, level);
             }
         }
 
