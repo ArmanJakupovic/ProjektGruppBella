@@ -361,18 +361,19 @@
             	</Grid.RenderTransform>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="100"></RowDefinition>
+                <RowDefinition Height="200"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Name="btnPausePlay" Grid.Row="1" Grid.Column="1" Style="{StaticResource ImageButton}" Click="btnPausePlay_Click">
+            <Button Name="btnPausePlay" Grid.Row="1" Grid.Column="1" Style="{StaticResource ImageButton}" Click="btnPausePlay_Click" Height="130" Width="130">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/btnPlay-icon2.png"/>
                 </Button.Background></Button>
+            <Label Grid.Row="1" Grid.Column="1" FontFamily="Verdana" FontSize="20" FontWeight="Bold" Foreground="Moccasin" VerticalAlignment="Top" HorizontalAlignment="Center">Game paused</Label>
         </Grid>
         <!--Slut på pause-->
 
