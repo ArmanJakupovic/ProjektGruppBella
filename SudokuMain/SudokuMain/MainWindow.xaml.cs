@@ -45,6 +45,7 @@ namespace SudokuMain
         private int _timeHours;
         private bool _rightClickMemory;
         private bool _leftClickMemory;
+        private bool hasCheated = false; //Visar om du har använt hint eller check
         #endregion
 
 
@@ -65,9 +66,9 @@ namespace SudokuMain
             gameSettings();//tilldelar inställningarna till spelet
             EventManager.RegisterClassHandler(typeof(Window),
             Keyboard.KeyUpEvent, new KeyEventHandler(CubeWithLabels_KeyDown_1), true);
-            game.SetLevel(_mainSettings.getDifficulty(), 3);//Läser in vilken bana som ska spelas
+            game.SetLevel(_mainSettings.getDifficulty(), 0);//Läser in vilken bana som ska spelas
             initBoard();//Fyller spelbrädet
-            txtHighScore.Text =  _highscores.GetHighScore(_mainSettings.getDifficulty(),3);//fyller highscore för specifik bana
+            txtHighScore.Text = _highscores.GetHighScore(game.levels[game.currentLevel].difficulty, game.levels[game.currentLevel].level);//fyller highscore för specifik bana
             ourWindow = this;
             initInfoLabel();//Skriver ut vilken svårighetsgrad och bana som spelas
             dispatch = new DispatcherTimer();
@@ -79,6 +80,7 @@ namespace SudokuMain
         //Fyller spelplanen med tecken från currentLevel.Unsolved
         private void initBoard()
         {
+            currentLvl.Content = "Level: " + (game.levels[game.currentLevel].level+1);
             for (int y = 0; y < 9; y++)
                 for (int x = 0; x < 9; x++)
                     updateBoard(y, x, game.levels[game.currentLevel].Unsolved[y, x]);
@@ -224,6 +226,15 @@ namespace SudokuMain
         //lägger till ett "/" framför den felaktiga siffran
         private void Button_Check_Click(object sender, RoutedEventArgs e)
         {
+            if (!hasCheated)
+            {
+                string btnClicked = SdkMsgBox.ShowBox("Check for errors is cheating and your time won't be registered. Play as a cheater?",
+                            "No...", "Cheating is bad!");
+                if (btnClicked == "left")
+                    hasCheated = true;
+                else
+                    return;
+            }
             List<int> checkErrors = game.CheckMatch();
             int x, y;
             string valueBefore;
@@ -244,6 +255,15 @@ namespace SudokuMain
         //vald position som är tom.
         private void Button_Hint_Click(object sender, RoutedEventArgs e)
         {
+            if (!hasCheated)
+            {
+                string btnClicked = SdkMsgBox.ShowBox("This is cheating and your time won't be registered. Play as a cheater?",
+                            "No...", "Cheating is bad!");
+                if (btnClicked == "left")
+                    hasCheated = true;
+                else
+                    return;
+            }
             _hintCount++;//Räknar antal hint-tryck
             int fusk = game.GetHint();
             if (fusk >= 0)
@@ -409,6 +429,14 @@ namespace SudokuMain
                         value = "9";
                         break;
                     }
+                case Key.P:
+                    {
+                        if(dispatch.IsEnabled)
+                            btnPausePlay_Click(this.btnPause, null);
+                        else
+                            btnPausePlay_Click(this.btnPlay, null);
+                        break;
+                    }
                 
                 default:
                     {
@@ -449,36 +477,56 @@ namespace SudokuMain
             {
              /*   //Här blir det ett anrop till GameOver-Form eller nåt
                 MessageBox.Show("Game Over!", "Den här skylten ska givetvis bytas ut...");*/
+                int level = game.levels[game.currentLevel].level;
+                int diff = game.levels[game.currentLevel].difficulty;
+                dispatch.Stop(); //Stannar klockan
+                string mess;
 
-                
+                if (hasCheated)
+                    mess = "Cheater";
+                else
+                    mess = "Too slow";
+
                 File.Delete("savedGame.sdk");//Tar bort eventuellt sparat spel
                 _gameFinished = true;//Indikerar att spelet är avslutat (kommer inte spara om man trycker X)
 
-                _score = (100/*Tid egentligen*/ * (_mainSettings.getDifficulty() + 1)) / (_hintCount/2);//räknar ut score
-                int placement = _highscores.CompareScore(_score, _mainSettings.getDifficulty(), 3);//Ev highscore
+                //_score = (100/*Tid egentligen*/ * (_mainSettings.getDifficulty() + 1)) / (_hintCount/2);//räknar ut score
+                _score = (_timeHours * 3600) + (_timeMinutes * 60) + _timeSeconds;
 
-                if (placement != -1)//Om highscore
+                int placement = _highscores.CompareScore(_score, diff, level);//Ev highscore
+
+                if (placement != -1 && !hasCheated)//Om highscore och ej har fuskat
                 {
                     string name = SdkMsgBox.showHighScoreBox("You made it to the highscore!", "Highscore!", "Type your name:", "Images\\goodJobFace.png", "Message");
-                    _highscores.InsertToHighscore(name.ToUpper().Substring(0, 3), _score, _mainSettings.getDifficulty(), 3, placement);
-                    txtHighScore.Text = _highscores.GetHighScore(_mainSettings.getDifficulty(), 3);
+                    _highscores.InsertToHighscore(name.ToUpper().Substring(0, 3), _score, diff, level, placement);
+                    txtHighScore.Text = _highscores.GetHighScore(diff, level);
+                    mess = "Winner!";
                 }
-                else
-                {
+                
                     //Visar den nya boxen. 
                     //Det går kalla på en highsScoreBox också med SdkMsgBox.showHighScoreBox.
                     //Den returnerar ett namn istället. 
-                    string btnClicked = SdkMsgBox.ShowBox("You cheated ffs!!", "Oh come on...", "Y u no play fair!?",
-                        "Images\\WhyYouNo.png", "Message", "Yes", "No", true, true);
+                    
+                    
+                    string btnClicked = SdkMsgBox.ShowBox("Play this level again or try next?", "Game over", mess,
+                        "Images\\WhyYouNo.png", "Message", "Retry", "Next", true, true);
                     if (btnClicked == "left")
                     {
-
+                        newGame(diff, level);
                     }
                     else
                     {
-
+                        level++;
+                        if (level > 4)
+                        {
+                            level = 0;
+                            diff++;
+                            if (diff > 2)
+                                diff = 0;
+                        }
+                        newGame(diff, level);
                     }
-                }
+                
             }
         }
 
@@ -507,7 +555,7 @@ namespace SudokuMain
         //Hämtar information om difficulty och level labels och initierar dem.
         private void initInfoLabel()
         {
-            int x = _mainSettings.getDifficulty();
+            int x = game.levels[game.currentLevel].difficulty;
             switch (x)
             {
                 case 0:
@@ -578,6 +626,42 @@ namespace SudokuMain
                 lblClock.Content = "" + _timeHours + ":0" + _timeMinutes + ":" + _timeSeconds;
             else // 6
                 lblClock.Content = ""+_timeHours + ":" + _timeMinutes + ":" + _timeSeconds;
+        }
+
+        //Pausar spelet och startar pausat spel
+        private void btnPausePlay_Click(Object sender, RoutedEventArgs args)
+        {
+            Button button = (Button)sender;
+            if (button.Name == "btnPlay")
+            {
+                dispatch.Start();
+                btnPlay.Visibility = Visibility.Hidden;
+                btnPause.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                dispatch.Stop();
+                btnPlay.Visibility = Visibility.Visible;
+                btnPause.Visibility = Visibility.Hidden;
+            }
+        }
+
+        //Initierar ett nytt spel
+        private void newGame(int diff, int level)
+        {
+            if (game.levels.Count < 5) //Läser in alla banor om det inte redan är gjort
+                game.ReadFromFile();
+            game.SetLevel(diff, level);
+            initBoard();//Fyller spelbrädet
+            txtHighScore.Text = _highscores.GetHighScore(game.levels[game.currentLevel].difficulty, game.levels[game.currentLevel].level);//fyller highscore för specifik bana
+            ourWindow = this;
+            initInfoLabel();//Skriver ut vilken svårighetsgrad och bana som spelas
+            _timeHours = 0;
+            _timeMinutes = 0;
+            _timeSeconds = 0;
+            hasCheated = false;
+            _gameFinished = false;
+            dispatch.Start();
         }
     }
 }

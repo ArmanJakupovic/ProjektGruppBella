@@ -330,7 +330,7 @@
                 </TransformGroup>
             </Grid.RenderTransform>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="80"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="52"/>
@@ -343,14 +343,44 @@
             <Grid Grid.Row="0" Grid.Column="0" Background="#FF761212">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40*"></ColumnDefinition>
-                    <ColumnDefinition Width="30"></ColumnDefinition>
-                    <ColumnDefinition Width="30"></ColumnDefinition>
+                    <ColumnDefinition Width="30*"></ColumnDefinition>
+                    <ColumnDefinition Width="30*"></ColumnDefinition>
+                    <ColumnDefinition Width="30*"></ColumnDefinition>
+                    <ColumnDefinition Width="30*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Name="lblClock" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Background="#FF761212" Foreground="Moccasin"  FontFamily="Verdana"/>
-                <Button Grid.Row="0" Grid.Column="1" BorderThickness="0" IsHitTestVisible="True" Click="btnSettings_Click" Style="{StaticResource ImageButton}">
+                <Label Name="lblClock" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Background="#FF761212" Foreground="Moccasin"  FontFamily="Verdana"/>
+                <Button Name="btnPause" Grid.Row="0" Grid.Column="0" BorderThickness="0" IsHitTestVisible="True" Click="btnPausePlay_Click" Style="{StaticResource ImageButton}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Images/btnPause-icon3.png" Stretch="Uniform">
+                            <ImageBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.8" ScaleY="0.8"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ImageBrush.RelativeTransform>
+                        </ImageBrush>
+                    </Button.Background>
+                </Button>
+                <Button Visibility="Hidden" Name="btnPlay" Grid.Row="0" Grid.Column="0" BorderThickness="0" IsHitTestVisible="True" Click="btnPausePlay_Click" Style="{StaticResource ImageButton}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Images/btnPlay-icon2.png" Stretch="Uniform">
+                            <ImageBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.8" ScaleY="0.8"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ImageBrush.RelativeTransform>
+                        </ImageBrush>
+                    </Button.Background>
+                </Button>
+                <Button Grid.Row="1" Grid.Column="2" BorderThickness="0" IsHitTestVisible="True" Click="btnSettings_Click" Style="{StaticResource ImageButton}">
                     <Button.Background>
                         <ImageBrush ImageSource="Images/setting-icon2.png" Stretch="Uniform">
                             <ImageBrush.RelativeTransform>
@@ -364,7 +394,7 @@
                         </ImageBrush>
                     </Button.Background>
                 </Button>
-                <Button Grid.Row="0" Grid.Column="2" BorderThickness="0" Style="{StaticResource ImageButton}" Click="btnHelp_Click" Background="Transparent" FontWeight="Bold" FontFamily="Verdana" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                <Button Grid.Row="1" Grid.Column="3" BorderThickness="0" Style="{StaticResource ImageButton}" Click="btnHelp_Click" Background="Transparent" FontWeight="Bold" FontFamily="Verdana" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                     <Button.Foreground>
                         <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                             <GradientStop Color="#FFD8B087" Offset="0"/>

@@ -88,8 +88,8 @@ namespace SudokuMain
                     writer.WriteLine("[" + i + "," + j + "]");//Skriver diff och level
                     for (int ix = 0; ix < _numberOfNames; ix++)
                     {
-                        if(_highscoreList[i,j] == null)
-                            writer.WriteLine("-\t0"); 
+                        if (_highscoreList[i, j] == null)
+                            writer.WriteLine("-\t3600");
                         else
                             writer.WriteLine(_highscoreList[i, j].GetScore(ix));
                     }
@@ -119,7 +119,7 @@ namespace SudokuMain
             List<int> prevHighscore = _highscoreList[diff, lvl].GetPoints();//hämtar lista med poäng för specifik bana
             for (int i = 0; i < prevHighscore.Count; i++)
             {
-                if (prevHighscore[i] < score)
+                if (prevHighscore[i] > score)
                 {
                     return i;
                 }
