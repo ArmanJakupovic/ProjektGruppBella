@@ -273,8 +273,14 @@
         	</DoubleAnimationUsingKeyFrames>
         	<BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.IsEnabled)" Storyboard.TargetName="grdBoard">
         		<DiscreteBooleanKeyFrame KeyTime="0" Value="True"/>
+        		<DiscreteBooleanKeyFrame KeyTime="0:0:0.3" Value="True"/>
         		<DiscreteBooleanKeyFrame KeyTime="0:0:0.4" Value="False"/>
         	</BooleanAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)" Storyboard.TargetName="grdBoard">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="16"/>
+        	</DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="hidePause">
         	<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="pauseGrid">
@@ -301,14 +307,16 @@
         		<DiscreteBooleanKeyFrame KeyTime="0" Value="False"/>
         		<DiscreteBooleanKeyFrame KeyTime="0:0:0.1" Value="True"/>
         	</BooleanAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)" Storyboard.TargetName="grdBoard">
+        		<EasingDoubleKeyFrame KeyTime="0" Value="16"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+        	</DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
         <!--Slut på ny stil för knappar-->
 
     </Window.Resources>
-    <Window.Triggers>
-        <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
-    </Window.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="500*"/>
@@ -319,6 +327,9 @@
         </Grid.ColumnDefinitions>
         
         <UniformGrid Grid.Row="0" Grid.Column="0" Columns="3" Rows="3" Background="Moccasin" x:Name="grdBoard" RenderTransformOrigin="0.5,0.5">
+        	<UniformGrid.Effect>
+        		<BlurEffect Radius="0"/>
+        	</UniformGrid.Effect>
             <UniformGrid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
