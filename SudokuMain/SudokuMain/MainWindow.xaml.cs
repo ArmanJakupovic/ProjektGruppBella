@@ -653,15 +653,26 @@ namespace SudokuMain
                 dispatch.Start();
                 btnPlay.Visibility = Visibility.Hidden;
                 btnPause.Visibility = Visibility.Visible;
+                _myBoard = (Storyboard)this.Resources["hidePause"];
+                _myBoard.Begin();
+            }
+            else if (button.Name == "btnPausePlay")
+            {
+                dispatch.Start();
+                btnPlay.Visibility = Visibility.Hidden;
+                btnPause.Visibility = Visibility.Visible;
+                _myBoard = (Storyboard)this.Resources["hidePause"];
+                _myBoard.Begin();
             }
             else
             {
                 dispatch.Stop();
                 btnPlay.Visibility = Visibility.Visible;
                 btnPause.Visibility = Visibility.Hidden;
+                _myBoard = (Storyboard)this.Resources["showPause"];
+                _myBoard.Begin();
             }
         }
-
         //Initierar ett nytt spel
         private void newGame(int diff, int level)
         {
