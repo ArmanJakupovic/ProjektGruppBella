@@ -20,7 +20,6 @@ namespace SudokuMain
 
         /************************************************************************************
         Följande fyra metoder används i samband med Settings(), som kallar på loadSettings().
-        Notera att det alltså finns två konstruktörer. 
         Settings() används vid läsning av fil.
         Settings(bool, bool, bool, int) används vid skrivning till fil.
         *************************************************************************************/
@@ -29,6 +28,8 @@ namespace SudokuMain
         public bool getPanel() { return _panel; }
         public int getDifficulty() { return Convert.ToInt16(_difficulty); }
 
+        public void setDifficulty(int diff) { _difficulty = diff; }
+
         //Konstruktor för användarinput
         public Settings(bool time, bool score, bool panel, int diff)
         {
@@ -36,6 +37,14 @@ namespace SudokuMain
             _highScore = score;
             _panel = panel;
             _difficulty = diff; // 0 = beginner, 1 = experienced, 2 = veteran 
+        }
+
+        //Konstruktor för MenuWindow (kan vara en dålig idé)
+        public Settings(bool time, bool score, bool panel)
+        {
+            _timer = time;
+            _highScore = score;
+            _panel = panel;
         }
 
         //Sparar inställningar till fil.

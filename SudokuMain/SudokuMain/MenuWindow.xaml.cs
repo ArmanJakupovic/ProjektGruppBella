@@ -41,6 +41,8 @@ namespace SudokuMain
 
         private void btnNewGame_Click(Object sender, RoutedEventArgs args)
         {
+            Time _time = new Time();
+            _time.setTime(0, 0, 0);
             _myBoard = (Storyboard)this.Resources["moveButtonsDownDiffUpp"];
             _myBoard.Begin();
         }
@@ -73,14 +75,14 @@ namespace SudokuMain
             showTimer.IsChecked = _set.getTimer();
             enableHighscore.IsChecked = _set.getHighscore();
             enablePanel.IsChecked = _set.getPanel();
-
+            /*
             int diff = _set.getDifficulty();
             if (diff == 0)
                 difficultyBeginner.IsChecked = true;
             else if (diff == 1)
                 difficultyExperienced.IsChecked = true;
             else if (diff == 2)
-                difficultyVeteran.IsChecked = true;
+                difficultyVeteran.IsChecked = true;*/
         }
 
         //Tillbaka till Menu utan att spara inställningar
@@ -109,14 +111,14 @@ namespace SudokuMain
             bool time = showTimer.IsChecked == true;
             bool score = enableHighscore.IsChecked == true;
             bool panel = enablePanel.IsChecked == true;
-
+            /*
             int diff = 0; //Beginner
             if (difficultyExperienced.IsChecked == true)
                 diff = 1;
             else if (difficultyVeteran.IsChecked == true)
                 diff = 2;
-
-            Settings set = new Settings(time, score, panel, diff);
+            */
+            Settings set = new Settings(time, score, panel); //diff
             set.saveSettings();
 
         //    gridButtons.Visibility = Visibility.Visible;
@@ -128,10 +130,19 @@ namespace SudokuMain
             /******SLUT*PÅ*ANIMATIONER*******/
         }
 
-        //Svårighetsgraden sparas ej utan knapparna startar endast spelet.
-        //Detta behöver hanteras.
+        //Uppdaterar inställningen "difficulty" och startar ett nytt spel.
+        //Den valda svårighetsgraden ligger nu i settings.sdk. SOM 
         private void buttonDiff_Click(object sender, RoutedEventArgs e)
         {
+            Button btnDiff = (Button)sender;
+            if (btnDiff.Content.ToString() == "Beginner")
+                _set.setDifficulty(0);
+            if (btnDiff.Content.ToString() == "Experienced")
+                _set.setDifficulty(1);
+            if(btnDiff.Content.ToString() == "Veteran")
+                _set.setDifficulty(2);
+            _set.saveSettings();
+
             MainWindow game = new MainWindow();
             game.Show();
             this.Close();

@@ -40,9 +40,11 @@ namespace SudokuMain
         private bool _gameFinished;
         private int _score, _hintCount = 0;
         DispatcherTimer dispatch;//klockan
+        //Dessa tre används förnärvarande för att hantera utseendet på tiden.
         private int _timeSeconds;
         private int _timeMinutes;
         private int _timeHours;
+
         private bool _rightClickMemory;
         private bool _leftClickMemory;
         private bool hasCheated = false; //Visar om du har använt hint eller check
@@ -546,6 +548,7 @@ namespace SudokuMain
         //Hanterar stänging med hjälp av X uppe i högra hörnet
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
+            _time.setTime(_timeSeconds, _timeMinutes, _timeHours); //Daniel lagt till, sätter tiden så den återupptas vid Continue
             if(!_gameFinished)//Om spelet är färdigspelat sparas det inte ner
                 game.SaveGame(_mainSettings, _time);
             MenuWindow menu = new MenuWindow();
@@ -669,9 +672,10 @@ namespace SudokuMain
             txtHighScore.Text = _highscores.GetHighScore(game.levels[game.currentLevel].difficulty, game.levels[game.currentLevel].level);//fyller highscore för specifik bana
             ourWindow = this;
             initInfoLabel();//Skriver ut vilken svårighetsgrad och bana som spelas
-            _timeHours = 0;
-            _timeMinutes = 0;
-            _timeSeconds = 0;
+            _time.setTime(0,0,0);
+            //_timeHours = 0;
+            //_timeMinutes = 0;
+            //_timeSeconds = 0;
             hasCheated = false;
             _gameFinished = false;
             dispatch.Start();

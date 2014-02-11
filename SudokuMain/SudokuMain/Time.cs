@@ -25,6 +25,20 @@ namespace SudokuMain
         public int getMinutes() { return _minutes; }
         public int getHours() { return _hours; }
 
+        //sätter nya värden i tiden.
+        public void setTime(int sec, int min, int h)
+        {
+            _seconds = sec;
+            _minutes = min;
+            _hours = h;
+
+            StreamWriter writer = new StreamWriter("savedGame.sdk");
+            writer.WriteLine(_seconds);
+            writer.WriteLine(_minutes);
+            writer.WriteLine(_hours);
+            writer.Close();
+        }
+
         public void loadTime()
         {
             if (File.Exists("savedGame.sdk"))
