@@ -109,12 +109,12 @@ namespace SudokuMain
             Label lbl = grd.Children[0] as Label;
             
             SolidColorBrush myBrush = new SolidColorBrush();
-            SolidColorBrush test = new SolidColorBrush();
-            test = (SolidColorBrush)(new BrushConverter().ConvertFrom("#181816"));
+            SolidColorBrush animationColor = new SolidColorBrush();
+            animationColor = (SolidColorBrush)(new BrushConverter().ConvertFrom("#181816"));
 
             ColorAnimation cellAnimation = new ColorAnimation();
             cellAnimation.From = Colors.Moccasin;
-            cellAnimation.To = test.Color;
+            cellAnimation.To = animationColor.Color;
                 
             cellAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(950));
             cellAnimation.AutoReverse = true;
