@@ -338,8 +338,20 @@ namespace SudokuMain
         private void gameSettings()
         {
             if (_mainSettings.getTimer())
+            {
                 lblClock.Visibility = Visibility.Visible;
-            else lblClock.Visibility = Visibility.Collapsed;
+                btnPause.Visibility = Visibility.Visible;
+                gridClockRow.Height = new GridLength('*');
+                gridRedArea.Height = new GridLength(80);
+            }
+            else
+            {
+                lblClock.Visibility = Visibility.Collapsed;
+                btnPause.Visibility = Visibility.Hidden;
+                gridClockRow.Height = new GridLength(0);
+                gridRedArea.Height = new GridLength(40);
+                
+            }
             if (_mainSettings.getHighscore())
                 grpHighScore.Visibility = Visibility.Visible;
             else grpHighScore.Visibility = Visibility.Collapsed;
@@ -429,6 +441,7 @@ namespace SudokuMain
                         break;
                     }
                 case Key.P:
+                case Key.Pause:
                     {
                         if(_time.GetDispatcher().IsEnabled)
                             btnPausePlay_Click(this.btnPause, null);
@@ -436,7 +449,6 @@ namespace SudokuMain
                             btnPausePlay_Click(this.btnPlay, null);
                         break;
                     }
-                
                 default:
                     {
                         value = " ";

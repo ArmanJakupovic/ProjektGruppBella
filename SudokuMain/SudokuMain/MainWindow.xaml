@@ -432,7 +432,7 @@
                 </TransformGroup>
             </Grid.RenderTransform>
             <Grid.RowDefinitions>
-                <RowDefinition Height="80"/>
+                <RowDefinition Name="gridRedArea" Height="80"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="52"/>
@@ -444,8 +444,8 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Row="0" Grid.Column="0" Background="#FF761212">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Name="gridClockRow" Height="*"></RowDefinition>
+                    <RowDefinition Name="gridSettingRow" Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30*"></ColumnDefinition>
