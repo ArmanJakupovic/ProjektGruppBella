@@ -43,8 +43,6 @@ namespace SudokuMain
         //och de inställningar man eventuellt ändrar till via Options.
         private void btnNewGame_Click(Object sender, RoutedEventArgs args)
         {
-            Time _time = new Time();
-            _time.setTime(0, 0, 0);
             _myBoard = (Storyboard)this.Resources["moveButtonsDownDiffUpp"];
             _myBoard.Begin();
         }
@@ -128,7 +126,7 @@ namespace SudokuMain
                 _set.setDifficulty(1);
             if(btnDiff.Content.ToString() == "Veteran")
                 _set.setDifficulty(2);
-            //_set.saveSettings();
+            _set.saveSettings();
 
             MainWindow game = new MainWindow();
             game.Show();
