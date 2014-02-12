@@ -48,16 +48,16 @@ namespace SudokuMain
         } //SetLevel
 
         //Sparar ner spelet och dess lösning, settings och tid.
-        public void SaveGame(Settings _mainSettings, Time _time)
+        public void SaveGame(Settings _mainSettings, Time _time, bool hasCheated)
         {
             StreamWriter writer = new StreamWriter(File.Create("savedGame.sdk"));
             string unsolved = string.Empty;
             string solved = string.Empty;
 
             //Skriver ner time
-            writer.WriteLine(_time.getSeconds());
-            writer.WriteLine(_time.getMinutes());
-            writer.WriteLine(_time.getHours());
+            writer.WriteLine(_time.GetSeconds());
+            writer.WriteLine(_time.GetMinutes());
+            writer.WriteLine(_time.GetHours());
             writer.WriteLine();//tomrad
 
             //Skriver ner settings
@@ -66,8 +66,12 @@ namespace SudokuMain
             writer.WriteLine(_mainSettings.getPanel().ToString());
             writer.WriteLine();//tomrad
 
+            //Fuskat eller inte
+            writer.WriteLine(hasCheated);
+            writer.WriteLine();//tomrad
+
             //Skriver diff,level
-            writer.WriteLine("[" + levels[currentDifficulty].difficulty.ToString() + "," + levels[currentLevel].level.ToString() + "]");
+            writer.WriteLine("[" + _mainSettings.getDifficulty().ToString() + "," + levels[currentLevel].level.ToString() + "]");
 
             //Skriver ner nuvarande spel
             for (int y = 0; y < 9; y++)
@@ -99,7 +103,7 @@ namespace SudokuMain
         }
 
         //Laddar tidigare spel
-        public void LoadGame(ref Settings setting, ref Time clock)
+        public void LoadGame(ref Settings setting, ref Time clock, ref bool hasCheated)
         {
             char[] delimiters = new char[] { '[', ']', ',' }; //För att ta bort oönskade tecken
             string[] info = new string[2];
@@ -108,15 +112,19 @@ namespace SudokuMain
             {
                 StreamReader loadStream = new StreamReader("savedGame.sdk");
                 //Time INGET HÄNDER DOCK.
-                loadStream.ReadLine();
-                loadStream.ReadLine();
-                loadStream.ReadLine();
+                clock.SetSeconds(Convert.ToInt16( loadStream.ReadLine() ) );
+                clock.SetMinutes(Convert.ToInt16( loadStream.ReadLine() ) );
+                clock.SetHours(Convert.ToInt16( loadStream.ReadLine() ) );
                 loadStream.ReadLine();//tomrad
 
                 //Settings
-                loadStream.ReadLine();
-                loadStream.ReadLine();
-                loadStream.ReadLine();
+                setting.SetTimer( Convert.ToBoolean( loadStream.ReadLine() ) );
+                setting.SetHighscore( Convert.ToBoolean(loadStream.ReadLine() ) );
+                setting.SetPopupPanel( Convert.ToBoolean(loadStream.ReadLine() ) );
+                loadStream.ReadLine();//tomrad 
+
+                //Fuskat eller inte
+                hasCheated = Convert.ToBoolean(loadStream.ReadLine());
                 loadStream.ReadLine();//tomrad
 
                 string line = loadStream.ReadLine();

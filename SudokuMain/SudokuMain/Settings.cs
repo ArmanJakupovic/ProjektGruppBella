@@ -29,6 +29,9 @@ namespace SudokuMain
         public int getDifficulty() { return Convert.ToInt16(_difficulty); }
 
         public void setDifficulty(int diff) { _difficulty = diff; }
+        public void SetTimer(bool timer) { _timer = timer; }
+        public void SetHighscore(bool highscore) { _highScore = highscore; }
+        public void SetPopupPanel(bool panel) { _panel = panel; }
 
         //Konstruktor för användarinput
         public Settings(bool time, bool score, bool panel, int diff)

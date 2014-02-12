@@ -15,7 +15,6 @@ using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
 using System.IO;
 using System.Windows.Media.Animation;
-using System.Windows.Threading;
 
 namespace SudokuMain
 {
@@ -28,7 +27,7 @@ namespace SudokuMain
         SudokuLevels game = new SudokuLevels();//Spelbräda
         Highscores _highscores = new Highscores();//Alla highscores
         Settings _mainSettings = new Settings();//Inställningar för spelet
-        Time _time = new Time(); //Tid
+        Time _time; //Tid
         MainWindow ourWindow;
         private Keypad _x;//Popup fönster
         private int _gridIndexNr;
@@ -39,11 +38,6 @@ namespace SudokuMain
         private Storyboard _myBoard;
         private bool _gameFinished;
         private int _score, _hintCount = 0;
-        DispatcherTimer dispatch;//klockan
-        //Dessa tre används förnärvarande för att hantera utseendet på tiden.
-        private int _timeSeconds;
-        private int _timeMinutes;
-        private int _timeHours;
 
         private bool _rightClickMemory;
         private bool _leftClickMemory;
@@ -55,6 +49,7 @@ namespace SudokuMain
         {
             InitializeComponent();
             _gameFinished = false;
+            _time = new Time(ref lblClock);//Initierar klockan
             if (!loadGame)
             {
                 game.ReadFromFile();//Läs in alla banor från filen
@@ -63,10 +58,10 @@ namespace SudokuMain
             }
             else
             {
-                game.LoadGame(ref _mainSettings, ref _time);//Laddar tidagare spel från fil
+                game.LoadGame(ref _mainSettings, ref _time, ref hasCheated);//Laddar tidagare spel från fil
                 
             }
-
+            
             gameSettings();//tilldelar inställningarna till spelet
             EventManager.RegisterClassHandler(typeof(Window),
             Keyboard.KeyUpEvent, new KeyEventHandler(CubeWithLabels_KeyDown_1), true);
@@ -75,8 +70,7 @@ namespace SudokuMain
             txtHighScore.Text = _highscores.GetHighScore(game.levels[game.currentLevel].difficulty, game.levels[game.currentLevel].level);//fyller highscore för specifik bana
             ourWindow = this;
             initInfoLabel();//Skriver ut vilken svårighetsgrad och bana som spelas
-            dispatch = new DispatcherTimer();
-            startTimer(); //startar klockan
+            _time.StartTime();//startar klockan
             _rightClickMemory = false;
             _leftClickMemory = false;
         }
@@ -339,6 +333,7 @@ namespace SudokuMain
             btnHint.IsEnabled = true;
             btnCheck.IsEnabled = true;
         }
+
         //Visar eller gömmer Klocka, highscore och sifferpanel
         private void gameSettings()
         {
@@ -435,7 +430,7 @@ namespace SudokuMain
                     }
                 case Key.P:
                     {
-                        if(dispatch.IsEnabled)
+                        if(_time.GetDispatcher().IsEnabled)
                             btnPausePlay_Click(this.btnPause, null);
                         else
                             btnPausePlay_Click(this.btnPlay, null);
@@ -483,7 +478,7 @@ namespace SudokuMain
                 MessageBox.Show("Game Over!", "Den här skylten ska givetvis bytas ut...");*/
                 int level = game.levels[game.currentLevel].level;
                 int diff = game.levels[game.currentLevel].difficulty;
-                dispatch.Stop(); //Stannar klockan
+                _time.StopTime(); //Stannar klockan
                 string mess;
 
                 if (hasCheated)
@@ -494,8 +489,7 @@ namespace SudokuMain
                 File.Delete("savedGame.sdk");//Tar bort eventuellt sparat spel
                 _gameFinished = true;//Indikerar att spelet är avslutat (kommer inte spara om man trycker X)
 
-                //_score = (100/*Tid egentligen*/ * (_mainSettings.getDifficulty() + 1)) / (_hintCount/2);//räknar ut score
-                _score = (_timeHours * 3600) + (_timeMinutes * 60) + _timeSeconds;
+                _score = (_time.GetHours() * 3600) + (_time.GetMinutes() * 60) + _time.GetSeconds();
 
                 int placement = _highscores.CompareScore(_score, diff, level);//Ev highscore
 
@@ -548,9 +542,8 @@ namespace SudokuMain
         //Hanterar stänging med hjälp av X uppe i högra hörnet
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            _time.setTime(_timeSeconds, _timeMinutes, _timeHours); //Daniel lagt till, sätter tiden så den återupptas vid Continue
             if(!_gameFinished)//Om spelet är färdigspelat sparas det inte ner
-                game.SaveGame(_mainSettings, _time);
+                game.SaveGame(_mainSettings, _time, hasCheated);
             MenuWindow menu = new MenuWindow();
             menu.Show();
             base.OnClosing(e);
@@ -589,90 +582,34 @@ namespace SudokuMain
             }
         }
 
-
-        //Laddar in sparad tid och startar klockans tickande.
-        private void startTimer()
-        {
-            _timeSeconds = _time.getSeconds();
-            _timeMinutes = _time.getMinutes();
-            _timeHours = _time.getHours();
-            dispatch.Tick += dispatch_Tick;
-            dispatch.Interval = new TimeSpan(0, 0, 0, 1);// en sekunds intervall.
-            dispatch.Start();
-        }
-
-        //Uppdaterar klockan vid varje tick (mycket kod...)
-        void dispatch_Tick(object sender, EventArgs e)
-        {
-            _timeSeconds++;
-            if (_timeSeconds > 59)
-            {
-                _timeSeconds = 0;
-                _timeMinutes++;
-            }
-            if (_timeMinutes > 59)
-            {
-                _timeMinutes = 0;
-                _timeHours++;
-            }
-            //Logik för utfyllnadsnollor.
-            if(_timeSeconds <= 9 && //0
-               _timeMinutes <= 9 &&
-               _timeHours <= 9)
-                lblClock.Content = "0"+_timeHours + ":0" + _timeMinutes + ":0" + _timeSeconds;
-            else if(_timeSeconds > 9 && //1
-                     _timeMinutes <= 9 &&
-                     _timeHours <= 9)
-                lblClock.Content = "0" + _timeHours + ":0" + _timeMinutes + ":" + _timeSeconds;
-            else if(_timeSeconds <= 9 && //2
-                    _timeMinutes > 9 &&
-                    _timeHours <= 9)
-                lblClock.Content = "0" + _timeHours + ":" + _timeMinutes + ":0" + _timeSeconds;
-            else if(_timeSeconds > 9 && //3
-                    _timeMinutes > 9 &&
-                    _timeHours <= 9)
-                lblClock.Content = "0" + _timeHours + ":" + _timeMinutes + ":" + _timeSeconds;
-            else if(_timeSeconds <= 9 && //4
-                    _timeMinutes <= 9 &&
-                    _timeHours > 9)
-                lblClock.Content = ""+_timeHours + ":0" + _timeMinutes + ":0" + _timeSeconds;
-            else if (_timeSeconds > 9 && //5
-                     _timeMinutes <= 9 &&
-                     _timeHours > 9)
-                lblClock.Content = "" + _timeHours + ":0" + _timeMinutes + ":" + _timeSeconds;
-            else // 6
-                lblClock.Content = ""+_timeHours + ":" + _timeMinutes + ":" + _timeSeconds;
-        }
-
         //Pausar spelet och startar pausat spel
         private void btnPausePlay_Click(Object sender, RoutedEventArgs args)
         {
             Button button = (Button)sender;
-            if (button.Name == "btnPlay")
+            if (button.Name == "btnPlay" || button.Name == "btnPausePlay")
             {
-                dispatch.Start();
+                _time.StartTime();
                 btnPlay.Visibility = Visibility.Hidden;
                 btnPause.Visibility = Visibility.Visible;
-                _myBoard = (Storyboard)this.Resources["hidePause"];
-                _myBoard.Begin();
-            }
-            else if (button.Name == "btnPausePlay")
-            {
-                dispatch.Start();
-                btnPlay.Visibility = Visibility.Hidden;
-                btnPause.Visibility = Visibility.Visible;
+                btnCheck.IsEnabled = true;
+                btnHint.IsEnabled = true;
+                keyPad_static.IsEnabled = true;
                 _myBoard = (Storyboard)this.Resources["hidePause"];
                 _myBoard.Begin();
             }
             else
             {
-                dispatch.Stop();
+                _time.StopTime();
                 btnPlay.Visibility = Visibility.Visible;
                 btnPause.Visibility = Visibility.Hidden;
+                btnCheck.IsEnabled = false;
+                btnHint.IsEnabled = false;
+                keyPad_static.IsEnabled = false;
                 _myBoard = (Storyboard)this.Resources["showPause"];
                 _myBoard.Begin();
             }
         }
+
         //Initierar ett nytt spel
         private void newGame(int diff, int level)
         {
@@ -689,7 +626,7 @@ namespace SudokuMain
             //_timeSeconds = 0;
             hasCheated = false;
             _gameFinished = false;
-            dispatch.Start();
+            _time.StartTime();
         }
     }
 }
