@@ -533,6 +533,7 @@ namespace SudokuMain
                             diff++;
                             if (diff > 2)
                                 diff = 0;
+                            _mainSettings.setDifficulty(diff);
                         }
                     }
                     //Tömmer arrayen med lösningar
