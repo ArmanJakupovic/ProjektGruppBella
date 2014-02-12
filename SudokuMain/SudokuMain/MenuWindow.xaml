@@ -342,9 +342,9 @@
                 <ColumnDefinition Width="30*" />
             </Grid.ColumnDefinitions>
 
-            <CheckBox x:Name="showTimer"       Grid.Column="1" Grid.Row="0" Margin="100,5,0,5" HorizontalAlignment="Left" Content="Show timer"       Grid.ColumnSpan="2" Width="120"/>
-            <CheckBox x:Name="enableHighscore" Grid.Column="1" Grid.Row="1" Margin="100,5,0,5" HorizontalAlignment="Left" Content="Enable highscore" Grid.ColumnSpan="2" Width="120"/>
-            <CheckBox x:Name="enablePanel"     Grid.Column="1" Grid.Row="2" Margin="100,5,0,5" HorizontalAlignment="Left" Content="Popup input"      Grid.ColumnSpan="2" Width="120"/>
+            <CheckBox x:Name="showTimer"       Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Content="Show timer"       Grid.ColumnSpan="2" Width="120"/>
+            <CheckBox x:Name="enableHighscore" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Content="Enable highscore" Grid.ColumnSpan="2" Width="120"/>
+            <CheckBox x:Name="enablePanel"     Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Content="Popup input"      Grid.ColumnSpan="2" Width="120"/>
 
             <Button x:Name="btnCancel" Grid.Column="1" Grid.Row="3" BorderBrush="Black" Click="btnCancel_Click" Height="30" Content="Cancel" Margin="0.5,0,0.5,0" Style="{StaticResource InformButton}"></Button>
             <Button x:Name="btnApply" Grid.Column="2" Grid.Row="3" BorderBrush="Black" Click="btnApply_Click" Height="30" Content="Apply" Margin="0.5,0,0.5,0" Style="{StaticResource InformButton}"></Button>
