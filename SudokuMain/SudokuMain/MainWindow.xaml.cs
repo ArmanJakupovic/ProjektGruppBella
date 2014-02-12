@@ -44,7 +44,6 @@ namespace SudokuMain
         private int _timeSeconds;
         private int _timeMinutes;
         private int _timeHours;
-
         private bool _rightClickMemory;
         private bool _leftClickMemory;
         private bool hasCheated = false; //Visar om du har använt hint eller check

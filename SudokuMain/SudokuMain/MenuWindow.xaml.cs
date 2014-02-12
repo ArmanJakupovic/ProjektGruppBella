@@ -64,9 +64,6 @@ namespace SudokuMain
         {
             _set.loadSettings();
 
-         //   gridButtons.Visibility = Visibility.Collapsed;
-         //   gridOptions.Visibility = Visibility.Collapsed;
-
             /*******ANIMATIONER***************/
             _myBoard = (Storyboard)this.Resources["moveButtonsDown"];
             _myBoard.Begin();
@@ -75,22 +72,11 @@ namespace SudokuMain
             showTimer.IsChecked = _set.getTimer();
             enableHighscore.IsChecked = _set.getHighscore();
             enablePanel.IsChecked = _set.getPanel();
-            /*
-            int diff = _set.getDifficulty();
-            if (diff == 0)
-                difficultyBeginner.IsChecked = true;
-            else if (diff == 1)
-                difficultyExperienced.IsChecked = true;
-            else if (diff == 2)
-                difficultyVeteran.IsChecked = true;*/
         }
 
         //Tillbaka till Menu utan att spara inställningar
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-         //   gridButtons.Visibility = Visibility.Visible;
-         //   gridOptions.Visibility = Visibility.Collapsed;
-
             /*******ANIMATIONER***************/
             _myBoard = (Storyboard)this.Resources["moveButtonsUp"];
             _myBoard.Begin();
@@ -111,18 +97,9 @@ namespace SudokuMain
             bool time = showTimer.IsChecked == true;
             bool score = enableHighscore.IsChecked == true;
             bool panel = enablePanel.IsChecked == true;
-            /*
-            int diff = 0; //Beginner
-            if (difficultyExperienced.IsChecked == true)
-                diff = 1;
-            else if (difficultyVeteran.IsChecked == true)
-                diff = 2;
-            */
+
             Settings set = new Settings(time, score, panel); //diff
             set.saveSettings();
-
-        //    gridButtons.Visibility = Visibility.Visible;
-        //    gridOptions.Visibility = Visibility.Collapsed;
 
             /*******ANIMATIONER***************/
             _myBoard = (Storyboard)this.Resources["moveButtonsUp"];
