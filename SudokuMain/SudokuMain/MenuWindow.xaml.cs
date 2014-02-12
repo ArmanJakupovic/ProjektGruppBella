@@ -39,6 +39,8 @@ namespace SudokuMain
             //Slut
         }
 
+        //Startar ett nytt spel med nollställd tid
+        //och de inställningar man eventuellt ändrar till via Options.
         private void btnNewGame_Click(Object sender, RoutedEventArgs args)
         {
             Time _time = new Time();
@@ -47,6 +49,9 @@ namespace SudokuMain
             _myBoard.Begin();
         }
 
+        //Fortsätter föregående spel INKLUSIVE dess inställningar,
+        //alltså kommer inte ändringar man gör i MenuWindow Options
+        //verka på spelet man återupptar, ändringar får göras under spelets gång.
         private void btnContinue_Click(Object sender, RoutedEventArgs args)
         {
             MainWindow game = new MainWindow(true);
@@ -63,15 +68,16 @@ namespace SudokuMain
         private void btnOptions_Click(object sender, RoutedEventArgs e)
         {
             _set.loadSettings();
+            showTimer.IsChecked       = _set.getTimer();
+            enableHighscore.IsChecked = _set.getHighscore();
+            enablePanel.IsChecked     = _set.getPanel();
 
             /*******ANIMATIONER***************/
             _myBoard = (Storyboard)this.Resources["moveButtonsDown"];
             _myBoard.Begin();
             /******SLUT*PÅ*ANIMATIONER*******/
 
-            showTimer.IsChecked = _set.getTimer();
-            enableHighscore.IsChecked = _set.getHighscore();
-            enablePanel.IsChecked = _set.getPanel();
+            
         }
 
         //Tillbaka till Menu utan att spara inställningar
@@ -94,12 +100,16 @@ namespace SudokuMain
         //Tillbaka till Menu och spara inställningar
         private void btnApply_Click(object sender, RoutedEventArgs e)
         {
-            bool time = showTimer.IsChecked == true;
-            bool score = enableHighscore.IsChecked == true;
-            bool panel = enablePanel.IsChecked == true;
+            //bool time = showTimer.IsChecked == true;
+            //bool score = enableHighscore.IsChecked == true;
+            //bool panel = enablePanel.IsChecked == true;
+            //Settings set = new Settings(time, score, panel); //diff
+            //set.saveSettings();
 
-            Settings set = new Settings(time, score, panel); //diff
-            set.saveSettings();
+            _set.SetTimer(showTimer.IsChecked == true);
+            _set.SetHighscore(enableHighscore.IsChecked == true);
+            _set.SetPopupPanel(enablePanel.IsChecked == true);
+            _set.saveSettings();
 
             /*******ANIMATIONER***************/
             _myBoard = (Storyboard)this.Resources["moveButtonsUp"];
@@ -118,7 +128,7 @@ namespace SudokuMain
                 _set.setDifficulty(1);
             if(btnDiff.Content.ToString() == "Veteran")
                 _set.setDifficulty(2);
-            _set.saveSettings();
+            //_set.saveSettings();
 
             MainWindow game = new MainWindow();
             game.Show();
