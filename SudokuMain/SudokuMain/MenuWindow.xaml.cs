@@ -75,7 +75,6 @@ namespace SudokuMain
             _myBoard.Begin();
             /******SLUT*PÅ*ANIMATIONER*******/
 
-            
         }
 
         //Tillbaka till Menu utan att spara inställningar
@@ -98,12 +97,6 @@ namespace SudokuMain
         //Tillbaka till Menu och spara inställningar
         private void btnApply_Click(object sender, RoutedEventArgs e)
         {
-            //bool time = showTimer.IsChecked == true;
-            //bool score = enableHighscore.IsChecked == true;
-            //bool panel = enablePanel.IsChecked == true;
-            //Settings set = new Settings(time, score, panel); //diff
-            //set.saveSettings();
-
             _set.SetTimer(showTimer.IsChecked == true);
             _set.SetHighscore(enableHighscore.IsChecked == true);
             _set.SetPopupPanel(enablePanel.IsChecked == true);

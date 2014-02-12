@@ -53,15 +53,13 @@ namespace SudokuMain
             if (!loadGame)
             {
                 game.ReadFromFile();//Läs in alla banor från filen
-                _mainSettings.loadSettings();//läser in inställningar från fil
                 game.SetLevel(_mainSettings.getDifficulty(), 0);//Läser in vilken bana som ska spelas
             }
             else
             {
-                game.LoadGame(ref _mainSettings, ref _time, ref hasCheated);//Laddar tidagare spel från fil
-                
+                game.LoadGame(ref _time, ref hasCheated);//Laddar tidagare spel från fil
             }
-            
+            _mainSettings.loadSettings();//läser in inställningar från fil
             gameSettings();//tilldelar inställningarna till spelet
             EventManager.RegisterClassHandler(typeof(Window),
             Keyboard.KeyUpEvent, new KeyEventHandler(CubeWithLabels_KeyDown_1), true);
@@ -312,8 +310,10 @@ namespace SudokuMain
             bool score = enableHighscoreMain.IsChecked == true;
             bool panel = enablePanelMain.IsChecked == true;
 
-            Settings set = new Settings(time, score, panel, game.currentDifficulty); // här är jag inte helt hundra med game.currentDifficulty, för att konstruktorn ska fungera måste jag ha ett värde.
-            set.saveSettings();
+            _mainSettings.SetTimer(time);
+            _mainSettings.SetHighscore(score);
+            _mainSettings.SetPopupPanel(panel);
+            _mainSettings.saveSettings();
 
             _mainSettings.loadSettings();
             gameSettings();

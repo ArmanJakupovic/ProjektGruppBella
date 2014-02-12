@@ -60,12 +60,6 @@ namespace SudokuMain
             writer.WriteLine(_time.GetHours());
             writer.WriteLine();//tomrad
 
-            //Skriver ner settings
-            writer.WriteLine(_mainSettings.getTimer().ToString());
-            writer.WriteLine(_mainSettings.getHighscore().ToString());
-            writer.WriteLine(_mainSettings.getPanel().ToString());
-            writer.WriteLine();//tomrad
-
             //Fuskat eller inte
             writer.WriteLine(hasCheated);
             writer.WriteLine();//tomrad
@@ -103,7 +97,7 @@ namespace SudokuMain
         }
 
         //Laddar tidigare spel
-        public void LoadGame(ref Settings setting, ref Time clock, ref bool hasCheated)
+        public void LoadGame(ref Time clock, ref bool hasCheated)
         {
             char[] delimiters = new char[] { '[', ']', ',' }; //För att ta bort oönskade tecken
             string[] info = new string[2];
@@ -116,12 +110,6 @@ namespace SudokuMain
                 clock.SetMinutes(Convert.ToInt16( loadStream.ReadLine() ) );
                 clock.SetHours(Convert.ToInt16( loadStream.ReadLine() ) );
                 loadStream.ReadLine();//tomrad
-
-                //Settings
-                setting.SetTimer( Convert.ToBoolean( loadStream.ReadLine() ) );
-                setting.SetHighscore( Convert.ToBoolean(loadStream.ReadLine() ) );
-                setting.SetPopupPanel( Convert.ToBoolean(loadStream.ReadLine() ) );
-                loadStream.ReadLine();//tomrad 
 
                 //Fuskat eller inte
                 hasCheated = Convert.ToBoolean(loadStream.ReadLine());
