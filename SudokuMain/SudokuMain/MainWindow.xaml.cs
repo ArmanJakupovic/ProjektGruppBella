@@ -31,7 +31,7 @@ namespace SudokuMain
         MainWindow ourWindow;
         private Keypad _x;//Popup fönster
         private int _gridIndexNr;
-        private int _lblFound;
+        private int _lblIndex;
         private CubeWithLabels prevBlockIx;
         private CubeWithLabels cube;
         private int prevIx = 0;
@@ -118,14 +118,10 @@ namespace SudokuMain
             string myNr = "X";
             _leftClickMemory = true;
             cube = sender as CubeWithLabels;
-
-            int indexnr = -1;
-            int lblFound = -1;
-
-            //Återställer rektangeln om det finns en gammal position lagrad
-            if (prevBlockIx != null)
-                prevBlockIx.setLabelBorder(prevIx, false);
             
+            int indexnr = -1;
+            int lblIndex = -1;
+
             for (int ix = 0; ix < 9; ix++)
             {
                 CubeWithLabels cubeCompair = grdBoard.Children[ix] as CubeWithLabels;
@@ -133,23 +129,28 @@ namespace SudokuMain
                 {
                     //MessageBox.Show(ix.ToString());
                     indexnr = ix;
-                    lblFound = cube.FindClickedLabel();
-                    //Gör så att den valda labeln blir markerad
-                    if (lblFound >= 0)
+                    lblIndex = cube.FindClickedLabel();
+                    if (cube.GetBackground(lblIndex) == Brushes.Moccasin)
                     {
-                        cube.setLabelBorder(lblFound, true);
-                        prevBlockIx = cube;
-                        prevIx = lblFound;
+                        //Återställer rektangeln om det finns en gammal position lagrad
+                        if (prevBlockIx != null)
+                            prevBlockIx.setLabelBorder(prevIx, false);
+                        //Gör så att den valda labeln blir markerad
+                        if (lblIndex >= 0)
+                        {
+                            cube.setLabelBorder(lblIndex, true);
+                            prevBlockIx = cube;
+                            prevIx = lblIndex;
+                        }
+                        _gridIndexNr = indexnr;
+                        _lblIndex = lblIndex;
+                        if (_mainSettings.getPanel())
+                        {
+                            openPopup(ref myNr, ref _gridIndexNr, ref _lblIndex, ref ourWindow);
+                        }
                     }
                     break;
                 }
-            }
-
-            _gridIndexNr = indexnr;
-            _lblFound = lblFound;
-            if (_mainSettings.getPanel())
-            {
-                openPopup(ref myNr, ref _gridIndexNr, ref _lblFound, ref ourWindow);
             }
         }
 
@@ -158,24 +159,26 @@ namespace SudokuMain
         {
                 cube = sender as CubeWithLabels;
                 int indexnr = -1;
-                int lblFound = -1;
-
-                if (prevBlockIx != null)
-                    prevBlockIx.setLabelBorder(prevIx, false);
+                int lblIndex = -1;
+                
                 for (int ix = 0; ix < 9; ix++)
                 {
                     CubeWithLabels cubeCompair = grdBoard.Children[ix] as CubeWithLabels;
                     if (cubeCompair == cube)
                     {
-                        //MessageBox.Show(ix.ToString());
                         indexnr = ix;
-                        lblFound = cube.FindClickedLabel();
-                        //Gör så att den valda labeln blir markerad
-                        if (lblFound >= 0)
+                        lblIndex = cube.FindClickedLabel();
+                        if (cube.GetBackground(lblIndex) == Brushes.Moccasin)
                         {
-                            cube.setLabelBorder(lblFound, true);
-                            prevBlockIx = cube;
-                            prevIx = lblFound;
+                            if (prevBlockIx != null)
+                                prevBlockIx.setLabelBorder(prevIx, false);
+                            //Gör så att den valda labeln blir markerad
+                            if (lblIndex >= 0)
+                            {
+                                cube.setLabelBorder(lblIndex, true);
+                                prevBlockIx = cube;
+                                prevIx = lblIndex;
+                            }
                         }
                         break;
                     }
@@ -184,19 +187,14 @@ namespace SudokuMain
             //Nedanstående kod kontrollerar om det är OK att radera vid dubbel högerklick
                 if ((_rightClickMemory || _leftClickMemory) && _gridIndexNr == indexnr)
                 {
-                    if (_lblFound == lblFound)
+                    if (_lblIndex == lblIndex)
                     {
-                        if (_lblFound >= 0)
+                        if (_lblIndex >= 0)
                         {
-                            updateMatrix(_gridIndexNr, _lblFound, " ");
+                            updateMatrix(_gridIndexNr, _lblIndex, " ");
                             _rightClickMemory = false;
                             _leftClickMemory = false;
                         }
-                    }
-                    else
-                    {
-                        _rightClickMemory = false;
-                        _leftClickMemory = false;
                     }
                 }
                 else
@@ -204,8 +202,11 @@ namespace SudokuMain
                     _rightClickMemory = true;
                 }
 
-                _gridIndexNr = indexnr;
-                _lblFound = lblFound;
+                if (cube.GetBackground(lblIndex) == Brushes.Moccasin)
+                {
+                    _gridIndexNr = indexnr;
+                    _lblIndex = lblIndex;
+                }
         }
 
         //Kallas på när knapp på keypaden trycks. Uppdaterar gridden.
@@ -285,7 +286,7 @@ namespace SudokuMain
                 prevBlockIx = blockIndex;
                 _gridIndexNr = block;
                 prevIx = ruta;
-                _lblFound = ruta;
+                _lblIndex = ruta;
             }
         }
 
@@ -373,7 +374,7 @@ namespace SudokuMain
         public void returnNumpadValue(object sender, RoutedEventArgs e)
         {
             Button x = sender as Button;
-            markedGridPosUpdate(_gridIndexNr, _lblFound, x.Content.ToString());
+            markedGridPosUpdate(_gridIndexNr, _lblIndex, x.Content.ToString());
         }
 
         
@@ -462,7 +463,7 @@ namespace SudokuMain
             
             if (prevBlockIx != null && prevIx >= 0)
             {
-                updateMatrix(_gridIndexNr, _lblFound, value);
+                updateMatrix(_gridIndexNr, _lblIndex, value);
             }
         } //CubeWithLabels_KeyDown_1
         
@@ -634,9 +635,6 @@ namespace SudokuMain
             ourWindow = this;
             initInfoLabel();//Skriver ut vilken svårighetsgrad och bana som spelas
             _time.setTime(0,0,0);
-            //_timeHours = 0;
-            //_timeMinutes = 0;
-            //_timeSeconds = 0;
             hasCheated = false;
             _gameFinished = false;
             _time.StartTime();

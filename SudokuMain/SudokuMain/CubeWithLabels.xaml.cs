@@ -54,17 +54,25 @@ namespace SudokuMain
             UniformGrid uGrd = this.field;
             Grid grd = uGrd.Children[ix] as Grid;
             Rectangle rectActive = grd.Children[1] as Rectangle;
+
             if (active)
             {
                 rectActive.StrokeThickness = 3;
-                rectActive.Stroke = new SolidColorBrush(Color.FromRgb(118, 18, 18)); ;
-                
+                rectActive.Stroke = new SolidColorBrush(Color.FromRgb(118, 18, 18)); 
             }
             else
             {
                 rectActive.StrokeThickness = 0.6;
                 rectActive.Stroke = Brushes.Black;
             }
+        }
+
+        public Brush GetBackground(int ix)
+        {
+            UniformGrid uGrd = this.field;
+            Grid grd = uGrd.Children[ix] as Grid;
+            Label lbl = grd.Children[0] as Label;
+            return lbl.Background;
         }
 
         //Sätter bakgrunden till mörk om locked=true, annars till ljus
@@ -134,7 +142,6 @@ namespace SudokuMain
                 Grid grd = uGrd.Children[ix] as Grid;
                 if (grd.Children[0] == lblChk)
                 {
-                    //MessageBox.Show("ruta "+ix.ToString());
                     CurrentLabel = ix;
                     break;
                 }
