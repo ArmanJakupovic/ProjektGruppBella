@@ -36,9 +36,8 @@ namespace SudokuMain
         private CubeWithLabels cube;
         private int prevIx = 0;
         private Storyboard _myBoard;
-        private bool _gameFinished;
-        private int _score, _hintCount = 0;
-
+        private bool _gameFinished = false;
+        private bool _newGame = false;
         private bool _rightClickMemory;
         private bool _leftClickMemory;
         private bool hasCheated = false; //Visar om du har använt hint eller check
@@ -48,7 +47,6 @@ namespace SudokuMain
         public MainWindow(bool loadGame = false)
         {
             InitializeComponent();
-            _gameFinished = false;
             _time = new Time(ref lblClock);//Initierar klockan
             if (!loadGame)
             {
@@ -261,7 +259,7 @@ namespace SudokuMain
                 else
                     return;
             }
-            _hintCount++;//Räknar antal hint-tryck
+
             int fusk = game.GetHint();
             if (fusk >= 0)
             {
@@ -276,12 +274,16 @@ namespace SudokuMain
                     prevBlockIx.setLabelBorder(prevIx, false);
 
                 updateMatrix(block, ruta, value);
-
+                
                 CubeWithLabels blockIndex = grdBoard.Children[block] as CubeWithLabels;
-                blockIndex.animateCell(ruta);
-
-                //Sätter fokus på den nya rutan
-                blockIndex.setLabelBorder(ruta, true);
+                if (!_newGame)
+                {
+                    blockIndex.animateCell(ruta);
+                    //Sätter fokus på den nya rutan
+                    blockIndex.setLabelBorder(ruta, true);
+                }
+                else//Hindrar animationen från att dyka upp i nästkommande bana
+                    _newGame = false;
 
                 prevBlockIx = blockIndex;
                 _gridIndexNr = block;
@@ -502,14 +504,14 @@ namespace SudokuMain
                 File.Delete("savedGame.sdk");//Tar bort eventuellt sparat spel
                 _gameFinished = true;//Indikerar att spelet är avslutat (kommer inte spara om man trycker X)
 
-                _score = (_time.GetHours() * 3600) + (_time.GetMinutes() * 60) + _time.GetSeconds();
+                int score = (_time.GetHours() * 3600) + (_time.GetMinutes() * 60) + _time.GetSeconds();
 
-                int placement = _highscores.CompareScore(_score, diff, level);//Ev highscore
+                int placement = _highscores.CompareScore(score, diff, level);//Ev highscore
 
                 if (placement != -1 && !hasCheated)//Om highscore och ej har fuskat
                 {
                     string name = SdkMsgBox.showHighScoreBox("You made it to the highscore!", "Highscore!", "Type your name:", "Images\\goodJobFace.png", "Message");
-                    _highscores.InsertToHighscore(name.ToUpper().Substring(0, 3), _score, diff, level, placement);
+                    _highscores.InsertToHighscore(name.ToUpper().Substring(0, 3), score, diff, level, placement);
                     txtHighScore.Text = _highscores.GetHighScore(diff, level);
                     mess = "Winner!";
                 }
@@ -637,6 +639,7 @@ namespace SudokuMain
             _time.setTime(0,0,0);
             hasCheated = false;
             _gameFinished = false;
+            _newGame = true;
             _time.StartTime();
         }
     }
