@@ -128,7 +128,7 @@ namespace SudokuMain
                     //MessageBox.Show(ix.ToString());
                     indexnr = ix;
                     lblIndex = cube.FindClickedLabel();
-                    if (cube.GetBackground(lblIndex) == Brushes.Moccasin)
+                    if (cube.GetBackground(lblIndex) == Brushes.Moccasin || cube.GetBackground(lblIndex) == Brushes.Tomato)
                     {
                         //Återställer rektangeln om det finns en gammal position lagrad
                         if (prevBlockIx != null)
@@ -166,7 +166,7 @@ namespace SudokuMain
                     {
                         indexnr = ix;
                         lblIndex = cube.FindClickedLabel();
-                        if (cube.GetBackground(lblIndex) == Brushes.Moccasin)
+                        if (cube.GetBackground(lblIndex) == Brushes.Moccasin || cube.GetBackground(lblIndex) == Brushes.Tomato)
                         {
                             if (prevBlockIx != null)
                                 prevBlockIx.setLabelBorder(prevIx, false);
@@ -200,7 +200,7 @@ namespace SudokuMain
                     _rightClickMemory = true;
                 }
 
-                if (cube.GetBackground(lblIndex) == Brushes.Moccasin)
+                if (cube.GetBackground(lblIndex) == Brushes.Moccasin || cube.GetBackground(lblIndex) == Brushes.Tomato)
                 {
                     _gridIndexNr = indexnr;
                     _lblIndex = lblIndex;
