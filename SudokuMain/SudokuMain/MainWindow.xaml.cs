@@ -142,7 +142,7 @@ namespace SudokuMain
                     }
                     _gridIndexNr = indexnr;
                     _lblIndex = lblIndex;
-                    if (_mainSettings.getPanel() && (cube.GetBackground(_lblIndex) == Brushes.Moccasin || cube.GetBackground(_lblIndex) == Brushes.Tomato) )
+                    if (_mainSettings.getPanel() && (cube.GetBackground(_lblIndex).ToString() != "#FFD8B087") )
                     {
                         openPopup(ref myNr, ref _gridIndexNr, ref _lblIndex, ref ourWindow);
                     }
