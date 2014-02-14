@@ -293,6 +293,7 @@ namespace SudokuMain
                     blockIndex.animateCell(ruta);
                     //Sätter fokus på den nya rutan
                     blockIndex.setLabelBorder(ruta, true);
+                    updatePos(blockIndex, ruta);
                 }
                 else//Hindrar animationen från att dyka upp i nästkommande bana
                     _newGame = false;
