@@ -35,6 +35,8 @@ namespace SudokuMain
         private CubeWithLabels prevBlockIx;
         private CubeWithLabels cube;
         private int prevIx = 0;
+        private int xPos = 0; //Ska hålla reda på vilken pos man är i (0-8)
+        private int yPos = 0;
         private Storyboard _myBoard;
         private bool _gameFinished = false;
         private bool _newGame = false;
@@ -69,6 +71,7 @@ namespace SudokuMain
             _time.StartTime();//startar klockan
             _rightClickMemory = false;
             _leftClickMemory = false;
+            
         }
 
         //Fyller spelplanen med tecken från currentLevel.Unsolved
@@ -139,6 +142,7 @@ namespace SudokuMain
                         cube.setLabelBorder(lblIndex, true);
                         prevBlockIx = cube;
                         prevIx = lblIndex;
+                        updatePos(cube, lblIndex);
                     }
                     _gridIndexNr = indexnr;
                     _lblIndex = lblIndex;
@@ -175,6 +179,7 @@ namespace SudokuMain
                             cube.setLabelBorder(lblIndex, true);
                             prevBlockIx = cube;
                             prevIx = lblIndex;
+                            updatePos(cube, lblIndex);
                         }
                         break;
                     }
@@ -385,6 +390,7 @@ namespace SudokuMain
         private void CubeWithLabels_KeyDown_1(object sender, KeyEventArgs e)
         {
             string value=" ";
+            bool update = true; //Så att inte innehållet ändras när man navigerar eller pausar
 
             switch (e.Key)
             {
@@ -449,6 +455,31 @@ namespace SudokuMain
                             btnPausePlay_Click(this.btnPause, null);
                         else
                             btnPausePlay_Click(this.btnPlay, null);
+                        update = false;
+                        break;
+                    }
+                case Key.Up:
+                    {
+                        keyNavigate(0, -1);
+                        update = false;
+                        break;
+                    }
+                case Key.Down:
+                    {
+                        keyNavigate(0, 1);
+                        update = false;
+                        break;
+                    }
+                case Key.Left:
+                    {
+                        keyNavigate(-1, 0);
+                        update = false;
+                        break;
+                    }
+                case Key.Right:
+                    {
+                        keyNavigate(1, 0);
+                        update = false;
                         break;
                     }
                 default:
@@ -462,7 +493,7 @@ namespace SudokuMain
             if (_x != null && _x.keypad_Popup.IsOpen)
                 _x.keypad_Popup.IsOpen = false;
             
-            if (prevBlockIx != null && prevIx >= 0)
+            if (update && prevBlockIx != null && prevIx >= 0)
             {
                 updateMatrix(_gridIndexNr, _lblIndex, value);
             }
@@ -640,6 +671,45 @@ namespace SudokuMain
             _gameFinished = false;
             _newGame = true;
             _time.StartTime();
+        }
+
+        //Hanterar styrningen med piltangenterna
+        private void keyNavigate(int addX, int addY)
+        {
+            int x = xPos + addX;
+            int y = yPos + addY;
+
+            //Gör inget om man kommer till en kant
+            if (x < 0 || x > 8 || y < 0 || y > 8)
+                return;
+
+            //Återställer rektangeln om det finns en gammal position lagrad
+            if (prevBlockIx != null)
+                prevBlockIx.setLabelBorder(prevIx, false);
+            
+            int block, ruta;
+            block = (y / 3) * 3 + (x / 3);
+            ruta = (y % 3) * 3 + (x % 3);
+
+            xPos = x;
+            yPos = y;
+
+            CubeWithLabels currBlock = grdBoard.Children[block] as CubeWithLabels;
+            
+            currBlock.setLabelBorder(ruta, true);
+            prevBlockIx = currBlock;
+            prevIx = ruta;
+            
+            _gridIndexNr = block;
+            _lblIndex = ruta;
+        }
+
+        //För att uppdarera position som hanterar piltangenterna vid musklick
+        private void updatePos(CubeWithLabels cube, int ix)
+        {
+            int block = (Convert.ToInt16(cube.Name.Substring(3, 1)))-1;
+            yPos = 3 * (block / 3) + (ix / 3);
+            xPos = 3 * (block % 3) + (ix % 3);
         }
     }
 }

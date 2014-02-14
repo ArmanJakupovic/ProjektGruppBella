@@ -86,12 +86,20 @@ namespace SudokuMain
         //Sätter bakgrunden till röd om error=true
         private void setLabelBackground(ref Label lbl, bool locked, bool error=false)
         {
+            int boxId = Convert.ToInt16(this.Name.Substring(3, 1));
             SolidColorBrush lockedSolidColorBrush = new SolidColorBrush();
             lockedSolidColorBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFD8B087"));
+            SolidColorBrush oddSolidColorBrush = new SolidColorBrush();
+            oddSolidColorBrush = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFF9D49E"));
             if (locked)
                 lbl.Background = lockedSolidColorBrush;
             else
-                lbl.Background = Brushes.Moccasin;
+            {
+                if (boxId % 2 == 0)
+                    lbl.Background = oddSolidColorBrush;
+                else
+                    lbl.Background = Brushes.Moccasin;
+            }
             if (error)
                 lbl.Background = Brushes.Tomato;
         }
