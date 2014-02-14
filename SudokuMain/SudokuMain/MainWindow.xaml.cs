@@ -120,6 +120,10 @@ namespace SudokuMain
             int indexnr = -1;
             int lblIndex = -1;
 
+            //Återställer rektangeln om det finns en gammal position lagrad
+            if (prevBlockIx != null)
+                prevBlockIx.setLabelBorder(prevIx, false);
+
             for (int ix = 0; ix < 9; ix++)
             {
                 CubeWithLabels cubeCompair = grdBoard.Children[ix] as CubeWithLabels;
@@ -128,24 +132,19 @@ namespace SudokuMain
                     //MessageBox.Show(ix.ToString());
                     indexnr = ix;
                     lblIndex = cube.FindClickedLabel();
-                    if (cube.GetBackground(lblIndex) == Brushes.Moccasin || cube.GetBackground(lblIndex) == Brushes.Tomato)
+
+                    //Gör så att den valda labeln blir markerad
+                    if (lblIndex >= 0)
                     {
-                        //Återställer rektangeln om det finns en gammal position lagrad
-                        if (prevBlockIx != null)
-                            prevBlockIx.setLabelBorder(prevIx, false);
-                        //Gör så att den valda labeln blir markerad
-                        if (lblIndex >= 0)
-                        {
-                            cube.setLabelBorder(lblIndex, true);
-                            prevBlockIx = cube;
-                            prevIx = lblIndex;
-                        }
-                        _gridIndexNr = indexnr;
-                        _lblIndex = lblIndex;
-                        if (_mainSettings.getPanel())
-                        {
-                            openPopup(ref myNr, ref _gridIndexNr, ref _lblIndex, ref ourWindow);
-                        }
+                        cube.setLabelBorder(lblIndex, true);
+                        prevBlockIx = cube;
+                        prevIx = lblIndex;
+                    }
+                    _gridIndexNr = indexnr;
+                    _lblIndex = lblIndex;
+                    if (_mainSettings.getPanel() && (cube.GetBackground(_lblIndex) == Brushes.Moccasin || cube.GetBackground(_lblIndex) == Brushes.Tomato) )
+                    {
+                        openPopup(ref myNr, ref _gridIndexNr, ref _lblIndex, ref ourWindow);
                     }
                     break;
                 }
@@ -158,7 +157,11 @@ namespace SudokuMain
                 cube = sender as CubeWithLabels;
                 int indexnr = -1;
                 int lblIndex = -1;
-                
+
+
+                if (prevBlockIx != null)
+                    prevBlockIx.setLabelBorder(prevIx, false);
+
                 for (int ix = 0; ix < 9; ix++)
                 {
                     CubeWithLabels cubeCompair = grdBoard.Children[ix] as CubeWithLabels;
@@ -166,17 +169,12 @@ namespace SudokuMain
                     {
                         indexnr = ix;
                         lblIndex = cube.FindClickedLabel();
-                        if (cube.GetBackground(lblIndex) == Brushes.Moccasin || cube.GetBackground(lblIndex) == Brushes.Tomato)
+                        //Gör så att den valda labeln blir markerad
+                        if (lblIndex >= 0)
                         {
-                            if (prevBlockIx != null)
-                                prevBlockIx.setLabelBorder(prevIx, false);
-                            //Gör så att den valda labeln blir markerad
-                            if (lblIndex >= 0)
-                            {
-                                cube.setLabelBorder(lblIndex, true);
-                                prevBlockIx = cube;
-                                prevIx = lblIndex;
-                            }
+                            cube.setLabelBorder(lblIndex, true);
+                            prevBlockIx = cube;
+                            prevIx = lblIndex;
                         }
                         break;
                     }
@@ -194,17 +192,18 @@ namespace SudokuMain
                             _leftClickMemory = false;
                         }
                     }
+                    else
+                    {
+                        _rightClickMemory = true;
+                        _leftClickMemory = false;
+                    }
                 }
                 else
                 {
                     _rightClickMemory = true;
                 }
-
-                if (cube.GetBackground(lblIndex) == Brushes.Moccasin || cube.GetBackground(lblIndex) == Brushes.Tomato)
-                {
-                    _gridIndexNr = indexnr;
-                    _lblIndex = lblIndex;
-                }
+                _gridIndexNr = indexnr;
+                _lblIndex = lblIndex;
         }
 
         //Kallas på när knapp på keypaden trycks. Uppdaterar gridden.

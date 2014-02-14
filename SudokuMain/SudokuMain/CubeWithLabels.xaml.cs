@@ -69,10 +69,17 @@ namespace SudokuMain
 
         public Brush GetBackground(int ix)
         {
-            UniformGrid uGrd = this.field;
-            Grid grd = uGrd.Children[ix] as Grid;
-            Label lbl = grd.Children[0] as Label;
-            return lbl.Background;
+            try
+            {
+                UniformGrid uGrd = this.field;
+                Grid grd = uGrd.Children[ix] as Grid;
+                Label lbl = grd.Children[0] as Label;
+                return lbl.Background;
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                return null;
+            }
         }
 
         //Sätter bakgrunden till mörk om locked=true, annars till ljus
