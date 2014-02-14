@@ -142,9 +142,17 @@ namespace SudokuMain
                     }
                     _gridIndexNr = indexnr;
                     _lblIndex = lblIndex;
-                    if (_mainSettings.getPanel() && (cube.GetBackground(_lblIndex).ToString() != "#FFD8B087") )
+                    try
                     {
-                        openPopup(ref myNr, ref _gridIndexNr, ref _lblIndex, ref ourWindow);
+
+                        if (_mainSettings.getPanel() && (cube.GetBackground(_lblIndex).ToString() != "#FFD8B087"))
+                        {
+                            openPopup(ref myNr, ref _gridIndexNr, ref _lblIndex, ref ourWindow);
+                        }
+                    }
+                    catch (NullReferenceException ex)
+                    {
+                        //nada
                     }
                     break;
                 }
