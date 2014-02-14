@@ -339,13 +339,13 @@
                 </TransformGroup>
             </UniformGrid.RenderTransform>
             <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1" MouseRightButtonDown="grdBoard_RightButtonDown"/>
+            <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1" MouseRightButtonDown="grdBoard_RightButtonDown" Background="#FFF9D49E"/>
             <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1" MouseRightButtonDown="grdBoard_RightButtonDown"/>
+            <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1" MouseRightButtonDown="grdBoard_RightButtonDown" Background="#FFF9D49E"/>
             <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1" MouseRightButtonDown="grdBoard_RightButtonDown"/>
+            <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1" MouseRightButtonDown="grdBoard_RightButtonDown" Background="#FFF9D49E"/>
             <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1" MouseRightButtonDown="grdBoard_RightButtonDown"/>
-            <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1" MouseRightButtonDown="grdBoard_RightButtonDown"/>
-            <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1" MouseRightButtonDown="grdBoard_RightButtonDown"/>
-            <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1" MouseRightButtonDown="grdBoard_RightButtonDown"/>
-            <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1" MouseRightButtonDown="grdBoard_RightButtonDown"/>
+            <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1" MouseRightButtonDown="grdBoard_RightButtonDown" Background="#FFF9D49E"/>
             <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1" MouseRightButtonDown="grdBoard_RightButtonDown"/>
         </UniformGrid>
 
