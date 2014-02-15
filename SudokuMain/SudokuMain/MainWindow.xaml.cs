@@ -561,7 +561,7 @@ namespace SudokuMain
                     
                     
                     string btnClicked = SdkMsgBox.ShowBox("Play this level again or try next?", "Game over", mess,
-                        "Images\\WhyYouNo.png", "Message", "Retry", "Next", true, true);
+                        "Images\\sadFace.png", "Message", "Retry", "Next", true, true);
                     if (btnClicked == "left")
                     {
                         
