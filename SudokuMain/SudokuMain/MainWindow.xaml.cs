@@ -493,6 +493,11 @@ namespace SudokuMain
                         update = false;
                         break;
                     }
+                case Key.Insert:
+                    {
+                        solveSudoku();
+                        break;
+                    }
                 default:
                     {
                         value = " ";
@@ -748,6 +753,35 @@ namespace SudokuMain
             int block = (Convert.ToInt16(cube.Name.Substring(3, 1)))-1;
             yPos = 3 * (block / 3) + (ix / 3);
             xPos = 3 * (block % 3) + (ix % 3);
+        }
+
+        //Löser allt på en gång FUSK!
+        private void solveSudoku()
+        {
+            int fusk = game.GetHint();
+            while (fusk >= 0)
+            {
+                int x = fusk % 9;
+                int y = fusk / 9;
+                int block = (y / 3) * 3 + (x / 3);
+                int ruta = (y % 3) * 3 + (x % 3);
+                string value = game.levels[game.currentLevel].Solved[y, x];
+                
+                updateMatrix(block, ruta, value);
+
+                CubeWithLabels blockIndex = grdBoard.Children[block] as CubeWithLabels;
+                if (!_newGame)//Hindrar animationen från att dyka upp i nästkommande bana
+                {
+                    blockIndex.animateCell(ruta);
+                }
+                else
+                {
+                    _newGame = false;
+                    break;
+                }
+
+                fusk = game.GetHint();
+            }
         }
     }
 }
