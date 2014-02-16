@@ -48,6 +48,12 @@ namespace SudokuMain
         public void StopTime() { _dispatch.Stop(); }//Stoppar klockan
         public DispatcherTimer GetDispatcher() { return _dispatch; }//hämtar dispatchen
 
+        //Konverterar tiden till int och returnerar denna
+        public int ConvertToScore()
+        {
+            return ( (_hours * 3600) + (_minutes * 60) + _seconds );
+        }
+
         //sätter nya värden i tiden.
         public void setTime(int sec, int min, int h)
         {

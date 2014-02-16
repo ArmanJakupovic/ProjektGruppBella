@@ -460,7 +460,9 @@ namespace SudokuMain
                 case Key.P:
                 case Key.Pause:
                     {
-                        if(_time.GetDispatcher().IsEnabled)
+                        if (_gameFinished)
+                            break;
+                        else if (_time.GetDispatcher().IsEnabled)
                             btnPausePlay_Click(this.btnPause, null);
                         else
                             btnPausePlay_Click(this.btnPlay, null);
@@ -543,7 +545,7 @@ namespace SudokuMain
                 File.Delete("savedGame.sdk");//Tar bort eventuellt sparat spel
                 _gameFinished = true;//Indikerar att spelet är avslutat (kommer inte spara om man trycker X)
 
-                int score = (_time.GetHours() * 3600) + (_time.GetMinutes() * 60) + _time.GetSeconds();
+                int score = _time.ConvertToScore();
 
                 int placement = _highscores.CompareScore(score, diff, level);//Ev highscore
 
@@ -551,7 +553,7 @@ namespace SudokuMain
                 if (placement != -1 && !hasCheated)//Om highscore och ej har fuskat
                 {
                     string name = SdkMsgBox.showHighScoreBox("You made it to the highscore!", "Highscore!", "Type your name:", "Images\\goodJobFace.png", "Message");
-                    _highscores.InsertToHighscore(name.ToUpper().Substring(0, 3), score, diff, level, placement);
+                    _highscores.InsertToHighscore(name.ToUpper(), score, diff, level, placement);
                     txtHighScore.Text = _highscores.GetHighScore(diff, level);
                     mess = "Winner!";
                     winnerCheck = true;

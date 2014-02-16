@@ -12,8 +12,8 @@ namespace SudokuMain
         private List<string> _name = new List<string>();//lista med namn
         private List<int> _score = new List<int>();//lista med poäng
         public void LoadScore(string value, int points) { _name.Add(value); _score.Add(points); }//Ladda in till listorna
-        public string GetScore(int index) { return _name[index] + "\t" + _score[index].ToString(); }//Returnerar en sträng med namn och poäng
-        public string GetTime(int index) { return _name[index] + "\t     " + (DateTime.Today + new TimeSpan(0, 0, _score[index])).ToString("H:mm:ss"); }//Returnerar en sträng med namn och poäng
+        public string GetNameAndScore(int index) { return _name[index] + "\t" + _score[index]; }//Returnerar en sträng med namn och poäng
+        public string GetNameAndTime(int index) { return _name[index] + "\t" + (DateTime.Today + new TimeSpan(0, 0, _score[index])).ToString("H:mm:ss"); }//Returnerar en sträng med namn och poäng(tid)
         public void InsertScore(string name, int points, int index) { _name.Insert(index, name); _score.Insert(index, points); }//Placerar en ny person på listan
         public void RemoveLast(int index) { _name.RemoveAt(index); _score.RemoveAt(index); }//Tar bort en person från listan på indexets plats. Ämnat för sista personen
         public List<int> GetPoints() { return _score; } //Returnerar en lista med poäng
@@ -61,7 +61,7 @@ namespace SudokuMain
                     for (int i = 0; i < _numberOfNames; i++)//Lägger fem rader i listan
                     {
                         row = reader.ReadLine();
-                        string[] highScoreRow = row.Split(Convert.ToChar(9));
+                        string[] highScoreRow = row.Split(Convert.ToChar(9));//splittar vid TAB
                         newHighscore.LoadScore(highScoreRow[0], Convert.ToInt16(highScoreRow[1]));
                     }
                     _highscoreList[_diff, _lvl] = newHighscore;
@@ -92,7 +92,7 @@ namespace SudokuMain
                         if (_highscoreList[i, j] == null)
                             writer.WriteLine("-\t3600");
                         else
-                            writer.WriteLine(_highscoreList[i, j].GetScore(ix));
+                            writer.WriteLine(_highscoreList[i, j].GetNameAndScore(ix));
                     }
                     writer.WriteLine();//tom rad
                 }
@@ -108,7 +108,7 @@ namespace SudokuMain
             string strHighscore = "";
             for (int i = 0; i < _numberOfNames; i++)
             {
-                strHighscore += (i + 1).ToString() + ". " + _highscoreList[diff,lvl].GetTime(i) + "\n";//namn och tab
+                strHighscore += (i + 1).ToString() + ". " + _highscoreList[diff,lvl].GetNameAndTime(i) + "\n";//namn och tab
             }
             return strHighscore;
         }
