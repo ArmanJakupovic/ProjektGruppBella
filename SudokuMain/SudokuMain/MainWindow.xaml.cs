@@ -633,6 +633,8 @@ namespace SudokuMain
         //Hanterar stänging med hjälp av X uppe i högra hörnet
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
+      //      _thisMusic.StopMusic();
+        //    _thisMusic = null;
             if(!_gameFinished)//Om spelet är färdigspelat sparas det inte ner
                 game.SaveGame(_mainSettings, _time, hasCheated);
             MenuWindow menu = new MenuWindow();
@@ -792,7 +794,6 @@ namespace SudokuMain
             _thisMusic = new MusicHandler();
             _thisMusic.Shuffle(true);
             _thisMusic.PlayMusic();
-            _thisMusic.Loop(true);
         }
 
         //Mutar och unmutar. 

@@ -37,6 +37,14 @@ namespace SudokuMain
         }
 
         ///<summary>
+        /// Stoppar playlistan
+        ///</summary>
+        public void StopMusic()
+        {
+            _myPlayer.controls.stop();
+        }
+
+        ///<summary>
         /// Nästa låt i listan
         ///</summary>
         public void NextSong()
