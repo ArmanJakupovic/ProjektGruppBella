@@ -547,24 +547,29 @@ namespace SudokuMain
 
                 int placement = _highscores.CompareScore(score, diff, level);//Ev highscore
 
+                bool winnerCheck = false;
                 if (placement != -1 && !hasCheated)//Om highscore och ej har fuskat
                 {
                     string name = SdkMsgBox.showHighScoreBox("You made it to the highscore!", "Highscore!", "Type your name:", "Images\\goodJobFace.png", "Message");
                     _highscores.InsertToHighscore(name.ToUpper().Substring(0, 3), score, diff, level, placement);
                     txtHighScore.Text = _highscores.GetHighScore(diff, level);
                     mess = "Winner!";
+                    winnerCheck = true;
                 }
                 
                     //Visar den nya boxen. 
                     //Det går kalla på en highsScoreBox också med SdkMsgBox.showHighScoreBox.
                     //Den returnerar ett namn istället. 
-                    
-                    
-                    string btnClicked = SdkMsgBox.ShowBox("Play this level again or try next?", "Game over", mess,
+
+
+                if (winnerCheck)
+                {
+                    string btnClicked = SdkMsgBox.ShowBox("Play this level again or try next?", "You made it!", mess,
                         "Images\\goodJobFace.png", "Message", "Retry", "Next", true, true);
+                    winnerCheck = false;
                     if (btnClicked == "left")
                     {
-                        
+
                     }
                     else
                     {
@@ -578,6 +583,28 @@ namespace SudokuMain
                             _mainSettings.setDifficulty(diff);
                         }
                     }
+                }
+                else
+                {
+                    string btnClicked = SdkMsgBox.ShowBox("Play this level again or try next?", "Game over", mess,
+                       "Images\\sadFace.png", "Message", "Retry", "Next", true, true);
+                    if (btnClicked == "left")
+                    {
+
+                    }
+                    else
+                    {
+                        level++;
+                        if (level > 4)
+                        {
+                            level = 0;
+                            diff++;
+                            if (diff > 2)
+                                diff = 0;
+                            _mainSettings.setDifficulty(diff);
+                        }
+                    }
+                }
                     //Tömmer arrayen med lösningar
                     for (int y = 0; y < 9; y++)
                         for (int x = 0; x < 9; x++)
