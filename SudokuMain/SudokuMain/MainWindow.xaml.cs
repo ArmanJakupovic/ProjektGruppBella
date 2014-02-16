@@ -50,7 +50,7 @@ namespace SudokuMain
         public MainWindow(bool loadGame = false)
         {
             InitializeComponent();
-            Music();
+      //      Music(); //Bortkommenterad under visningen.
             _time = new Time(ref lblClock);//Initierar klockan
             if (!loadGame)
             {
@@ -681,7 +681,7 @@ namespace SudokuMain
             Button button = (Button)sender;
             if (button.Name == "btnPlay" || button.Name == "btnPausePlay")
             {
-                _thisMusic.PlayMusic();
+            //    _thisMusic.PlayMusic();
                 _time.StartTime();
                 btnPlay.Visibility = Visibility.Hidden;
                 btnPause.Visibility = Visibility.Visible;
@@ -693,7 +693,7 @@ namespace SudokuMain
             }
             else
             {
-                _thisMusic.PauseMusic();
+           //     _thisMusic.PauseMusic();
                 _time.StopTime();
                 btnPlay.Visibility = Visibility.Visible;
                 btnPause.Visibility = Visibility.Hidden;
@@ -806,13 +806,13 @@ namespace SudokuMain
             {
                 btnNotMuted.Visibility = System.Windows.Visibility.Collapsed;
                 btnMuted.Visibility = System.Windows.Visibility.Visible;
-                _thisMusic.Mute(true);
+               // _thisMusic.Mute(true);
             }
             else
             {
                 btnNotMuted.Visibility = System.Windows.Visibility.Visible;
                 btnMuted.Visibility = System.Windows.Visibility.Collapsed;
-                _thisMusic.Mute(false);
+               // _thisMusic.Mute(false);
             }
         }
     }
