@@ -28,18 +28,52 @@ namespace SudokuMain
             createPlaylistFromFiles();
         }
 
-        //Startar spelaren.
+        ///<summary>
+        /// Spelar playlistan
+        ///</summary>
         public void PlayMusic()
         {
-            _myPlayer.settings.setMode("shuffle", true);
             _myPlayer.controls.play();
         }
 
+        ///<summary>
+        /// Nästa låt i listan
+        ///</summary>
         public void NextSong()
         {
             _myPlayer.controls.next();
         }
 
+        ///<summary>
+        /// Som det..inte låter, eller låter
+        /// true eller false
+        ///</summary>
+        public void Mute(bool muteCheck)
+        {
+            _myPlayer.settings.mute = muteCheck;
+        }
+
+        ///<summary>
+        /// Aktiverar shuffle mode, true eller false
+        ///</summary>
+        public void Shuffle(bool shuffle)
+        {
+            _myPlayer.settings.setMode("shuffle", shuffle);
+            NextSong();
+        }
+
+        ///<summary>
+        /// Loopar igenom den aktiva listan
+        ///</summary>
+        public void Loop(bool loop)
+        {
+            _myPlayer.settings.setMode("loop", loop);
+            NextSong();
+        }
+
+        ///<summary>
+        /// Hämtar antal filer i mappen
+        ///</summary>
         private int getAmmountOfFiles()
         {
             int nr = 0;
@@ -48,6 +82,11 @@ namespace SudokuMain
             return nr;
         }
 
+        ///<summary>
+        /// Skapar en playlista utifrån antal filer i mappen
+        /// Gör det möjligt att i efterhand lägga till fler låtar.
+        /// Allt bör sköta sig självt.
+        ///</summary>
         private void createPlaylistFromFiles()
         {
             IWMPMedia myMedia;

@@ -127,20 +127,50 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\loggo.png" />
+    <Resource Include="Images\loggo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\setting-icon.png" />
-    <Resource Include="Images\setting-icon2.png" />
-    <Resource Include="Images\cerealGuy.png" />
-    <Resource Include="Images\sadFace.png" />
-    <Resource Include="Images\sPanda.png" />
-    <Resource Include="Images\WhyYouNo.png" />
-    <Resource Include="Images\goodJobFace.png" />
-    <Resource Include="Images\LearningFace.png" />
-    <Resource Include="Images\icon.png" />
-    <Resource Include="Images\btnPause-icon3.png" />
-    <Resource Include="Images\btnPlay-icon2.png" />
+    <Resource Include="Images\setting-icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\setting-icon2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\cerealGuy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\sadFace.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\sPanda.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\WhyYouNo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\goodJobFace.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\LearningFace.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\btnPause-icon3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\btnPlay-icon2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\btnMute-icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\btnSound-icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Music\1.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

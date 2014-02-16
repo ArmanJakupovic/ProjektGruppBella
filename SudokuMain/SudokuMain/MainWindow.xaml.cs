@@ -50,8 +50,7 @@ namespace SudokuMain
         public MainWindow(bool loadGame = false)
         {
             InitializeComponent();
-       //     _thisMusic = new MusicHandler();
-       //     _thisMusic.PlayMusic();
+            Music();
             _time = new Time(ref lblClock);//Initierar klockan
             if (!loadGame)
             {
@@ -784,6 +783,33 @@ namespace SudokuMain
                 }
 
                 fusk = game.GetHint();
+            }
+        }
+
+        //Spelar musik
+        private void Music()
+        {
+            _thisMusic = new MusicHandler();
+            _thisMusic.Shuffle(true);
+            _thisMusic.PlayMusic();
+            _thisMusic.Loop(true);
+        }
+
+        //Mutar och unmutar. 
+        private void btnMuteClick(object sender, RoutedEventArgs e)
+        {
+            Button mute = (Button)sender;
+            if (mute.Name == "btnNotMuted")
+            {
+                btnNotMuted.Visibility = System.Windows.Visibility.Collapsed;
+                btnMuted.Visibility = System.Windows.Visibility.Visible;
+                _thisMusic.Mute(true);
+            }
+            else
+            {
+                btnNotMuted.Visibility = System.Windows.Visibility.Visible;
+                btnMuted.Visibility = System.Windows.Visibility.Collapsed;
+                _thisMusic.Mute(false);
             }
         }
     }

@@ -504,6 +504,33 @@
                         </LinearGradientBrush>
                     </Button.Foreground> ?
                 </Button>
+                <Button Name="btnMuted" Grid.Row="1" BorderThickness="0" Grid.Column="0" Style="{StaticResource ImageButton}" Click="btnMuteClick" Visibility="Collapsed"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Images/btnMute-icon.png" Stretch="Uniform">
+                            <ImageBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.8" ScaleY="0.8"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ImageBrush.RelativeTransform>
+                        </ImageBrush>
+                    </Button.Background></Button>
+                <Button Name="btnNotMuted" Grid.Row="1" Grid.Column="0" BorderThickness="0" Style="{StaticResource ImageButton}" Click="btnMuteClick" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Images/btnSound-icon.png" Stretch="Uniform">
+                            <ImageBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.8" ScaleY="0.8"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ImageBrush.RelativeTransform>
+                        </ImageBrush>
+                    </Button.Background>
+                </Button>
             </Grid>
 
             <Button Name="btnHint" Grid.Row="1" Grid.Column="0" Content="Hint" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Height="30" Click="Button_Hint_Click" Style="{StaticResource InformButton}"></Button>
