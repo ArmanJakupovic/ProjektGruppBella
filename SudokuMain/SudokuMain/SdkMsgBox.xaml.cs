@@ -191,7 +191,10 @@ namespace SudokuMain
         {
             if (_myMsgBox.hScoreCheck)
             {
-                name = _myMsgBox.stackPanTxtBoxBox.Text;
+                if (_myMsgBox.stackPanTxtBoxBox.Text == "")
+                    name = "DRP";
+                else
+                    name = _myMsgBox.stackPanTxtBoxBox.Text;
                 _myMsgBox.hScoreCheck = false;
             }
             else
