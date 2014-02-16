@@ -43,12 +43,15 @@ namespace SudokuMain
         private bool _rightClickMemory;
         private bool _leftClickMemory;
         private bool hasCheated = false; //Visar om du har använt hint eller check
+        private MusicHandler _thisMusic;
         #endregion
 
 
         public MainWindow(bool loadGame = false)
         {
             InitializeComponent();
+       //     _thisMusic = new MusicHandler();
+       //     _thisMusic.PlayMusic();
             _time = new Time(ref lblClock);//Initierar klockan
             if (!loadGame)
             {
