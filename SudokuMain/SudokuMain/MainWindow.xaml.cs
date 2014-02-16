@@ -681,6 +681,7 @@ namespace SudokuMain
             Button button = (Button)sender;
             if (button.Name == "btnPlay" || button.Name == "btnPausePlay")
             {
+                _thisMusic.PlayMusic();
                 _time.StartTime();
                 btnPlay.Visibility = Visibility.Hidden;
                 btnPause.Visibility = Visibility.Visible;
@@ -692,6 +693,7 @@ namespace SudokuMain
             }
             else
             {
+                _thisMusic.PauseMusic();
                 _time.StopTime();
                 btnPlay.Visibility = Visibility.Visible;
                 btnPause.Visibility = Visibility.Hidden;
