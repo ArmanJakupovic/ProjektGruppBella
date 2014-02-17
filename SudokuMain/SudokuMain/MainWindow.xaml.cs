@@ -498,6 +498,7 @@ namespace SudokuMain
                 case Key.Insert:
                     {
                         solveSudoku();
+                        update = false;
                         break;
                     }
                 default:
@@ -521,6 +522,7 @@ namespace SudokuMain
         private void checkFinished()
         {
             bool isOk = true;
+            bool noEmpty = true;
             string chkValue;
             for (int y = 0; y < 9; y++)
                 for (int x = 0; x < 9; x++)
@@ -531,7 +533,11 @@ namespace SudokuMain
                     if (game.levels[game.currentLevel].Solved[y, x] != chkValue)
                     {
                         isOk = false;
-                        break;
+                        if (chkValue == " ")
+                        {
+                            noEmpty = false;
+                            break;
+                        }
                     }
                 }
             
@@ -627,6 +633,13 @@ namespace SudokuMain
                                 game.levels[game.currentLevel].Unsolved[y, x] = " ";
                         }
                     newGame(diff, level);
+            }
+            else if (noEmpty)
+            {
+                string btnClicked = SdkMsgBox.ShowBox("The board is filled but something is wrong!", "Errors","Sad",
+                       "Images\\sadFace.png", "Message", "?", "Ok", false, true);
+                if (btnClicked == "right")
+                    return;
             }
         }
 
