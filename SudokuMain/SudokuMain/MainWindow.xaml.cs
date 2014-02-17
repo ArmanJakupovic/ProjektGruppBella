@@ -79,7 +79,7 @@ namespace SudokuMain
         //Fyller spelplanen med tecken från currentLevel.Unsolved
         private void initBoard()
         {
-            currentLvl.Content = "Level: " + (game.levels[game.currentLevel].level+1);
+            currentLvl.Content = (game.levels[game.currentLevel].level+1);
             for (int y = 0; y < 9; y++)
                 for (int x = 0; x < 9; x++)
                     updateBoard(y, x, game.levels[game.currentLevel].Unsolved[y, x]);
@@ -660,13 +660,13 @@ namespace SudokuMain
             switch (x)
             {
                 case 0:
-                    currentDiff.Content = "Difficulty: Beginner";
+                    currentDiff.Content = "Beginner";
                     break;
                 case 1:
-                    currentDiff.Content = "Difficulty: Experienced";
+                    currentDiff.Content = "Experienced";
                     break;
                 case 2:
-                    currentDiff.Content = "Difficulty: Veteran";
+                    currentDiff.Content = "Veteran";
                     break;
                 default:
                     currentDiff.Content = "ERROR";
