@@ -42,6 +42,7 @@ namespace SudokuMain
         public void StopMusic()
         {
             _myPlayer.controls.stop();
+            _myPlayer.close();
         }
 
         ///<summary>
