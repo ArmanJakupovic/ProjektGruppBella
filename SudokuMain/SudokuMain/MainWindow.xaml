@@ -408,7 +408,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="150*"/>
             </Grid.ColumnDefinitions>
             <CheckBox x:Name="showTimerMain" Grid.Column="0" Grid.Row="1" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Show timer" Margin="0,0,1,0"/>
             <CheckBox x:Name="enableHighscoreMain" Grid.Column="0" Grid.Row="2" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Enable highscore"/>
@@ -440,7 +440,7 @@
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="150*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Row="0" Grid.Column="0" Background="#FF761212">
                 <Grid.RowDefinitions>
