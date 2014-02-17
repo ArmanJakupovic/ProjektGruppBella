@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:SudokuMain"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="SudokuMain.MainWindow"
-        Title="Sudoku - GruppBella" Height="500 " Width="600" MinHeight="450" MinWidth="600" WindowStartupLocation="CenterScreen" Icon="Images/icon.png">
+        Title="Sudoku - GruppBella" Height="500" Width="650" MinHeight="500" MinWidth="650" WindowStartupLocation="CenterScreen" Icon="Images/icon.png">
     <Window.Resources>
         <Storyboard x:Key="showSettings">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grid1">
@@ -68,7 +68,6 @@
         </Storyboard>
 
         <!--Ny stil för knapparna.-->
-
         <Style x:Key="MyFocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -83,7 +82,7 @@
         </Style>
 
         <Style x:Key="ShadowStyle">
-            <Setter Property="Control.Foreground" Value="LightGray" />
+            <Setter Property="Control.Foreground" Value="Moccasin" />
         </Style>
 
         <Style x:Key="InformButton" TargetType="Button">
@@ -279,7 +278,7 @@
         	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)" Storyboard.TargetName="grdBoard">
         		<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
-        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="16"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="40"/>
         	</DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="hidePause">
@@ -308,7 +307,7 @@
         		<DiscreteBooleanKeyFrame KeyTime="0:0:0.1" Value="True"/>
         	</BooleanAnimationUsingKeyFrames>
         	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(BlurEffect.Radius)" Storyboard.TargetName="grdBoard">
-        		<EasingDoubleKeyFrame KeyTime="0" Value="16"/>
+        		<EasingDoubleKeyFrame KeyTime="0" Value="40"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
         		<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
         	</DoubleAnimationUsingKeyFrames>
@@ -322,10 +321,10 @@
             <RowDefinition Height="500*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="450*"/>
+            <ColumnDefinition Width="500*"/>
             <ColumnDefinition Width="150*"/>
         </Grid.ColumnDefinitions>
-        
+        <Viewbox Stretch="Fill">
         <UniformGrid Grid.Row="0" Grid.Column="0" Columns="3" Rows="3" Background="Moccasin" x:Name="grdBoard" RenderTransformOrigin="0.5,0.5">
         	<UniformGrid.Effect>
         		<BlurEffect Radius="0"/>
@@ -348,7 +347,7 @@
             <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1" MouseRightButtonDown="grdBoard_RightButtonDown" x:Name="CWL8" Background="#FFF9D49E"/>
             <local:CubeWithLabels MouseLeftButtonDown="grdBoard_MouseLeftButtonDown_1" KeyDown="CubeWithLabels_KeyDown_1" MouseRightButtonDown="grdBoard_RightButtonDown" x:Name="CWL9"/>
         </UniformGrid>
-
+        </Viewbox>
         <!--Pause-->
             <Grid x:Name="pauseGrid" Grid.Row="0" Grid.Column="0" Background="Black" Opacity="0.8" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed">
             	<Grid.RenderTransform>
@@ -378,7 +377,6 @@
         <!--Slut på pause-->
 
         <!--Den grid som gömmer sig bakom allt-->
-
         <Grid x:Name="grid" Grid.Row="0" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
             <Grid.RenderTransform>
                 <TransformGroup>
@@ -416,7 +414,6 @@
             <Button x:Name="BtnSettings_Cancel" Grid.Column="0" Grid.Row="5" BorderBrush="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="btnSettings_Cancel_Click" Content="Cancel" Style="{StaticResource InformButton}"/>
             <Button x:Name="BtnSettings_Apply" Grid.Column="0" Grid.Row="4" BorderBrush="Black" VerticalAlignment="Stretch" Click="btnSettings_Apply_Click" Content="Apply" Style="{StaticResource InformButton}"/>
         </Grid>
-
         <!--Slut på gömmande gridden-->
 
         <Grid x:Name="grid1" Grid.Row="0" Grid.Column="1" Background="#FFD8B087" RenderTransformOrigin="0.5,0.5">
@@ -432,12 +429,12 @@
                 </TransformGroup>
             </Grid.RenderTransform>
             <Grid.RowDefinitions>
-                <RowDefinition Name="gridRedArea" Height="80"/>
+                <RowDefinition Name="gridRedArea" Height="80*"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="52"/>
                 <RowDefinition Height="160*"/>
-                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="140*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150*"/>
@@ -536,24 +533,34 @@
             <Button Name="btnHint" Grid.Row="1" Grid.Column="0" Content="Hint" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Height="30" Click="Button_Hint_Click" Style="{StaticResource InformButton}"></Button>
             <Button Name="btnCheck" Grid.Row="2" Grid.Column="0" Content="Check"  FontWeight="SemiBold" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" BorderBrush="Black" Click="Button_Check_Click" Style="{StaticResource InformButton}"></Button>
             <StackPanel Grid.Row="3" Grid.Column="0">
-                <Label Name="currentLvl" FontFamily="Verdana">Level: </Label>
-                <Label Name="currentDiff" FontFamily="Verdana">Difficulty: </Label>
+                <StackPanel Orientation="Horizontal">
+                    <Label FontFamily="Verdana" FontWeight="Bold">Level: </Label>
+                    <Label Name="currentLvl" FontFamily="Verdana" Margin="-8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" HorizontalContentAlignment="Left">1</Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label FontFamily="Verdana" FontWeight="Bold">Difficulty: </Label>
+                    <Label Name="currentDiff" FontFamily="Verdana" Margin="-8,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" HorizontalContentAlignment="Left">2</Label>
+                </StackPanel>
             </StackPanel>
-            <GroupBox x:Name="grpHighScore" Grid.Row="4" Grid.Column="0" Header="Highscore" FontSize="14"  Margin="5,-3,5,0" BorderBrush="#FF761212" IsEnabled="False" FontFamily="Verdana">
+            <GroupBox x:Name="grpHighScore" Grid.Row="4" Grid.Column="0" Header="Highscore"  Margin="5,-3,5,0" BorderBrush="#FF761212" IsEnabled="False" FontFamily="Verdana">
+                <Viewbox Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left">
                 <TextBlock x:Name="txtHighScore" FontSize="12"/>
+                </Viewbox>
             </GroupBox>
-            <GroupBox Name="keyPad_static" Header="Keypad" Grid.Row="5" Grid.Column="0" Margin="5,-3,5,5" BorderBrush="#FF761212" Visibility="Visible" FontFamily="Verdana">
+            <GroupBox Name="keyPad_static" Header="Keypad" Grid.Row="5" Grid.Column="0" Margin="5,0,5,5" BorderBrush="#FF761212" Visibility="Visible" FontFamily="Verdana">
+                <Viewbox Stretch="Fill" >
                 <UniformGrid Name="mainWindowKeypad" Rows="3" Columns="3">
-                    <Button Name="one" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">1</Button>
-                    <Button Name="two" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">2</Button>
-                    <Button Name="three" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">3</Button>
-                    <Button Name="four" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">4</Button>
-                    <Button Name="five" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">5</Button>
-                    <Button Name="six" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">6</Button>
-                    <Button Name="seven" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">7</Button>
-                    <Button Name="eight" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">8</Button>
-                    <Button Name="nine" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">9</Button>
+                    <Button Name="one" Margin="2" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">1</Button>
+                        <Button Name="two"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">2</Button>
+                        <Button Name="three"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">3</Button>
+                        <Button Name="four"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">4</Button>
+                        <Button Name="five"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">5</Button>
+                        <Button Name="six"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">6</Button>
+                        <Button Name="seven"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">7</Button>
+                        <Button Name="eight"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">8</Button>
+                        <Button Name="nine"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">9</Button>
                 </UniformGrid>
+                </Viewbox>
             </GroupBox>
         </Grid>
     </Grid>

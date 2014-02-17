@@ -129,5 +129,17 @@ namespace SudokuMain
             _myBoard.Begin();
             //this.Hide();
         }
+
+        private void btnCloudHighscoreClicked(object sender, RoutedEventArgs e)
+        {
+            Button myButton = (Button)sender;
+
+            if (myButton.Content.ToString() == "Cloud highscore OFF")
+            {
+                myButton.Content = "Cloud highscore ON";
+            }
+            else
+                myButton.Content = "Cloud highscore OFF";
+        }
     }
 }

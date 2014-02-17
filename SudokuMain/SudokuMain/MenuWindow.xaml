@@ -304,20 +304,21 @@
                 </TransformGroup>
             </Grid.RenderTransform>
             <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
+                <RowDefinition Height="30*" />
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30*" />
                 <ColumnDefinition Width="30*" />
                 <ColumnDefinition Width="30*" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnContinue" Grid.Column="1" Grid.Row="0" BorderBrush="Black" Click="btnContinue_Click" Height="30" Content="Continue" Style="{StaticResource InformButton}"></Button>
-            <Button x:Name="btnNewGame" Grid.Column="1" Grid.Row="1" BorderBrush="Black" Click="btnNewGame_Click" Height="30" Content="New Game" Style="{StaticResource InformButton}"></Button>
-            <Button x:Name="btnOptions" Grid.Column="1" Grid.Row="2" BorderBrush="Black" Click="btnOptions_Click" Height="30" Content="Options" Style="{StaticResource InformButton}"></Button>
-            <Button x:Name="btnExit" Grid.Column="1" Grid.Row="3" BorderBrush="Black" Click="btnExit_Click" Height="30" Content="Exit" Style="{StaticResource InformButton}"></Button>
+            <Button x:Name="btnContinue" Grid.Column="1" Grid.Row="0" BorderBrush="Black" Click="btnContinue_Click" Margin="2"  Content="Continue" Style="{StaticResource InformButton}"></Button>
+            <Button x:Name="btnNewGame" Grid.Column="1" Grid.Row="1" BorderBrush="Black" Click="btnNewGame_Click" Margin="2" Content="New Game" Style="{StaticResource InformButton}"></Button>
+            <Button x:Name="btnOptions" Grid.Column="1" Grid.Row="2" BorderBrush="Black" Click="btnOptions_Click" Margin="2" Content="Options" Style="{StaticResource InformButton}"></Button>
+            <Button x:Name="btnExit" Grid.Column="1" Grid.Row="3" BorderBrush="Black" Click="btnExit_Click" Margin="2" Content="Exit" Style="{StaticResource InformButton}"></Button>
+            <Button Name="multi" Grid.Column="0" Margin="5,4,5,4" Click="btnCloudHighscoreClicked" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="3" Style="{StaticResource InformButton}">Cloud highscore OFF</Button>
         </Grid>
 
         <Grid x:Name="gridOptions" Grid.Column="1" Grid.Row="1" Margin="5" RenderTransformOrigin="0.5,0.5">
@@ -330,10 +331,10 @@
                 </TransformGroup>
             </Grid.RenderTransform>
             <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
+                <RowDefinition Height="30*" />
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30*" />
@@ -342,12 +343,12 @@
                 <ColumnDefinition Width="30*" />
             </Grid.ColumnDefinitions>
 
-            <CheckBox x:Name="showTimer"       Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Content="Show timer"       Grid.ColumnSpan="2" Width="120"/>
+            <CheckBox x:Name="showTimer" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Content="Show timer"       Grid.ColumnSpan="2" Width="120"/>
             <CheckBox x:Name="enableHighscore" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Content="Enable highscore" Grid.ColumnSpan="2" Width="120"/>
             <CheckBox x:Name="enablePanel"     Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Content="Popup input"      Grid.ColumnSpan="2" Width="120"/>
 
-            <Button x:Name="btnCancel" Grid.Column="1" Grid.Row="3" BorderBrush="Black" Click="btnCancel_Click" Height="30" Content="Cancel" Margin="0.5,0,0.5,0" Style="{StaticResource InformButton}"></Button>
-            <Button x:Name="btnApply" Grid.Column="2" Grid.Row="3" BorderBrush="Black" Click="btnApply_Click" Height="30" Content="Apply" Margin="0.5,0,0.5,0" Style="{StaticResource InformButton}"></Button>
+            <Button x:Name="btnCancel" Grid.Column="1" Grid.Row="3" BorderBrush="Black" Click="btnCancel_Click" Content="Cancel" Margin="1,2,1,2" Style="{StaticResource InformButton}"></Button>
+            <Button x:Name="btnApply" Grid.Column="2" Grid.Row="3" BorderBrush="Black" Click="btnApply_Click" Content="Apply" Margin="1,2,1,2" Style="{StaticResource InformButton}"></Button>
         </Grid>
 
         <Grid Name="gridDifficulty" Grid.Row="1" Grid.Column="1" Margin="5" RenderTransformOrigin="0.5,0.5">
@@ -360,20 +361,20 @@
                 </TransformGroup>
             </Grid.RenderTransform>
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="30*"></RowDefinition>
+                <RowDefinition Height="30*"></RowDefinition>
+                <RowDefinition Height="30*"></RowDefinition>
+                <RowDefinition Height="30*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30*"></ColumnDefinition>
                 <ColumnDefinition Width="30*"></ColumnDefinition>
                 <ColumnDefinition Width="30*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="0" Grid.Column="1" Height="30" Style="{StaticResource InformButton}" Click="buttonDiff_Click">Beginner</Button>
-            <Button Grid.Row="1" Grid.Column="1" Height="30" Style="{StaticResource InformButton}" Click="buttonDiff_Click">Experienced</Button>
-            <Button Grid.Row="2" Grid.Column="1" Height="30" Style="{StaticResource InformButton}" Click="buttonDiff_Click">Veteran</Button>
-            <Button Grid.Row="3" Grid.Column="1" Height="30" Style="{StaticResource InformButton}" Click="buttonBack_Click">Back</Button>
+            <Button Grid.Row="0" Grid.Column="1" Margin="2" Style="{StaticResource InformButton}" Click="buttonDiff_Click">Beginner</Button>
+            <Button Grid.Row="1" Grid.Column="1" Margin="2" Style="{StaticResource InformButton}" Click="buttonDiff_Click">Experienced</Button>
+            <Button Grid.Row="2" Grid.Column="1" Margin="2" Style="{StaticResource InformButton}" Click="buttonDiff_Click">Veteran</Button>
+            <Button Grid.Row="3" Grid.Column="1" Margin="2" Style="{StaticResource InformButton}" Click="buttonBack_Click">Back</Button>
         </Grid>
 
     </Grid>

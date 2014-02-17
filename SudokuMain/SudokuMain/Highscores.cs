@@ -119,7 +119,14 @@ namespace SudokuMain
             string strHighscore = "";
             for (int i = 0; i < _numberOfNames; i++)
             {
-                strHighscore += (i + 1).ToString() + ". " + _highscoreList[diff,lvl].GetNameAndTime(i) + "\n";//namn och tab
+                if (i == _numberOfNames - 1)
+                {
+                    strHighscore += (i + 1).ToString() + ". " + _highscoreList[diff, lvl].GetNameAndTime(i);//namn och tab
+                }
+                else
+                {
+                    strHighscore += (i + 1).ToString() + ". " + _highscoreList[diff, lvl].GetNameAndTime(i) + "\n";//namn och tab
+                }
             }
             return strHighscore;
         }

@@ -57,12 +57,12 @@ namespace SudokuMain
 
             if (active)
             {
-                rectActive.StrokeThickness = 3;
+                rectActive.StrokeThickness = 5;
                 rectActive.Stroke = new SolidColorBrush(Color.FromRgb(118, 18, 18)); 
             }
             else
             {
-                rectActive.StrokeThickness = 0.6;
+                rectActive.StrokeThickness = 1.6;
                 rectActive.Stroke = Brushes.Black;
             }
         }
