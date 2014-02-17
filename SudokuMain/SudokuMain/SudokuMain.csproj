@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.7.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\grupplo\RagnarLabs\RagnarLabs\bin\Debug\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -58,10 +62,12 @@
       <DependentUpon>Keypad.xaml</DependentUpon>
     </Compile>
     <Compile Include="MusicHandler.cs" />
+    <Compile Include="MySQL_connection.cs" />
     <Compile Include="SdkMsgBox.xaml.cs">
       <DependentUpon>SdkMsgBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="SingleHighscore.cs" />
     <Compile Include="SudokuLevels.cs" />
     <Compile Include="Time.cs" />
     <Page Include="CubeWithLabels.xaml">

@@ -52,7 +52,7 @@ namespace SudokuMain
         //verka på spelet man återupptar, ändringar får göras under spelets gång.
         private void btnContinue_Click(Object sender, RoutedEventArgs args)
         {
-            MainWindow game = new MainWindow(true);
+            MainWindow game = new MainWindow(false,true);
             game.Show();
             this.Close();
         }

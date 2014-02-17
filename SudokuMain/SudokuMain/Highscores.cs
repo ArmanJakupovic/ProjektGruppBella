@@ -7,37 +7,48 @@ using System.IO;
 
 namespace SudokuMain
 {
-    class SingleHighscore
-    {
-        private List<string> _name = new List<string>();//lista med namn
-        private List<int> _score = new List<int>();//lista med poäng
-        public void LoadScore(string value, int points) { _name.Add(value); _score.Add(points); }//Ladda in till listorna
-        public string GetNameAndScore(int index) { return _name[index] + "\t" + _score[index]; }//Returnerar en sträng med namn och poäng
-        public string GetNameAndTime(int index) { return _name[index] + "\t" + (DateTime.Today + new TimeSpan(0, 0, _score[index])).ToString("H:mm:ss"); }//Returnerar en sträng med namn och poäng(tid)
-        public void InsertScore(string name, int points, int index) { _name.Insert(index, name); _score.Insert(index, points); }//Placerar en ny person på listan
-        public void RemoveLast(int index) { _name.RemoveAt(index); _score.RemoveAt(index); }//Tar bort en person från listan på indexets plats. Ämnat för sista personen
-        public List<int> GetPoints() { return _score; } //Returnerar en lista med poäng
-    }
-
     class Highscores
     {
         private SingleHighscore[,] _highscoreList;//Array med alla highscores för varje bana
         private int _diff, _lvl;//Indexerar vilken lista som ska hämtas
         private int _numberOfLvls, _numberOfNames;//antal banor per svårighetsgrad. antal namn per highscore
+        MySQL_connection _DBConnection = new MySQL_connection();
 
         //Konstruktor
-        public Highscores()
+        public Highscores(bool multiplayer=false, int diff=0, int lvl=0)
         {
             _numberOfLvls = 5;
             _numberOfNames = 5;
             _highscoreList = new SingleHighscore[3,_numberOfLvls];
-            _diff = 0;
-            _lvl = 0;
-            loadHighscores();
+            _diff = diff;
+            _lvl = lvl;
+            if (!multiplayer)
+                loadHighscoresTxt();
+            else
+            {
+                loadHighscoreDB();
+            }
+        }
+
+        //Laddar highscore från databasen
+        private void loadHighscoreDB()
+        { 
+            _highscoreList[_diff,_lvl] = _DBConnection.GetHighscore(_diff,_lvl);
+            if (_highscoreList[_diff, _lvl] == null)//Om man inte lyckats ladda från databasen.
+                loadHighscoresTxt();
+        }
+
+        //Spara highscore till databasen
+        private bool saveHighscoreDB()
+        {
+            if (!_DBConnection.InsertToDatabase(_highscoreList[_diff, _lvl], _diff, _lvl))
+                return false;
+            else
+                return true;
         }
 
         //Hämtar alla highscores som finns ifrån textfil
-        private void loadHighscores()
+        private void loadHighscoresTxt()
         {
             string row;
 
@@ -72,13 +83,13 @@ namespace SudokuMain
             }
             else
             {
-                saveHighscores();
-                loadHighscores();
+                saveHighscoresTxt();
+                loadHighscoresTxt();
             }
         }
 
         //Skriver alla highscores till textfil
-        private void saveHighscores()
+        private void saveHighscoresTxt()
         {
             StreamWriter writer = new StreamWriter(File.Create("highscore.sdk"));
 
@@ -129,11 +140,20 @@ namespace SudokuMain
         } 
  
         //Placerar personen i listan och petar bort den sista personen
-        public void InsertToHighscore(string name, int score, int diff, int lvl, int index)
+        public void InsertToHighscoreTxt(string name, int score, int diff, int lvl, int index)
         {
             _highscoreList[diff, lvl].InsertScore(name, score, index);//lägger till 
             _highscoreList[diff, lvl].RemoveLast(_numberOfNames);//petar bort sämsta i listan
-            saveHighscores();
+            saveHighscoresTxt();
+        }
+
+        //Placerar personen i listan och petar bort den sista personen
+        public void InsertToHighscoreDB(string name, int score, int diff, int lvl, int index)
+        {
+            _highscoreList[diff, lvl].InsertScore(name, score, index);//lägger till 
+            _highscoreList[diff, lvl].RemoveLast(_numberOfNames);//petar bort sämsta i listan
+            saveHighscoreDB();
+                //TODO val om skriva till lokal fil.
         }
     }
 }

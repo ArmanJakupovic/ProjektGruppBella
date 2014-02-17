@@ -24,8 +24,9 @@ namespace SudokuMain
     public partial class MainWindow : Window
     {
         #region constans
+        MySQL_connection DBConnection = new MySQL_connection();
         SudokuLevels game = new SudokuLevels();//Spelbräda
-        Highscores _highscores = new Highscores();//Alla highscores
+        Highscores _highscores;//Alla highscores
         Settings _mainSettings = new Settings();//Inställningar för spelet
         Time _time; //Tid
         MainWindow ourWindow;
@@ -40,6 +41,7 @@ namespace SudokuMain
         private Storyboard _myBoard;
         private bool _gameFinished = false;
         private bool _newGame = false;
+        private bool _multiplayer;
         private bool _rightClickMemory;
         private bool _leftClickMemory;
         private bool hasCheated = false; //Visar om du har använt hint eller check
@@ -47,9 +49,12 @@ namespace SudokuMain
         #endregion
 
 
-        public MainWindow(bool loadGame = false)
+        public MainWindow(bool loadGame = false, bool multiplayer=false)
         {
             InitializeComponent();
+            _multiplayer = multiplayer;//Indikerar om man spelar mot DB eller inte.
+           // DBConnection.DeleteTable(); //Används för att tömma DB
+           // DBConnection.FillTable(3, 5, 5);//Används för att fylla DB
             Music(); //Bortkommenterad under visningen.
             _time = new Time(ref lblClock);//Initierar klockan
             if (!loadGame)
@@ -62,6 +67,7 @@ namespace SudokuMain
                 game.LoadGame(ref _time, ref hasCheated);//Laddar tidagare spel från fil
             }
             _mainSettings.loadSettings();//läser in inställningar från fil
+            _highscores = new Highscores(_multiplayer, game.levels[game.currentLevel].difficulty, game.levels[game.currentLevel].level);//Skapar listan med highscores
             gameSettings();//tilldelar inställningarna till spelet
             EventManager.RegisterClassHandler(typeof(Window),
             Keyboard.KeyUpEvent, new KeyEventHandler(CubeWithLabels_KeyDown_1), true);
@@ -560,7 +566,10 @@ namespace SudokuMain
                 if (placement != -1 && !hasCheated)//Om highscore och ej har fuskat
                 {
                     string name = SdkMsgBox.showHighScoreBox("You made it to the highscore!", "Highscore!", "Type your name:", "Images\\goodJobFace.png", "Message");
-                    _highscores.InsertToHighscore(name.ToUpper(), score, diff, level, placement);
+                    if (!_multiplayer)//Om man inte spelar mot DB
+                        _highscores.InsertToHighscoreTxt(name.ToUpper(), score, diff, level, placement);
+                    else
+                        _highscores.InsertToHighscoreDB(name.ToUpper(), score, diff, level, placement);
                     txtHighScore.Text = _highscores.GetHighScore(diff, level);
                     mess = "Winner!";
                     winnerCheck = true;
@@ -711,6 +720,8 @@ namespace SudokuMain
                 game.ReadFromFile();
             game.SetLevel(diff, level);
             initBoard();//Fyller spelbrädet
+            if (_multiplayer)//Om man spelar mot online highscore
+                _highscores = new Highscores(true, diff, level);
             txtHighScore.Text = _highscores.GetHighScore(game.levels[game.currentLevel].difficulty, game.levels[game.currentLevel].level);//fyller highscore för specifik bana
             ourWindow = this;
             initInfoLabel();//Skriver ut vilken svårighetsgrad och bana som spelas
