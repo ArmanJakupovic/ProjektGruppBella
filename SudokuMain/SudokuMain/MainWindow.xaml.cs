@@ -589,12 +589,23 @@ namespace SudokuMain
                 {
                     string name = SdkMsgBox.showHighScoreBox("You made it to the highscore!", "Highscore!", "Type your name:", "Images\\goodJobFace.png", "Message");
                     if (!_mainSettings.getOnline())//Om man inte spelar mot DB
+                    {
                         _highscores.InsertToHighscoreTxt(name.ToUpper(), score, diff, level, placement);
+                        winnerCheck = true;
+                    }
                     else
-                        _highscores.InsertToHighscoreDB(name.ToUpper(), score, diff, level, placement);
+                    {
+                        if (_highscores.InsertToHighscoreDB(name.ToUpper(), score, diff, level, placement))//Om man lyckas skriva till DB eller platsar i lokal highscore
+                        {
+                            winnerCheck = true;
+                            mess = "Winner!";
+                        }
+                        else//Man lyckas inte skriva till DB eller platsar i lokal highscore.
+                        {
+                            winnerCheck = false;
+                        }
+                    }
                     txtHighScore.Text = _highscores.GetHighScore(diff, level);
-                    mess = "Winner!";
-                    winnerCheck = true;
                 }
                 
                     //Visar den nya boxen. 

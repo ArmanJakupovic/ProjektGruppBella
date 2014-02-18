@@ -37,18 +37,19 @@ namespace SudokuMain
             if (_highscoreList[_diff, _lvl] == null)//Om man inte lyckats ladda från databasen.
             {
                 loadHighscoresTxt();
-                SdkMsgBox.ShowBox("Something went wrong with the connection\n Local highscore activated.");
+                SdkMsgBox.ShowBox("Something went wrong with the connection.\n" + "Local highscore activated.",true);
             }
         }
 
         //Spara highscore till databasen
-        private void saveHighscoreDB()
+        private bool saveHighscoreDB()
         {
             if (!_DBConnection.InsertToDatabase(_highscoreList[_diff, _lvl], _diff, _lvl))
             {
-                if(SdkMsgBox.ShowBox("Saving to cloud highscore failed.\nWould you like to save to your local highscore?", "Failure", "Y u no save?!?","Images\\WhyYouNo.png") == "left")                
-                    saveHighscoresTxt();                
+                return false;
             }
+            else
+                return true;
         }
 
         //Hämtar alla highscores som finns ifrån textfil
@@ -159,12 +160,27 @@ namespace SudokuMain
         }
 
         //Placerar personen i listan och petar bort den sista personen
-        public void InsertToHighscoreDB(string name, int score, int diff, int lvl, int index)
+        public bool InsertToHighscoreDB(string name, int score, int diff, int lvl, int index)
         {
             _highscoreList[diff, lvl].InsertScore(name, score, index);//lägger till 
             _highscoreList[diff, lvl].RemoveLast(_numberOfNames);//petar bort sämsta i listan
-            saveHighscoreDB();
-                //TODO val om skriva till lokal fil.
+            if (!saveHighscoreDB())//Om det inte går att spara till DB
+            {
+                //Om man vill spara lokalt
+                if (SdkMsgBox.ShowBox("Saving to cloud highscore failed.\nWould you like to save to your local highscore?", "Failure", "Y u no save?!?", "Images\\WhyYouNo.png") == "left")
+                {
+                    loadHighscoresTxt();
+                    int placement = CompareScore(score, diff, lvl);//Se om man platsar i lokal highscore
+                    if ( placement != -1)//Om man platsar
+                    {
+                        InsertToHighscoreTxt(name, score, diff, lvl, placement);//Spara i lokal highscore
+                        return true;
+                    }
+                    return false;
+                }
+                return false;
+            }
+            return true;
         }
     }
 }

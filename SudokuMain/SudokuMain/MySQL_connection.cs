@@ -57,19 +57,6 @@ namespace SudokuMain
             }
             catch (MySqlException ex)//Om det inte går att ansluta
             {
-                switch (ex.Number)
-                {
-                    case 0:
-                        MessageBox.Show("Cannot connect to server.  Contact administrator");
-                        break;
-
-                    case 1045:
-                        MessageBox.Show("Invalid username/password, please try again");
-                        break;
-                    default:
-                        SdkMsgBox.ShowBox("Connection error, try again later.");
-                        break;
-                }
                 return false;
             }
         }
@@ -84,7 +71,6 @@ namespace SudokuMain
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message);
                 return false;
             }
         }

@@ -43,6 +43,21 @@ namespace SudokuMain
         }
 
         ///<summary>
+        /// Ändra endast boxens meddelande, och sätter ok knapp.
+        ///</summary>
+        public static string ShowBox(string txtMessage, bool okBtn)
+        {
+            _myMsgBox = new SdkMsgBox();
+            _myMsgBox.stackPanBtn.Visibility = Visibility.Visible;
+            _myMsgBox.leftBtn.Visibility = Visibility.Collapsed;
+            _myMsgBox.rightBtn.Content = "OK";
+            _myMsgBox.stackPanTxtBox.Visibility = Visibility.Collapsed;
+            _myMsgBox.msgBoxTextBlock.Text = txtMessage;
+            _myMsgBox.ShowDialog();
+            return button_id;
+        }
+
+        ///<summary>
         /// Ändra meddelande och titel
         ///</summary>
         public static string ShowBox(string txtMessage, string txtTitle)
