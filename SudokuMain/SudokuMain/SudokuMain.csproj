@@ -177,9 +177,9 @@
     <Resource Include="Images\btnSound-icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Content Include="dlls\MySql.Data.dll">
+    <Resource Include="dlls\MySql.Data.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </Resource>
     <Content Include="Music\1.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
