@@ -14,6 +14,7 @@ namespace SudokuMain
         bool _highScore;
         bool _panel;
         int _difficulty;
+        bool _online;
 
         //konstruktor för inladdning
         public Settings() { loadSettings(); }
@@ -27,11 +28,13 @@ namespace SudokuMain
         public bool getHighscore() { return _highScore; }
         public bool getPanel() { return _panel; }
         public int getDifficulty() { return Convert.ToInt16(_difficulty); }
+        public bool getOnline() { return _online; }
 
         public void setDifficulty(int diff) { _difficulty = diff; }
         public void SetTimer(bool timer) { _timer = timer; }
         public void SetHighscore(bool highscore) { _highScore = highscore; }
         public void SetPopupPanel(bool panel) { _panel = panel; }
+        public void SetOnline(bool online) { _online = online; }
 
         //Konstruktor för användarinput
         public Settings(bool time, bool score, bool panel, int diff)
@@ -58,6 +61,7 @@ namespace SudokuMain
             writer.WriteLine(_highScore);
             writer.WriteLine(_panel);
             writer.WriteLine(_difficulty);
+            writer.WriteLine(_online);
             writer.Close();
         }
 
@@ -71,6 +75,7 @@ namespace SudokuMain
                 _highScore = Convert.ToBoolean(reader.ReadLine());
                 _panel = Convert.ToBoolean(reader.ReadLine());
                 _difficulty = Convert.ToInt16(reader.ReadLine());
+                _online = Convert.ToBoolean(reader.ReadLine());
                 reader.Close();
             }
         }

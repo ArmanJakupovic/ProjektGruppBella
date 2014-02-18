@@ -11,13 +11,9 @@ namespace SudokuMain
     class MySQL_connection
     {
         /******************************************************
-         * TODO!
-         * Man måste spara ner om man använder global eller lokal
-         * highscore. Detta görs inte just nu.
-         * 
+         * TODO! 
          * Säkerhet i mot databasen.
-         * 
-         * Val om vad man vill göra när man inte kan spara till databasen.
+         * Val om vad man vill göra när man inte kan spara till databasen. Testköra.
          * ****************************************************/
         
         private MySqlConnection _connection;//Anslutningen

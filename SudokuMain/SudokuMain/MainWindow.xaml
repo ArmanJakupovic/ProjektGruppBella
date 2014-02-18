@@ -404,6 +404,7 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
+
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150*"/>
@@ -413,6 +414,11 @@
             <CheckBox x:Name="enablePanelMain" Grid.Column="0" Grid.Row="3" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Popup input"/>
             <Button x:Name="BtnSettings_Cancel" Grid.Column="0" Grid.Row="5" BorderBrush="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="btnSettings_Cancel_Click" Content="Cancel" Style="{StaticResource InformButton}"/>
             <Button x:Name="BtnSettings_Apply" Grid.Column="0" Grid.Row="4" BorderBrush="Black" VerticalAlignment="Stretch" Click="btnSettings_Apply_Click" Content="Apply" Style="{StaticResource InformButton}"/>
+             <GroupBox x:Name="grpCredits" Grid.Row="6" Grid.Column="0" Header="Credits" Margin="5,0,5,3" BorderBrush="#FF761212" IsEnabled="False" FontFamily="Verdana">
+                <Viewbox Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <TextBlock x:Name="txtCredits" FontSize="12" TextWrapping="Wrap"/>
+                </Viewbox>
+            </GroupBox>
         </Grid>
         <!--Slut på gömmande gridden-->
 

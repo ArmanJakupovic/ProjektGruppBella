@@ -21,12 +21,15 @@ namespace SudokuMain
     /// </summary>
     public partial class MenuWindow : Window
     {
-        bool _cloudHighscore = false;
         Settings _set = new Settings(); // inställningar, används vid uppstart och via funktionen btnOptions_Click
         private Storyboard _myBoard;
         public MenuWindow()
         {
             InitializeComponent();
+            if (_set.getOnline() == true)
+                btnMulti.Content = "Cloud highscore ON";
+            else btnMulti.Content = "Cloud highscore OFF";
+
             if (File.Exists("savedGame.sdk"))//Om sparat visa continue
                 btnContinue.Visibility = Visibility.Visible;
             else
@@ -53,7 +56,8 @@ namespace SudokuMain
         //verka på spelet man återupptar, ändringar får göras under spelets gång.
         private void btnContinue_Click(Object sender, RoutedEventArgs args)
         {
-            MainWindow game = new MainWindow(true,_cloudHighscore);
+            _set.saveSettings();
+            MainWindow game = new MainWindow(true);
             game.Show();
             this.Close();
         }
@@ -122,7 +126,7 @@ namespace SudokuMain
                 _set.setDifficulty(2);
             _set.saveSettings();
 
-            MainWindow game = new MainWindow(false,_cloudHighscore);
+            MainWindow game = new MainWindow(false);
             game.Show();
             this.Close();
 
@@ -139,12 +143,12 @@ namespace SudokuMain
             if (myButton.Content.ToString() == "Cloud highscore OFF")
             {
                 myButton.Content = "Cloud highscore ON";
-                _cloudHighscore = true;
+                _set.SetOnline(true);
             }
             else
             {
                 myButton.Content = "Cloud highscore OFF";
-                _cloudHighscore = false;
+                _set.SetOnline(false);
             }
         }
     }

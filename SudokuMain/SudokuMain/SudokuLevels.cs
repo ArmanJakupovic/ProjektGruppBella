@@ -105,7 +105,7 @@ namespace SudokuMain
             try
             {
                 StreamReader loadStream = new StreamReader("savedGame.sdk");
-                //Time INGET HÄNDER DOCK.
+
                 clock.SetSeconds(Convert.ToInt16( loadStream.ReadLine() ) );
                 clock.SetMinutes(Convert.ToInt16( loadStream.ReadLine() ) );
                 clock.SetHours(Convert.ToInt16( loadStream.ReadLine() ) );

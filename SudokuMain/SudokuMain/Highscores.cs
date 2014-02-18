@@ -35,16 +35,20 @@ namespace SudokuMain
         { 
             _highscoreList[_diff,_lvl] = _DBConnection.GetHighscore(_diff,_lvl);
             if (_highscoreList[_diff, _lvl] == null)//Om man inte lyckats ladda från databasen.
+            {
                 loadHighscoresTxt();
+                SdkMsgBox.ShowBox("Something went wrong with the connection\n Local highscore activated.");
+            }
         }
 
         //Spara highscore till databasen
-        private bool saveHighscoreDB()
+        private void saveHighscoreDB()
         {
             if (!_DBConnection.InsertToDatabase(_highscoreList[_diff, _lvl], _diff, _lvl))
-                return false;
-            else
-                return true;
+            {
+                if(SdkMsgBox.ShowBox("Saving to cloud highscore failed.\nWould you like to save to your local highscore?", "Failure", "Y u no save?!?","Images\\WhyYouNo.png") == "left")                
+                    saveHighscoresTxt();                
+            }
         }
 
         //Hämtar alla highscores som finns ifrån textfil
