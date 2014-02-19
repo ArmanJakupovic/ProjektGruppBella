@@ -106,7 +106,7 @@ namespace SudokuMain
                     for (int ix = 0; ix < _numberOfNames; ix++)
                     {
                         if (_highscoreList[i, j] == null)
-                            writer.WriteLine("-\t3600");
+                            writer.WriteLine("-    \t3600");
                         else
                             writer.WriteLine(_highscoreList[i, j].GetNameAndScore(ix));
                     }

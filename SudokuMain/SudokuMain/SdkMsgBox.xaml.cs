@@ -53,6 +53,7 @@ namespace SudokuMain
             _myMsgBox.rightBtn.Content = "OK";
             _myMsgBox.stackPanTxtBox.Visibility = Visibility.Collapsed;
             _myMsgBox.msgBoxTextBlock.Text = txtMessage;
+            _myMsgBox.rightBtn.IsDefault = true;
             _myMsgBox.ShowDialog();
             return button_id;
         }
@@ -192,6 +193,7 @@ namespace SudokuMain
             _myMsgBox.msgBoxImage.Source = new BitmapImage(new Uri(@pathToImage, UriKind.Relative));
             _myMsgBox.msgBoxGroupBox.Header = groupBoxMessage;
             _myMsgBox.stackPanTxtBoxBox.Focus();
+            _myMsgBox.rightBtnOk.IsDefault = true;
             _myMsgBox.ShowDialog();
             return name;
         }

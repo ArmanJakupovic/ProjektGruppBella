@@ -829,7 +829,7 @@ namespace SudokuMain
                 CubeWithLabels blockIndex = grdBoard.Children[block] as CubeWithLabels;
                 if (!_newGame)//Hindrar animationen från att dyka upp i nästkommande bana
                 {
-                    blockIndex.animateCell(ruta);
+                   blockIndex.animateCell(ruta);
                 }
                 else
                 {
