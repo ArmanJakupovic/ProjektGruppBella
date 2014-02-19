@@ -134,7 +134,7 @@ namespace SudokuMain
                     {
                         for (int ix = 0; ix < numberOfNames; ix++)
                         {
-                            _query = "INSERT INTO Highscore (Name, Score, Diff, Level) VALUES ('DB-','3600', '" + i + "','" + j + "')";
+                            _query = "INSERT INTO Highscore (Name, Score, Diff, Level) VALUES ('" + i.ToString()+j.ToString() + "-','3600', '" + i + "','" + j + "')";
                             _command = new MySqlCommand(_query, _connection);
                             _command.ExecuteNonQuery();
                         }
