@@ -218,5 +218,26 @@ namespace SudokuMain
             }
             this.Close();
         }
+
+        private bool isValid(string sToCheck)
+        {
+            if (sToCheck.All(Char.IsLetterOrDigit))
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+
+        private void notAllowedKeyDown(object sender, KeyboardEventArgs e)
+        {
+            if (!stackPanTxtBoxBox.Text.All(Char.IsLetterOrDigit))
+            {
+                SdkMsgBox.ShowBox("Invalid input! Try A-Z, a-z, 0-9.", "WARNING", "Dude, cerealiously!?", "Images\\cerealGuy.png", "Error", "", "I'm sorry", false, true);
+                stackPanTxtBoxBox.Text = "";
+            }
+        }
+
     }
 }
