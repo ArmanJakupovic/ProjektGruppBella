@@ -245,8 +245,8 @@ namespace SudokuMain
         {
             if (!stackPanTxtBoxBox.Text.All(Char.IsLetterOrDigit))
             {
-                SdkMsgBox.ShowBox("Invalid input! Try A-Z, a-z, 0-9.", "WARNING", "Dude, cerealiously!?", "Images\\cerealGuy.png", "Error", "", "I'm sorry", false, true);
-                stackPanTxtBoxBox.Text = "";
+                SdkMsgBox.ShowBox("Invalid input! Must use 5 character. Try A-Z, a-z, 0-9.", "WARNING", "Dude, cerealiously!?", "Images\\cerealGuy.png", "Error", "", "I'm sorry", false, true);
+                this.stackPanTxtBoxBox.Text = "";
             }
         }
 
