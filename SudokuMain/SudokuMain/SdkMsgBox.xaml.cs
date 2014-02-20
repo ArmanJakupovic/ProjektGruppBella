@@ -35,6 +35,7 @@ namespace SudokuMain
         public static string ShowBox(string txtMessage)
         {
             _myMsgBox = new SdkMsgBox();
+            _myMsgBox.Topmost = true;
             _myMsgBox.stackPanBtn.Visibility = Visibility.Visible;
             _myMsgBox.stackPanTxtBox.Visibility = Visibility.Collapsed;
             _myMsgBox.msgBoxTextBlock.Text = txtMessage;
@@ -48,6 +49,7 @@ namespace SudokuMain
         public static string ShowBox(string txtMessage, bool okBtn)
         {
             _myMsgBox = new SdkMsgBox();
+            _myMsgBox.Topmost = true;
             _myMsgBox.stackPanBtn.Visibility = Visibility.Visible;
             _myMsgBox.leftBtn.Visibility = Visibility.Collapsed;
             _myMsgBox.rightBtn.Content = "OK";
@@ -64,6 +66,7 @@ namespace SudokuMain
         public static string ShowBox(string txtMessage, string txtTitle)
         {
             _myMsgBox = new SdkMsgBox();
+            _myMsgBox.Topmost = true;
             _myMsgBox.stackPanBtn.Visibility = Visibility.Visible;
             _myMsgBox.stackPanTxtBox.Visibility = Visibility.Collapsed;
             _myMsgBox.msgBoxTextBlock.Text = txtMessage;
@@ -78,6 +81,7 @@ namespace SudokuMain
         public static string ShowBox(string txtMessage, string txtTitle, string txtBelowImage)
         {
             _myMsgBox = new SdkMsgBox();
+            _myMsgBox.Topmost = true;
             _myMsgBox.stackPanBtn.Visibility = Visibility.Visible;
             _myMsgBox.stackPanTxtBox.Visibility = Visibility.Collapsed;
             _myMsgBox.msgBoxTextBlock.Text = txtMessage;
@@ -93,6 +97,7 @@ namespace SudokuMain
         public static string ShowBox(string txtMessage, string txtTitle, string txtBelowImage, string pathToImage)
         {
             _myMsgBox = new SdkMsgBox();
+            _myMsgBox.Topmost = true;
             _myMsgBox.stackPanBtn.Visibility = Visibility.Visible;
             _myMsgBox.stackPanTxtBox.Visibility = Visibility.Collapsed;
             _myMsgBox.msgBoxTextBlock.Text = txtMessage;
@@ -109,6 +114,7 @@ namespace SudokuMain
         public static string ShowBox(string txtMessage, string txtTitle, string txtBelowImage, string pathToImage, string groupBoxMessage, string txtLeftBtn, string txtRightBtn)
         {
             _myMsgBox = new SdkMsgBox();
+            _myMsgBox.Topmost = true;
             _myMsgBox.stackPanBtn.Visibility = Visibility.Visible;
             _myMsgBox.stackPanTxtBox.Visibility = Visibility.Collapsed;
             _myMsgBox.msgBoxTextBlock.Text = txtMessage;
@@ -128,6 +134,7 @@ namespace SudokuMain
         public static string ShowBox(string txtMessage, string txtTitle, string txtBelowImage, string pathToImage, string groupBoxMessage, string txtLeftBtn, string txtRightBtn, bool leftButtonActive, bool RightButtonActive)
         {
             _myMsgBox = new SdkMsgBox();
+            _myMsgBox.Topmost = true;
             _myMsgBox.stackPanBtn.Visibility = Visibility.Visible;
             _myMsgBox.stackPanTxtBox.Visibility = Visibility.Collapsed;
             _myMsgBox.msgBoxTextBlock.Text = txtMessage;
@@ -155,6 +162,7 @@ namespace SudokuMain
         public static string ShowBox(string txtMessage, string txtTitle, string txtBelowImage, string pathToImage, string groupBoxMessage, string txtLeftBtn, string txtRightBtn, bool leftButtonActive, bool RightButtonActive, double yHeight, double xWidth)
         {
             _myMsgBox = new SdkMsgBox();
+            _myMsgBox.Topmost = true;
             _myMsgBox.stackPanBtn.Visibility = Visibility.Visible;
             _myMsgBox.stackPanTxtBox.Visibility = Visibility.Collapsed;
             _myMsgBox.msgBoxTextBlock.Text = txtMessage;
@@ -184,6 +192,7 @@ namespace SudokuMain
         public static string showHighScoreBox(string txtMessage, string txtTitle, string txtBelowImage, string pathToImage, string groupBoxMessage)
         {
             _myMsgBox = new SdkMsgBox();
+            _myMsgBox.Topmost = true;
             _myMsgBox.hScoreCheck = true;
             _myMsgBox.stackPanBtn.Visibility = Visibility.Collapsed;
             _myMsgBox.stackPanTxtBox.Visibility = Visibility.Visible;
