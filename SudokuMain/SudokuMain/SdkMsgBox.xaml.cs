@@ -217,11 +217,11 @@ namespace SudokuMain
         {
             if (_myMsgBox.hScoreCheck)
             {
-                if (_myMsgBox.stackPanTxtBoxBox.Text == "")
+                if (this.stackPanTxtBoxBox.Text.Length == 0)
                     name = "DRP";
                 else
-                    name = _myMsgBox.stackPanTxtBoxBox.Text;
-                _myMsgBox.hScoreCheck = false;
+                    name = this.stackPanTxtBoxBox.Text;
+              //  _myMsgBox.hScoreCheck = false;
             }
             else
             {
@@ -245,8 +245,9 @@ namespace SudokuMain
         {
             if (!stackPanTxtBoxBox.Text.All(Char.IsLetterOrDigit))
             {
-                SdkMsgBox.ShowBox("Invalid input! Must use 5 character. Try A-Z, a-z, 0-9.", "WARNING", "Dude, cerealiously!?", "Images\\cerealGuy.png", "Error", "", "I'm sorry", false, true);
-                this.stackPanTxtBoxBox.Text = "";
+               SdkMsgBox.ShowBox("Invalid input! Must use 5 character. Try A-Z, a-z, 0-9.", "WARNING", "Dude, cerealiously!?", "Images\\cerealGuy.png", "Error", "", "I'm sorry", false, true);
+               this.stackPanTxtBoxBox.Text = "";
+               _myMsgBox.hScoreCheck = true;
             }
         }
 
