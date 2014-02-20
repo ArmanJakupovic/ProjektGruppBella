@@ -136,7 +136,6 @@ namespace SudokuMain
             animationColor = (SolidColorBrush)(new BrushConverter().ConvertFrom("#181816"));
 
             ColorAnimation cellAnimation = new ColorAnimation();
-            cellAnimation.From = Colors.Moccasin;
             cellAnimation.To = animationColor.Color;
                 
             cellAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(950));
