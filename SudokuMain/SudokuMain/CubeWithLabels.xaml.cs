@@ -62,7 +62,7 @@ namespace SudokuMain
             }
             else
             {
-                rectActive.StrokeThickness = 1.6;
+                rectActive.StrokeThickness = 1;
                 rectActive.Stroke = Brushes.Black;
             }
         }
