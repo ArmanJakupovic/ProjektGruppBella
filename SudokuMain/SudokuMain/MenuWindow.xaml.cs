@@ -27,8 +27,8 @@ namespace SudokuMain
         {
             InitializeComponent();
             if (_set.getOnline() == true)
-                btnMulti.Content = "Cloud highscore ON";
-            else btnMulti.Content = "Cloud highscore OFF";
+                btnMulti.Content = "ON";
+            else btnMulti.Content = "OFF";
 
             if (File.Exists("savedGame.sdk"))//Om sparat visa continue
                 btnContinue.Visibility = Visibility.Visible;
@@ -140,14 +140,14 @@ namespace SudokuMain
         {
             Button myButton = (Button)sender;
 
-            if (myButton.Content.ToString() == "Cloud highscore OFF")
+            if (myButton.Content.ToString() == "OFF")
             {
-                myButton.Content = "Cloud highscore ON";
+                myButton.Content = "ON";
                 _set.SetOnline(true);
             }
             else
             {
-                myButton.Content = "Cloud highscore OFF";
+                myButton.Content = "OFF";
                 _set.SetOnline(false);
             }
         }

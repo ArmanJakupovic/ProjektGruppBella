@@ -318,7 +318,11 @@
             <Button x:Name="btnNewGame" Grid.Column="1" Grid.Row="1" BorderBrush="Black" Click="btnNewGame_Click" Margin="2" Content="New Game" Style="{StaticResource InformButton}"></Button>
             <Button x:Name="btnOptions" Grid.Column="1" Grid.Row="2" BorderBrush="Black" Click="btnOptions_Click" Margin="2" Content="Options" Style="{StaticResource InformButton}"></Button>
             <Button x:Name="btnExit" Grid.Column="1" Grid.Row="3" BorderBrush="Black" Click="btnExit_Click" Margin="2" Content="Exit" Style="{StaticResource InformButton}"></Button>
-            <Button Name="btnMulti" Grid.Column="0" Margin="5,4,5,4" Click="btnCloudHighscoreClicked" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="3" Style="{StaticResource InformButton}">Cloud highscore OFF</Button>
+            <StackPanel Grid.Column="0" Grid.Row="3" Margin="2" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+            <Label HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontFamily="Verdana" FontSize="14">Cloud highscore:</Label>
+                <Button Name="btnMulti" Click="btnCloudHighscoreClicked" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{StaticResource InformButton}">OFF</Button>
+            </StackPanel>
+
         </Grid>
 
         <Grid x:Name="gridOptions" Grid.Column="1" Grid.Row="1" Margin="5" RenderTransformOrigin="0.5,0.5">
