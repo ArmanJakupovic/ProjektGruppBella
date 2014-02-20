@@ -14,6 +14,7 @@ namespace SudokuMain
         private int _seconds;
         private int _minutes;
         private int _hours;
+        private bool _stopped;
         DispatcherTimer _dispatch;//hanterar tick
         Label lblClock;//klockan i spelet
 
@@ -23,6 +24,7 @@ namespace SudokuMain
             _seconds = 0;
             _minutes = 0;
             _hours = 0;
+            _stopped = false;
             _dispatch.Tick += dispatch_Tick;
             _dispatch.Interval = new TimeSpan(0, 0, 0, 1);// en sekunds intervall.
         }
@@ -33,6 +35,7 @@ namespace SudokuMain
             _seconds = 0;
             _minutes = 0;
             _hours = 0;
+            _stopped = false;
             lblClock = clock;
             _dispatch.Tick += dispatch_Tick;
             _dispatch.Interval = new TimeSpan(0, 0, 0, 1);// en sekunds intervall.
@@ -44,8 +47,9 @@ namespace SudokuMain
         public void SetSeconds(int sec) { _seconds = sec; } // sätter sekunder
         public void SetMinutes(int min) { _minutes = min; }// sätter minuter
         public void SetHours(int hour) { _hours = hour; }// sätter timmar
-        public void StartTime() { _dispatch.Start(); }//Startar klockan
-        public void StopTime() { _dispatch.Stop(); }//Stoppar klockan
+        public void StartTime() { _dispatch.Start(); _stopped = false; }//Startar klockan
+        public void StopTime() { _dispatch.Stop(); _stopped = true; }//Stoppar klockan
+        public bool checkIfStopped() { return _stopped; } //Returnerar en bool om timern har stoppats. 
         public DispatcherTimer GetDispatcher() { return _dispatch; }//hämtar dispatchen
 
         //Konverterar tiden till int och returnerar denna

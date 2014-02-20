@@ -49,12 +49,12 @@ namespace SudokuMain
         #endregion
 
 
-        public MainWindow(bool loadGame = false, bool multiplayer=false)
+        public MainWindow(bool loadGame = false, bool multiplayer = false)
         {
             InitializeComponent();
             //_multiplayer = multiplayer;//Indikerar om man spelar mot DB eller inte.
-           // DBConnection.DeleteTable(); //Används för att tömma DB
-           // DBConnection.FillTable(3, 5, 5);//Används för att fylla DB
+            // DBConnection.DeleteTable(); //Används för att tömma DB
+            // DBConnection.FillTable(3, 5, 5);//Används för att fylla DB
             Music(); //Bortkommenterad under visningen.
             _time = new Time(ref lblClock);//Initierar klockan
             if (!loadGame)
@@ -71,7 +71,7 @@ namespace SudokuMain
             gameSettings();//tilldelar inställningarna till spelet
             EventManager.RegisterClassHandler(typeof(Window),
             Keyboard.KeyUpEvent, new KeyEventHandler(CubeWithLabels_KeyDown_1), true);
-            
+
             initBoard();//Fyller spelbrädet
             txtHighScore.Text = _highscores.GetHighScore(game.levels[game.currentLevel].difficulty, game.levels[game.currentLevel].level);//fyller highscore för specifik bana
             ourWindow = this;
@@ -79,17 +79,16 @@ namespace SudokuMain
             _time.StartTime();//startar klockan
             _rightClickMemory = false;
             _leftClickMemory = false;
-            
+
         }
 
         //Fyller spelplanen med tecken från currentLevel.Unsolved
         private void initBoard()
         {
-            currentLvl.Content = (game.levels[game.currentLevel].level+1);
+            currentLvl.Content = (game.levels[game.currentLevel].level + 1);
             for (int y = 0; y < 9; y++)
                 for (int x = 0; x < 9; x++)
                     updateBoard(y, x, game.levels[game.currentLevel].Unsolved[y, x]);
-                
         }
 
         //Uppdaterar spelbrädet med ett tecken på rätt position
@@ -112,8 +111,8 @@ namespace SudokuMain
             x = 3 * (block % 3) + (ix % 3);
             //Obs! Matrisen är y,x
             //MessageBox.Show("X = " + x.ToString() + ", Y = " + y.ToString());
-            
-            if (game.levels[game.currentLevel].Unsolved[y, x].Substring(0,1) != "-")
+
+            if (game.levels[game.currentLevel].Unsolved[y, x].Substring(0, 1) != "-")
             {
                 game.levels[game.currentLevel].Unsolved[y, x] = value;
                 updateBoard(y, x, value);
@@ -127,7 +126,7 @@ namespace SudokuMain
             string myNr = "X";
             _leftClickMemory = true;
             cube = sender as CubeWithLabels;
-            
+
             int indexnr = -1;
             int lblIndex = -1;
 
@@ -174,61 +173,60 @@ namespace SudokuMain
         //Raderar där markören är vid dubbel högerklick.
         private void grdBoard_RightButtonDown(object sender, MouseButtonEventArgs e)
         {
-                cube = sender as CubeWithLabels;
-                int indexnr = -1;
-                int lblIndex = -1;
+            cube = sender as CubeWithLabels;
+            int indexnr = -1;
+            int lblIndex = -1;
 
+            if (prevBlockIx != null)
+                prevBlockIx.setLabelBorder(prevIx, false);
 
-                if (prevBlockIx != null)
-                    prevBlockIx.setLabelBorder(prevIx, false);
-
-                for (int ix = 0; ix < 9; ix++)
+            for (int ix = 0; ix < 9; ix++)
+            {
+                CubeWithLabels cubeCompair = grdBoard.Children[ix] as CubeWithLabels;
+                if (cubeCompair == cube)
                 {
-                    CubeWithLabels cubeCompair = grdBoard.Children[ix] as CubeWithLabels;
-                    if (cubeCompair == cube)
+                    indexnr = ix;
+                    lblIndex = cube.FindClickedLabel();
+                    //Gör så att den valda labeln blir markerad
+                    if (lblIndex >= 0)
                     {
-                        indexnr = ix;
-                        lblIndex = cube.FindClickedLabel();
-                        //Gör så att den valda labeln blir markerad
-                        if (lblIndex >= 0)
-                        {
-                            cube.setLabelBorder(lblIndex, true);
-                            prevBlockIx = cube;
-                            prevIx = lblIndex;
-                            updatePos(cube, lblIndex);
-                        }
-                        break;
+                        cube.setLabelBorder(lblIndex, true);
+                        prevBlockIx = cube;
+                        prevIx = lblIndex;
+                        updatePos(cube, lblIndex);
                     }
+                    break;
                 }
+            }
 
             //Nedanstående kod kontrollerar om det är OK att radera vid dubbel högerklick
-                if ((_rightClickMemory || _leftClickMemory) && _gridIndexNr == indexnr)
+            if ((_rightClickMemory || _leftClickMemory) && _gridIndexNr == indexnr)
+            {
+                if (_lblIndex == lblIndex)
                 {
-                    if (_lblIndex == lblIndex)
+                    if (_lblIndex >= 0)
                     {
-                        if (_lblIndex >= 0)
-                        {
-                            updateMatrix(_gridIndexNr, _lblIndex, " ");
-                            _rightClickMemory = false;
-                            _leftClickMemory = false;
-                        }
-                    }
-                    else
-                    {
-                        _rightClickMemory = true;
+                        updateMatrix(_gridIndexNr, _lblIndex, " ");
+                        _rightClickMemory = false;
                         _leftClickMemory = false;
                     }
                 }
                 else
                 {
                     _rightClickMemory = true;
+                    _leftClickMemory = false;
                 }
-                _gridIndexNr = indexnr;
-                _lblIndex = lblIndex;
+            }
+            else
+            {
+                _rightClickMemory = true;
+            }
+            _gridIndexNr = indexnr;
+            _lblIndex = lblIndex;
         }
 
         //Kallas på när knapp på keypaden trycks. Uppdaterar gridden.
-        public void markedGridPosUpdate(int indexnr, int lblFound , string myStr)
+        public void markedGridPosUpdate(int indexnr, int lblFound, string myStr)
         {
             if (lblFound >= 0)
             {
@@ -258,14 +256,13 @@ namespace SudokuMain
             {
                 x = checkErrors[ix] % 9;
                 y = checkErrors[ix] / 9;
-                valueBefore = game.levels[game.currentLevel].Unsolved[y,x];
-                if(valueBefore.Substring(0,1) != "/")
+                valueBefore = game.levels[game.currentLevel].Unsolved[y, x];
+                if (valueBefore.Substring(0, 1) != "/")
                     game.levels[game.currentLevel].Unsolved[y, x] = "/" + valueBefore;
                 updateBoard(y, x, game.levels[game.currentLevel].Unsolved[y, x]);
             }
-
         }
-        
+
         //Hämtar en korrekt siffra och stoppar in den på en slumpmässigt 
         //vald position som är tom.
         private void Button_Hint_Click(object sender, RoutedEventArgs e)
@@ -288,13 +285,13 @@ namespace SudokuMain
                 int block = (y / 3) * 3 + (x / 3);
                 int ruta = (y % 3) * 3 + (x % 3);
                 string value = game.levels[game.currentLevel].Solved[y, x];
-                
+
                 //Tar bort fokus från den förra rutan
                 if (prevBlockIx != null)
                     prevBlockIx.setLabelBorder(prevIx, false);
 
                 updateMatrix(block, ruta, value);
-                
+
                 CubeWithLabels blockIndex = grdBoard.Children[block] as CubeWithLabels;
                 if (!_newGame)
                 {
@@ -390,7 +387,7 @@ namespace SudokuMain
                 btnPause.Visibility = Visibility.Hidden;
                 gridClockRow.Height = new GridLength(0);
                 gridRedArea.Height = new GridLength(40);
-                
+
             }
             if (_mainSettings.getHighscore())
                 grpHighScore.Visibility = Visibility.Visible;
@@ -399,7 +396,7 @@ namespace SudokuMain
                 keyPad_static.Visibility = Visibility.Visible;
             else keyPad_static.Visibility = Visibility.Collapsed;
         }
-        
+
         /*Kalla på nedanstående metod för att keypaden ska poppa upp.
          Skicka in ref till den sträng du vill ändra. I detta fallet
          borde det vara den sträng som som X skrivs till. Det kommer
@@ -416,7 +413,7 @@ namespace SudokuMain
             markedGridPosUpdate(_gridIndexNr, _lblIndex, x.Content.ToString());
         }
 
-        
+
         //Låter användaren skriva in siffor med tangentbordet
         //Det går att göra det möjligt att navigera med piltangenterna men det
         //blir komplicerat eftersom MainWindow består av block
@@ -425,7 +422,7 @@ namespace SudokuMain
             if (_gameFinished)
                 return;
 
-            string value=" ";
+            string value = " ";
             bool update = true; //Så att inte innehållet ändras när man navigerar eller pausar
 
             switch (e.Key)
@@ -531,18 +528,17 @@ namespace SudokuMain
                         value = " ";
                         break;
                     }
-                    
             }
 
             if (_x != null && _x.keypad_Popup.IsOpen)
                 _x.keypad_Popup.IsOpen = false;
-            
+
             if (update && prevBlockIx != null && prevIx >= 0)
             {
                 updateMatrix(_gridIndexNr, _lblIndex, value);
             }
         } //CubeWithLabels_KeyDown_1
-        
+
         //Kontrollerar om spelet är färdigspelat eller inte
         private void checkFinished()
         {
@@ -565,11 +561,11 @@ namespace SudokuMain
                         }
                     }
                 }
-            
-            if (isOk)
+
+            if (isOk && !_time.checkIfStopped())
             {
-             /*   //Här blir det ett anrop till GameOver-Form eller nåt
-                MessageBox.Show("Game Over!", "Den här skylten ska givetvis bytas ut...");*/
+                /*   //Här blir det ett anrop till GameOver-Form eller nåt
+                   MessageBox.Show("Game Over!", "Den här skylten ska givetvis bytas ut...");*/
                 int level = game.levels[game.currentLevel].level;
                 int diff = game.levels[game.currentLevel].difficulty;
                 _time.StopTime(); //Stannar klockan
@@ -610,10 +606,10 @@ namespace SudokuMain
                     }
                     txtHighScore.Text = _highscores.GetHighScore(diff, level);
                 }
-                
-                    //Visar den nya boxen. 
-                    //Det går kalla på en highsScoreBox också med SdkMsgBox.showHighScoreBox.
-                    //Den returnerar ett namn istället. 
+
+                //Visar den nya boxen. 
+                //Det går kalla på en highsScoreBox också med SdkMsgBox.showHighScoreBox.
+                //Den returnerar ett namn istället. 
 
 
                 if (winnerCheck)
@@ -659,26 +655,30 @@ namespace SudokuMain
                         }
                     }
                 }
-                    //Tömmer arrayen med lösningar
-                    for (int y = 0; y < 9; y++)
-                        for (int x = 0; x < 9; x++)
+                //Tömmer arrayen med lösningar
+                for (int y = 0; y < 9; y++)
+                    for (int x = 0; x < 9; x++)
+                    {
+                        if (game.levels[game.currentLevel].Unsolved[y, x].Length > 1)
                         {
-                            if (game.levels[game.currentLevel].Unsolved[y, x].Length > 1)
-                            {
-                                if (game.levels[game.currentLevel].Unsolved[y, x].Substring(0, 1) == "/")
-                                    game.levels[game.currentLevel].Unsolved[y, x] = " ";
-                            }
-                            else
+                            if (game.levels[game.currentLevel].Unsolved[y, x].Substring(0, 1) == "/")
                                 game.levels[game.currentLevel].Unsolved[y, x] = " ";
                         }
-                    newGame(diff, level);
+                        else
+                            game.levels[game.currentLevel].Unsolved[y, x] = " ";
+                    }
+                newGame(diff, level);
             }
-            else if (noEmpty)
+            else if (noEmpty && !_time.checkIfStopped()) // Har lagt till _time.checkIfStoppen(). Den kontrollerar om timern står stilla. Ser till att samma ruta inte visas om och om igen.
             {
-                string btnClicked = SdkMsgBox.ShowBox("The board is filled but something is wrong!", "Errors","Sad",
+                _time.StopTime(); //Stannar klockan
+                string btnClicked = SdkMsgBox.ShowBox("The board is filled but something is wrong!", "Errors", "Sad",
                        "Images\\sadFace.png", "Message", "?", "Ok", false, true);
                 if (btnClicked == "right")
+                {
+                    _time.StartTime();
                     return;
+                }
             }
         }
 
@@ -686,7 +686,7 @@ namespace SudokuMain
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             _thisMusic.StopMusic();
-            if(!_gameFinished)//Om spelet är färdigspelat sparas det inte ner
+            if (!_gameFinished)//Om spelet är färdigspelat sparas det inte ner
                 game.SaveGame(_mainSettings, _time, hasCheated);
             MenuWindow menu = new MenuWindow();
             menu.Show();
@@ -697,7 +697,7 @@ namespace SudokuMain
         private void btnHelp_Click(object sender, RoutedEventArgs e)
         {
             btnPausePlay_Click(sender, e);
-            string rules = " A sudoku board consists of a 9x9 grid. The grid is divided into 3x3 blocks called regions." 
+            string rules = " A sudoku board consists of a 9x9 grid. The grid is divided into 3x3 blocks called regions."
             + " A region may or may not have cells which are considered unchangable, in our game they are represented by a darker background color."
             + " The purpose of the game is to make sure that each block contains the numbers  1 trough 9. Each cell number must be unique for that specific row and column."
             + "||"
@@ -769,7 +769,7 @@ namespace SudokuMain
             txtHighScore.Text = _highscores.GetHighScore(game.levels[game.currentLevel].difficulty, game.levels[game.currentLevel].level);//fyller highscore för specifik bana
             ourWindow = this;
             initInfoLabel();//Skriver ut vilken svårighetsgrad och bana som spelas
-            _time.setTime(0,0,0);
+            _time.setTime(0, 0, 0);
             hasCheated = false;
             _gameFinished = false;
             _newGame = true;
@@ -789,7 +789,7 @@ namespace SudokuMain
             //Återställer rektangeln om det finns en gammal position lagrad
             if (prevBlockIx != null)
                 prevBlockIx.setLabelBorder(prevIx, false);
-            
+
             int block, ruta;
             block = (y / 3) * 3 + (x / 3);
             ruta = (y % 3) * 3 + (x % 3);
@@ -798,11 +798,11 @@ namespace SudokuMain
             yPos = y;
 
             CubeWithLabels currBlock = grdBoard.Children[block] as CubeWithLabels;
-            
+
             currBlock.setLabelBorder(ruta, true);
             prevBlockIx = currBlock;
             prevIx = ruta;
-            
+
             _gridIndexNr = block;
             _lblIndex = ruta;
         }
@@ -810,7 +810,7 @@ namespace SudokuMain
         //För att uppdarera position som hanterar piltangenterna vid musklick
         private void updatePos(CubeWithLabels cube, int ix)
         {
-            int block = (Convert.ToInt16(cube.Name.Substring(3, 1)))-1;
+            int block = (Convert.ToInt16(cube.Name.Substring(3, 1))) - 1;
             yPos = 3 * (block / 3) + (ix / 3);
             xPos = 3 * (block % 3) + (ix % 3);
         }
@@ -826,20 +826,19 @@ namespace SudokuMain
                 int block = (y / 3) * 3 + (x / 3);
                 int ruta = (y % 3) * 3 + (x % 3);
                 string value = game.levels[game.currentLevel].Solved[y, x];
-                
+
                 updateMatrix(block, ruta, value);
 
                 CubeWithLabels blockIndex = grdBoard.Children[block] as CubeWithLabels;
                 if (!_newGame)//Hindrar animationen från att dyka upp i nästkommande bana
                 {
-                   blockIndex.animateCell(ruta);
+                    blockIndex.animateCell(ruta);
                 }
                 else
                 {
                     _newGame = false;
                     break;
                 }
-
                 fusk = game.GetHint();
             }
         }
