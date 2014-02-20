@@ -422,6 +422,9 @@ namespace SudokuMain
         //blir komplicerat eftersom MainWindow består av block
         private void CubeWithLabels_KeyDown_1(object sender, KeyEventArgs e)
         {
+            if (_gameFinished)
+                return;
+
             string value=" ";
             bool update = true; //Så att inte innehållet ändras när man navigerar eller pausar
 
