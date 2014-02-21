@@ -419,7 +419,7 @@ namespace SudokuMain
         //blir komplicerat eftersom MainWindow består av block
         private void CubeWithLabels_KeyDown_1(object sender, KeyEventArgs e)
         {
-            if (_gameFinished)
+            if (_gameFinished || _time.checkIfStopped())
                 return;
 
             string value = " ";
