@@ -377,6 +377,7 @@
         <!--Slut på pause-->
 
         <!--Den grid som gömmer sig bakom allt-->
+        <Viewbox Grid.Row="0" Grid.Column="1" Stretch="Fill">
         <Grid x:Name="grid" Grid.Row="0" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
             <Grid.RenderTransform>
                 <TransformGroup>
@@ -420,8 +421,10 @@
                 </Viewbox>
             </GroupBox>
         </Grid>
+        </Viewbox>
         <!--Slut på gömmande gridden-->
 
+        <Viewbox Grid.Row="0" Grid.Column="1" Stretch="Fill">
         <Grid x:Name="grid1" Grid.Row="0" Grid.Column="1" Background="#FFD8B087" RenderTransformOrigin="0.5,0.5">
             <Grid.Effect>
                 <DropShadowEffect/>
@@ -435,12 +438,12 @@
                 </TransformGroup>
             </Grid.RenderTransform>
             <Grid.RowDefinitions>
-                <RowDefinition Name="gridRedArea" Height="80*"/>
+                <RowDefinition Name="gridRedArea" Height="80"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="52"/>
-                <RowDefinition Height="160*"/>
-                <RowDefinition Height="140*"></RowDefinition>
+                <RowDefinition Height="110"/>
+                <RowDefinition Height="140"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150*"/>
@@ -549,9 +552,7 @@
                 </StackPanel>
             </StackPanel>
             <GroupBox x:Name="grpHighScore" Grid.Row="4" Grid.Column="0" Header="Highscore"  Margin="5,-3,5,0" BorderBrush="#FF761212" IsEnabled="False" FontFamily="Verdana">
-                <Viewbox Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left">
                 <TextBlock x:Name="txtHighScore" FontSize="12"/>
-                </Viewbox>
             </GroupBox>
             <GroupBox Name="keyPad_static" Header="Keypad" Grid.Row="5" Grid.Column="0" Margin="5,0,5,5" BorderBrush="#FF761212" Visibility="Visible" FontFamily="Verdana">
                 <Viewbox Stretch="Fill" >
@@ -569,5 +570,6 @@
                 </Viewbox>
             </GroupBox>
         </Grid>
+        </Viewbox>
     </Grid>
 </Window>
