@@ -23,7 +23,6 @@ namespace SudokuMain
         {
             _myPlayer = new WindowsMediaPlayer();
             _newRnd = new Random();
-            _playlist = _myPlayer.playlistCollection.newPlaylist("arman");
             _ammountOfFiles = getAmmountOfFiles();
             createPlaylistFromFiles();
         }
@@ -108,13 +107,13 @@ namespace SudokuMain
         {
             IWMPMedia myMedia;
             string path;
+
             for (int i = 0; i < _ammountOfFiles; i++)
             {
                 path = String.Format("Music\\{0}.mp3", i + 1);
                 myMedia = _myPlayer.newMedia(path);
-                _playlist.appendItem(myMedia);
+                _myPlayer.currentPlaylist.appendItem(myMedia);
             }
-            _myPlayer.currentPlaylist = _playlist;
         }
     }
 }
