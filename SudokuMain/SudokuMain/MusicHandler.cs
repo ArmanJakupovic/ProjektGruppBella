@@ -25,6 +25,9 @@ namespace SudokuMain
             _newRnd = new Random();
         }
 
+        ///<summary>
+        /// Skapar en musikspelare och returnerar ett true om allt går som det ska.
+        ///</summary>
         public bool CreateMediaPlayer()
         {
             try
@@ -42,6 +45,9 @@ namespace SudokuMain
             }
         }
 
+        ///<summary>
+        /// Hämtar bool _error. Om True är inget fel, om false har något gått galet.
+        ///</summary>
         public bool ErrorCheck
         {
             get { return _error; }
