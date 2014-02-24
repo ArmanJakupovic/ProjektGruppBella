@@ -790,6 +790,10 @@ namespace SudokuMain
         //Hanterar styrningen med piltangenterna
         private void keyNavigate(int addX, int addY)
         {
+            //Om pausat läge
+            if (_time.checkIfStopped())
+                return;
+
             int x = xPos + addX;
             int y = yPos + addY;
 
