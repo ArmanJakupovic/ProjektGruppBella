@@ -419,7 +419,7 @@ namespace SudokuMain
         //blir komplicerat eftersom MainWindow består av block
         private void CubeWithLabels_KeyDown_1(object sender, KeyEventArgs e)
         {
-            if (_gameFinished || _time.checkIfStopped())
+            if (_gameFinished)
                 return;
 
             string value = " ";
@@ -531,9 +531,12 @@ namespace SudokuMain
             if (_x != null && _x.keypad_Popup.IsOpen)
                 _x.keypad_Popup.IsOpen = false;
 
-            if (update && prevBlockIx != null && prevIx >= 0)
+            if (!_time.checkIfStopped())
             {
-                updateMatrix(_gridIndexNr, _lblIndex, value);
+                if (update && prevBlockIx != null && prevIx >= 0)
+                {
+                    updateMatrix(_gridIndexNr, _lblIndex, value);
+                }
             }
         } //CubeWithLabels_KeyDown_1
 
