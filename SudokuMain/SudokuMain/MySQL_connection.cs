@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using System.Configuration;
 
 namespace SudokuMain
 {
@@ -20,31 +21,36 @@ namespace SudokuMain
         private MySqlCommand _command; //SQL kommando
         private string _query;//SQL querryn
         private MySqlDataReader reader;//Läser resultaten från querries.
-        private string _server;
-        private string _database;
-        private string _uid;
-        private string _password;
 
         //Konstruktor
         public MySQL_connection()
         {
-            initialize();
+            EncryptConnectionString(System.AppDomain.CurrentDomain.FriendlyName);//SudokuMain.vshost.exe
+            EncryptConnectionString(System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.Name);//SudokuMain.exe
+            _connection = new MySqlConnection(Properties.Settings.Default.ConnectionString);
         }
 
-        //Init
-        private void initialize()
+        //Krypterar anslutningen i 
+        private void EncryptConnectionString(string exeConfigName)
         {
-            _server = "5.150.195.196";
-            _database = "jakupovic_gruppBella";
-            _uid = "jakupovic_albert";
-            _password = "foal1144";
-            string connectionString;
-            connectionString = "server=" + _server + ";User Id=" + _uid + ";password=" + _password + ";database=" + _database;
+            //Hämtar den den app som exekverar och använder dess config
+            try
+            {
+                // Öppnar och hämtar konfigurationsdelen för den app som exekverar
+                Configuration config = ConfigurationManager.OpenExeConfiguration(exeConfigName);
 
-            _connection = new MySqlConnection(connectionString);
+                ConnectionStringsSection section = config.GetSection("connectionStrings") as ConnectionStringsSection;
 
-
-            //server=82.99.48.146;User Id=jakupovic_admin;password=jaar1186;database=jakupovic_testLo
+                if (!section.SectionInformation.IsProtected)
+                {
+                    // Krypterar sektionen
+                    section.SectionInformation.ProtectSection("DataProtectionConfigurationProvider");
+                    config.Save();
+                }
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         //Öppnar anslutningen

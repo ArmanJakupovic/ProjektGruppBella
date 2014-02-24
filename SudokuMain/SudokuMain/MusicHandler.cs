@@ -15,7 +15,6 @@ namespace SudokuMain
         #region constans
         private Random _newRnd;
         private WindowsMediaPlayer _myPlayer;
-        private IWMPPlaylist _playlist;
         private int _ammountOfFiles;
         #endregion
 
