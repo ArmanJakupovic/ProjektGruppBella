@@ -222,6 +222,7 @@ namespace SudokuMain
                 else
                 {
                     name = this.stackPanTxtBoxBox.Text.PadRight(5,'-');
+                    name = name.PadRight(6, ' ');
                 }
               //  _myMsgBox.hScoreCheck = false;
             }
