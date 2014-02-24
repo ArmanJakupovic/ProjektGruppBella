@@ -10,13 +10,7 @@ using System.Configuration;
 namespace SudokuMain
 {
     class MySQL_connection
-    {
-        /******************************************************
-         * TODO! 
-         * Säkerhet i mot databasen.
-         * Val om vad man vill göra när man inte kan spara till databasen. Testköra.
-         * ****************************************************/
-        
+    {        
         private MySqlConnection _connection;//Anslutningen
         private MySqlCommand _command; //SQL kommando
         private string _query;//SQL querryn

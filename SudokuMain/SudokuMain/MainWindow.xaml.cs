@@ -401,14 +401,14 @@ namespace SudokuMain
             else keyPad_static.Visibility = Visibility.Collapsed;
             if (_mainSettings.getMusic())
             {
-                btnNotMuted.Visibility = System.Windows.Visibility.Visible;
-                btnMuted.Visibility = System.Windows.Visibility.Collapsed;
+                btnNotMuted.Visibility = Visibility.Visible;
+                btnMuted.Visibility = Visibility.Collapsed;
                 _thisMusic.Mute(false);
             }
             else
             {
-                btnNotMuted.Visibility = System.Windows.Visibility.Collapsed;
-                btnMuted.Visibility = System.Windows.Visibility.Visible;
+                btnNotMuted.Visibility = Visibility.Collapsed;
+                btnMuted.Visibility =  Visibility.Visible;
                 _thisMusic.Mute(true);
             }
         }
@@ -539,9 +539,15 @@ namespace SudokuMain
                         update = false;
                         break;
                     }
-                default:
+                case Key.Delete:
+                case Key.Back:
                     {
                         value = " ";
+                        break;
+                    }
+                default:
+                    {
+                        update = false;
                         break;
                     }
             }

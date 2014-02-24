@@ -90,8 +90,6 @@ namespace SudokuMain
             _myBoard = (Storyboard)this.Resources["moveButtonsUp"];
             _myBoard.Begin();
             /******SLUT*PÅ*ANIMATIONER*******/
-
-            //TODO Göra så ändringar återställs. Kanske kommer hända automatiskt om vi använder en klass för att ladda in från fil.
         }
 
         private void buttonBack_Click(object sender, RoutedEventArgs e)
