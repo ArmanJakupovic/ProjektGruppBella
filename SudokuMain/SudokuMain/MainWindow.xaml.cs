@@ -377,7 +377,15 @@ namespace SudokuMain
             if (_mainSettings.getTimer())
             {
                 lblClock.Visibility = Visibility.Visible;
-                btnPause.Visibility = Visibility.Visible;
+                if (_time.checkIfStopped())
+                {
+                    btnPause.Visibility = Visibility.Hidden;
+                    btnPlay.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    btnPause.Visibility = Visibility.Visible;
+                }
                 gridClockRow.Height = new GridLength('*');
                 gridRedArea.Height = new GridLength(80);
             }
