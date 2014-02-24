@@ -547,6 +547,7 @@ namespace SudokuMain
                     }
                 default:
                     {
+                        update = false;
                         break;
                     }
             }
