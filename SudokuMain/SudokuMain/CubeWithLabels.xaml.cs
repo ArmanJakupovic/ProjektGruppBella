@@ -23,16 +23,23 @@ namespace SudokuMain
     public partial class CubeWithLabels : UserControl
     {
         private int CurrentLabel;
+        private int CurrentNumber;
 
         public CubeWithLabels()
         {
             InitializeComponent();
             CurrentLabel = -1;
+            CurrentNumber = -1;
         }
 
         public int FindClickedLabel()
         {
             return CurrentLabel;
+        }
+
+        public int FindNumber()
+        {
+            return CurrentNumber;
         }
 
         //Hämtar innehållet i den label ix (0-9);
@@ -53,6 +60,8 @@ namespace SudokuMain
         {
             UniformGrid uGrd = this.field;
             Grid grd = uGrd.Children[ix] as Grid;
+            Label tempLabel = grd.Children[0] as Label;
+            findContent(ref tempLabel);
             Rectangle rectActive = grd.Children[1] as Rectangle;
 
             if (active)
@@ -67,6 +76,7 @@ namespace SudokuMain
             }
         }
 
+        /*
         public Brush GetBackground(int ix)
         {
             try
@@ -80,6 +90,19 @@ namespace SudokuMain
             {
                 return null;
             }
+        }
+        */
+
+        //Sätter texten till fet i aktuell label om active=true
+        public void setTextProperty(int ix, bool active)
+        {
+            UniformGrid uGrd = this.field;
+            Grid grd = uGrd.Children[ix] as Grid;
+            Label lbl = grd.Children[0] as Label;
+            if (active)
+                lbl.FontWeight = FontWeights.ExtraBlack;
+            else
+                lbl.FontWeight = FontWeights.Normal;
         }
 
         //Sätter bakgrunden till mörk om locked=true, annars till ljus
@@ -157,10 +180,19 @@ namespace SudokuMain
                 if (grd.Children[0] == lblChk)
                 {
                     CurrentLabel = ix;
+                    findContent(ref lblChk);
                     break;
                 }
             }
 
         } //Label_MouseLeftButtonDown_1
+
+        //Tar reda på vilket nummer som finns i aktuell label
+        private void findContent(ref Label lblKontroll)
+        {
+            int tempNumber = 0;
+            bool test = int.TryParse(lblKontroll.Content.ToString(), out tempNumber);
+            CurrentNumber = tempNumber;
+        }
     }
 }

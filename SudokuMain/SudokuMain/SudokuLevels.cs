@@ -311,5 +311,13 @@ namespace SudokuMain
 
             return retValue;
         } //GetHint
+
+        //Returnerar true om aktuell siffra är ändringsbar
+        public bool NumberIsChangeable(int gridIx, int lblIx)
+        {
+            if (levels[currentLevel].Unsolved[(3 * (gridIx / 3) + (lblIx / 3)), (3 * (gridIx % 3) + (lblIx % 3))].Substring(0, 1) == "-")
+                return false;
+            return true;
+        }
     }
 }

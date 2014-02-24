@@ -45,6 +45,7 @@ namespace SudokuMain
         private bool _rightClickMemory;
         private bool _leftClickMemory;
         private bool hasCheated = false; //Visar om du har använt hint eller check
+        private List<int> numberList = new List<int>(); //Håller reda på alla siffror med samma värde
         private MusicHandler _thisMusic;
         #endregion
 
@@ -116,6 +117,9 @@ namespace SudokuMain
             {
                 game.levels[game.currentLevel].Unsolved[y, x] = value;
                 updateBoard(y, x, value);
+                int number = 0;
+                bool test = int.TryParse(value, out number);
+                showNumbers(number);
             }
             checkFinished();
         }
@@ -153,10 +157,12 @@ namespace SudokuMain
                     }
                     _gridIndexNr = indexnr;
                     _lblIndex = lblIndex;
+                    showNumbers();
                     try
                     {
 
-                        if (_mainSettings.getPanel() && (cube.GetBackground(_lblIndex).ToString() != "#FFD8B087"))
+                        //if (_mainSettings.getPanel() && (cube.GetBackground(_lblIndex).ToString() != "#FFD8B087"))
+                        if (_mainSettings.getPanel() && game.NumberIsChangeable(_gridIndexNr, _lblIndex))
                         {
                             openPopup(ref myNr, ref _gridIndexNr, ref _lblIndex, ref ourWindow);
                         }
@@ -799,6 +805,7 @@ namespace SudokuMain
             txtHighScore.Text = _highscores.GetHighScore(game.levels[game.currentLevel].difficulty, game.levels[game.currentLevel].level);//fyller highscore för specifik bana
             ourWindow = this;
             initInfoLabel();//Skriver ut vilken svårighetsgrad och bana som spelas
+            showNumbers();
             _time.setTime(0, 0, 0);
             hasCheated = false;
             _gameFinished = false;
@@ -839,6 +846,7 @@ namespace SudokuMain
 
             _gridIndexNr = block;
             _lblIndex = ruta;
+            showNumbers();
         }
 
         //För att uppdarera position som hanterar piltangenterna vid musklick
@@ -912,6 +920,59 @@ namespace SudokuMain
                 _mainSettings.SetMusic(true);
             }
             _mainSettings.saveSettings();
+        }
+
+        //Indikerar alla siffror med samma värde som den aktiva
+        private void showNumbers(int number = -1)
+        {
+            if (numberList.Count > 0)
+            {
+                for (int ix = 0; ix < numberList.Count; ix++)
+                {
+                    int x = numberList[ix] % 9;
+                    int y = numberList[ix] / 9;
+                    int block = (y / 3) * 3 + (x / 3);
+                    int ruta = (y % 3) * 3 + (x % 3);
+                    CubeWithLabels kub = this.grdBoard.Children[block] as CubeWithLabels;
+                    kub.setTextProperty(ruta, false);
+                }
+            }
+            numberList.Clear();
+            if (number < 0 && prevBlockIx != null)
+                number = prevBlockIx.FindNumber();
+            if (number > 0)
+            {
+                int number2;
+                int pos = 0;
+                string nr;
+                for (int y = 0; y < 9; y++)
+                    for (int x = 0; x < 9; x++)
+                    {
+                        nr = game.levels[game.currentLevel].Unsolved[y, x];
+                        if (game.levels[game.currentLevel].Unsolved[y, x].Length > 1)
+                            nr = game.levels[game.currentLevel].Unsolved[y, x].Substring(1, 1);
+                        bool ok = int.TryParse(nr, out number2);
+                        if (!ok)
+                            number2 = 0;
+                        if (number2 == number)
+                            numberList.Add(pos);
+                        pos++;
+                    }
+
+                for (int ix = 0; ix < numberList.Count; ix++)
+                {
+                    int x = numberList[ix] % 9;
+                    int y = numberList[ix] / 9;
+                    int block = (y / 3) * 3 + (x / 3);
+                    int ruta = (y % 3) * 3 + (x % 3);
+                    CubeWithLabels kub = this.grdBoard.Children[block] as CubeWithLabels;
+                    kub.setTextProperty(ruta, true);
+                }
+            }
+            else
+            {
+                numberList.Clear();
+            }
         }
     }
 }
