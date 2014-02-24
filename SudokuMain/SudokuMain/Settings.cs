@@ -8,35 +8,31 @@ namespace SudokuMain
 {
     public class Settings
     {
-        //TODO
-        // klassen ska kunna läsa och skriva till filen settings.sdk
         bool _timer;
         bool _highScore;
         bool _panel;
         int _difficulty;
         bool _online;
+        bool _musicOn;
 
         //konstruktor för inladdning
         public Settings() { loadSettings(); }
 
-        /************************************************************************************
-        Följande fyra metoder används i samband med Settings(), som kallar på loadSettings().
-        Settings() används vid läsning av fil.
-        Settings(bool, bool, bool, int) används vid skrivning till fil.
-        *************************************************************************************/
         public bool getTimer() { return _timer; }
         public bool getHighscore() { return _highScore; }
         public bool getPanel() { return _panel; }
         public int getDifficulty() { return Convert.ToInt16(_difficulty); }
         public bool getOnline() { return _online; }
+        public bool getMusic() { return _musicOn; }
 
         public void setDifficulty(int diff) { _difficulty = diff; }
         public void SetTimer(bool timer) { _timer = timer; }
         public void SetHighscore(bool highscore) { _highScore = highscore; }
         public void SetPopupPanel(bool panel) { _panel = panel; }
         public void SetOnline(bool online) { _online = online; }
+        public void SetMusic(bool music) { _musicOn = music; }
 
-        //Konstruktor för användarinput
+        //Konstruktor
         public Settings(bool time, bool score, bool panel, int diff)
         {
             _timer = time;
@@ -52,7 +48,7 @@ namespace SudokuMain
             _highScore = score;
             _panel = panel;
         }
-
+        
         //Sparar inställningar till fil.
         public void saveSettings()
         {
@@ -62,6 +58,7 @@ namespace SudokuMain
             writer.WriteLine(_panel);
             writer.WriteLine(_difficulty);
             writer.WriteLine(_online);
+            writer.WriteLine(_musicOn);
             writer.Close();
         }
 
@@ -76,6 +73,7 @@ namespace SudokuMain
                 _panel = Convert.ToBoolean(reader.ReadLine());
                 _difficulty = Convert.ToInt16(reader.ReadLine());
                 _online = Convert.ToBoolean(reader.ReadLine());
+                _musicOn = Convert.ToBoolean(reader.ReadLine());
                 reader.Close();
             }
         }

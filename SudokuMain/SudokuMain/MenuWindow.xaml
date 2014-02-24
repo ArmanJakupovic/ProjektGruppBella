@@ -347,12 +347,13 @@
                 <ColumnDefinition Width="30*" />
             </Grid.ColumnDefinitions>
 
-            <CheckBox x:Name="showTimer" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Content="Show timer"       Grid.ColumnSpan="2" Width="120"/>
-            <CheckBox x:Name="enableHighscore" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Content="Enable highscore" Grid.ColumnSpan="2" Width="120"/>
-            <CheckBox x:Name="enablePanel"     Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Content="Popup input"      Grid.ColumnSpan="2" Width="120"/>
-
-            <Button x:Name="btnCancel" Grid.Column="1" Grid.Row="3" BorderBrush="Black" Click="btnCancel_Click" Content="Cancel" Margin="1,2,1,2" Style="{StaticResource InformButton}"></Button>
+            <CheckBox x:Name="showTimer"       Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Content="Show timer"       Grid.ColumnSpan="1" Width="120"/>
+            <CheckBox x:Name="enableHighscore" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Content="Enable highscore" Grid.ColumnSpan="1" Width="120"/>
+            <CheckBox x:Name="enablePanel"     Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Content="Popup input"      Grid.ColumnSpan="1" Width="120"/>
+            <CheckBox x:Name="enableMusic"     Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" Content="Enable music"     Grid.ColumnSpan="1" Width="120"/>
             <Button x:Name="btnApply" Grid.Column="2" Grid.Row="3" BorderBrush="Black" Click="btnApply_Click" Content="Apply" Margin="1,2,1,2" Style="{StaticResource InformButton}"></Button>
+            <Button x:Name="btnCancel" Grid.Column="1" Grid.Row="3" BorderBrush="Black" Click="btnCancel_Click" Content="Cancel" Margin="1,2,1,2" Style="{StaticResource InformButton}"></Button>
+            
         </Grid>
 
         <Grid Name="gridDifficulty" Grid.Row="1" Grid.Column="1" Margin="5" RenderTransformOrigin="0.5,0.5">

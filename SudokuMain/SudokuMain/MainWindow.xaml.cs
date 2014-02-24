@@ -317,6 +317,7 @@ namespace SudokuMain
             showTimerMain.IsChecked = _mainSettings.getTimer();
             enableHighscoreMain.IsChecked = _mainSettings.getHighscore();
             enablePanelMain.IsChecked = _mainSettings.getPanel();
+            enableMusic.IsChecked = _mainSettings.getMusic();
 
             _myBoard = (Storyboard)this.Resources["showSettings"];
             _myBoard.Begin();
@@ -343,15 +344,11 @@ namespace SudokuMain
         //Sparar de nya inställningarna medan spelet är igång, återgå till spelet.
         private void btnSettings_Apply_Click(object sender, RoutedEventArgs e)
         {
-            bool time = showTimerMain.IsChecked == true;
-            bool score = enableHighscoreMain.IsChecked == true;
-            bool panel = enablePanelMain.IsChecked == true;
-
-            _mainSettings.SetTimer(time);
-            _mainSettings.SetHighscore(score);
-            _mainSettings.SetPopupPanel(panel);
+            _mainSettings.SetTimer(showTimerMain.IsChecked == true);
+            _mainSettings.SetHighscore(enableHighscoreMain.IsChecked == true);
+            _mainSettings.SetPopupPanel(enablePanelMain.IsChecked == true);
+            _mainSettings.SetMusic(enableMusic.IsChecked == true);
             _mainSettings.saveSettings();
-
             _mainSettings.loadSettings();
             gameSettings();
             //TODO nya inställningar ska appliceras på klocka, scoreboard och sifferpanelen.
@@ -395,7 +392,6 @@ namespace SudokuMain
                 btnPause.Visibility = Visibility.Hidden;
                 gridClockRow.Height = new GridLength(0);
                 gridRedArea.Height = new GridLength(40);
-
             }
             if (_mainSettings.getHighscore())
                 grpHighScore.Visibility = Visibility.Visible;
@@ -403,6 +399,18 @@ namespace SudokuMain
             if (!_mainSettings.getPanel())
                 keyPad_static.Visibility = Visibility.Visible;
             else keyPad_static.Visibility = Visibility.Collapsed;
+            if (_mainSettings.getMusic())
+            {
+                btnNotMuted.Visibility = System.Windows.Visibility.Visible;
+                btnMuted.Visibility = System.Windows.Visibility.Collapsed;
+                _thisMusic.Mute(false);
+            }
+            else
+            {
+                btnNotMuted.Visibility = System.Windows.Visibility.Collapsed;
+                btnMuted.Visibility = System.Windows.Visibility.Visible;
+                _thisMusic.Mute(true);
+            }
         }
 
         /*Kalla på nedanstående metod för att keypaden ska poppa upp.

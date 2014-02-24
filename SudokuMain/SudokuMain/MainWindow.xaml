@@ -404,21 +404,22 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
-
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150*"/>
             </Grid.ColumnDefinitions>
-            <CheckBox x:Name="showTimerMain" Grid.Column="0" Grid.Row="1" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Show timer" Margin="0,0,1,0"/>
+            <CheckBox x:Name="showTimerMain"       Grid.Column="0" Grid.Row="1" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Show timer" Margin="0,0,1,0"/>
             <CheckBox x:Name="enableHighscoreMain" Grid.Column="0" Grid.Row="2" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Enable highscore"/>
-            <CheckBox x:Name="enablePanelMain" Grid.Column="0" Grid.Row="3" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Popup input"/>
-            <Button x:Name="BtnSettings_Cancel" Grid.Column="0" Grid.Row="5" BorderBrush="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="btnSettings_Cancel_Click" Content="Cancel" Style="{StaticResource InformButton}"/>
-            <Button x:Name="BtnSettings_Apply" Grid.Column="0" Grid.Row="4" BorderBrush="Black" VerticalAlignment="Stretch" Click="btnSettings_Apply_Click" Content="Apply" Style="{StaticResource InformButton}"/>
-             <GroupBox x:Name="grpCredits" Grid.Row="6" Grid.Column="0" Header="Credits" Margin="5,0,5,3" BorderBrush="#FF761212" IsEnabled="False" FontFamily="Verdana">
-                <Viewbox Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left">
-                    <TextBlock x:Name="txtCredits" FontSize="12" TextWrapping="Wrap"/>
-                </Viewbox>
+            <CheckBox x:Name="enablePanelMain"     Grid.Column="0" Grid.Row="3" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Popup input"/>
+            <CheckBox x:Name="enableMusic"         Grid.Column="0" Grid.Row="4" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Enable music"/>
+            <Button x:Name="BtnSettings_Apply"     Grid.Column="0" Grid.Row="5" BorderBrush="Black" VerticalAlignment="Stretch" Click="btnSettings_Apply_Click"  Content="Apply"  Style="{StaticResource InformButton}"/>
+            <Button x:Name="BtnSettings_Cancel"    Grid.Column="0" Grid.Row="6" BorderBrush="Black" VerticalAlignment="Stretch" Click="btnSettings_Cancel_Click" Content="Cancel" Style="{StaticResource InformButton}" HorizontalAlignment="Stretch"/>
+            <GroupBox x:Name="grpCredits"          Grid.Column="0" Grid.Row="7" Header="Credits" Margin="5,0,5,3" BorderBrush="#FF761212" IsEnabled="False" FontFamily="Verdana">
+            <Viewbox Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <TextBlock x:Name="txtCredits" FontSize="12" TextWrapping="Wrap"/>
+            </Viewbox>
             </GroupBox>
         </Grid>
         </Viewbox>

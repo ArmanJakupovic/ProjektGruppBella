@@ -74,6 +74,7 @@ namespace SudokuMain
             showTimer.IsChecked       = _set.getTimer();
             enableHighscore.IsChecked = _set.getHighscore();
             enablePanel.IsChecked     = _set.getPanel();
+            enableMusic.IsChecked     = _set.getMusic();
 
             /*******ANIMATIONER***************/
             _myBoard = (Storyboard)this.Resources["moveButtonsDown"];
@@ -105,6 +106,7 @@ namespace SudokuMain
             _set.SetTimer(showTimer.IsChecked == true);
             _set.SetHighscore(enableHighscore.IsChecked == true);
             _set.SetPopupPanel(enablePanel.IsChecked == true);
+            _set.SetMusic(enableMusic.IsChecked == true);
             _set.saveSettings();
 
             /*******ANIMATIONER***************/
@@ -114,7 +116,6 @@ namespace SudokuMain
         }
 
         //Uppdaterar inställningen "difficulty" och startar ett nytt spel.
-        //Den valda svårighetsgraden ligger nu i settings.sdk. SOM 
         private void buttonDiff_Click(object sender, RoutedEventArgs e)
         {
             Button btnDiff = (Button)sender;
