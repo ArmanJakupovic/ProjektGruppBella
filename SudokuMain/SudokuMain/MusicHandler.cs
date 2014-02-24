@@ -16,14 +16,35 @@ namespace SudokuMain
         private Random _newRnd;
         private WindowsMediaPlayer _myPlayer;
         private int _ammountOfFiles;
+        private bool _error;
         #endregion
 
         public MusicHandler()
         {
-            _myPlayer = new WindowsMediaPlayer();
+            _error = false;
             _newRnd = new Random();
-            _ammountOfFiles = getAmmountOfFiles();
-            createPlaylistFromFiles();
+        }
+
+        public bool CreateMediaPlayer()
+        {
+            try
+            {
+                _myPlayer = new WindowsMediaPlayer();
+                _ammountOfFiles = getAmmountOfFiles();
+                createPlaylistFromFiles();
+                _error = true;
+                return _error;
+            }
+            catch
+            {
+                _error = false;
+                return _error;
+            }
+        }
+
+        public bool ErrorCheck
+        {
+            get { return _error; }
         }
 
         ///<summary>
