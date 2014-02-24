@@ -314,10 +314,10 @@ namespace SudokuMain
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
             _mainSettings.loadSettings();
-            showTimerMain.IsChecked = _mainSettings.getTimer();
+            showTimerMain.IsChecked       = _mainSettings.getTimer();
             enableHighscoreMain.IsChecked = _mainSettings.getHighscore();
-            enablePanelMain.IsChecked = _mainSettings.getPanel();
-            enableMusic.IsChecked = _mainSettings.getMusic();
+            enablePanelMain.IsChecked     = _mainSettings.getPanel();
+            enableMusic.IsChecked         = _mainSettings.getMusic();
 
             _myBoard = (Storyboard)this.Resources["showSettings"];
             _myBoard.Begin();
@@ -368,7 +368,7 @@ namespace SudokuMain
             btnCheck.IsEnabled = true;
         }
 
-        //Visar eller gömmer Klocka, highscore och sifferpanel
+        //Visar eller gömmer Klocka, highscore och sifferpanel, samt hanterar on/off av musik.
         private void gameSettings()
         {
             if (_mainSettings.getTimer())
@@ -890,14 +890,19 @@ namespace SudokuMain
                 btnNotMuted.Visibility = System.Windows.Visibility.Collapsed;
                 btnMuted.Visibility = System.Windows.Visibility.Visible;
                 if (_thisMusic.ErrorCheck)
+                {
                     _thisMusic.Mute(true);
+                    _mainSettings.SetMusic(false);
+                }
             }
             else
             {
                 btnNotMuted.Visibility = System.Windows.Visibility.Visible;
                 btnMuted.Visibility = System.Windows.Visibility.Collapsed;
                 _thisMusic.Mute(false);
+                _mainSettings.SetMusic(true);
             }
+            _mainSettings.saveSettings();
         }
     }
 }
