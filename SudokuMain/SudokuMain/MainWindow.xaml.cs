@@ -492,7 +492,9 @@ namespace SudokuMain
                 case Key.P:
                 case Key.Pause:
                     {
-                        if (_time.GetDispatcher().IsEnabled)
+                        if (_gameFinished)
+                            break;
+                        else if (_time.GetDispatcher().IsEnabled)
                             btnPausePlay_Click(this.btnPause, null);
                         else
                             btnPausePlay_Click(this.btnPlay, null);
