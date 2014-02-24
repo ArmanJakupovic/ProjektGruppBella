@@ -403,13 +403,15 @@ namespace SudokuMain
             {
                 btnNotMuted.Visibility = Visibility.Visible;
                 btnMuted.Visibility = Visibility.Collapsed;
-                _thisMusic.Mute(false);
+                if (_thisMusic.ErrorCheck)
+                    _thisMusic.Mute(false);
             }
             else
             {
                 btnNotMuted.Visibility = Visibility.Collapsed;
                 btnMuted.Visibility =  Visibility.Visible;
-                _thisMusic.Mute(true);
+                if (_thisMusic.ErrorCheck)
+                    _thisMusic.Mute(true);
             }
         }
 
@@ -905,7 +907,8 @@ namespace SudokuMain
             {
                 btnNotMuted.Visibility = System.Windows.Visibility.Visible;
                 btnMuted.Visibility = System.Windows.Visibility.Collapsed;
-                _thisMusic.Mute(false);
+                if (_thisMusic.ErrorCheck)
+                    _thisMusic.Mute(false);
                 _mainSettings.SetMusic(true);
             }
             _mainSettings.saveSettings();
