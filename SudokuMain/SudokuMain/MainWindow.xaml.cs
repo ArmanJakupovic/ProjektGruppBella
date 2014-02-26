@@ -689,17 +689,8 @@ namespace SudokuMain
                     }
                 }
                 //Tömmer arrayen med lösningar
-                for (int y = 0; y < 9; y++)
-                    for (int x = 0; x < 9; x++)
-                    {
-                        if (game.levels[game.currentLevel].Unsolved[y, x].Length > 1)
-                        {
-                            if (game.levels[game.currentLevel].Unsolved[y, x].Substring(0, 1) == "/")
-                                game.levels[game.currentLevel].Unsolved[y, x] = " ";
-                        }
-                        else
-                            game.levels[game.currentLevel].Unsolved[y, x] = " ";
-                    }
+                game.ClearCurrentSolution();
+                
                 newGame(diff, level);
             }
             else if (noEmpty && !_time.checkIfStopped()) // Har lagt till _time.checkIfStoppen(). Den kontrollerar om timern står stilla. Ser till att samma ruta inte visas om och om igen.
@@ -722,6 +713,7 @@ namespace SudokuMain
                 _thisMusic.StopMusic();
             if (!_gameFinished)//Om spelet är färdigspelat sparas det inte ner
                 game.SaveGame(_mainSettings, _time, hasCheated);
+            game.ClearCurrentSolution();
             MenuWindow menu = new MenuWindow();
             menu.Show();
             base.OnClosing(e);
@@ -974,5 +966,6 @@ namespace SudokuMain
                 numberList.Clear();
             }
         }
+        
     }
 }

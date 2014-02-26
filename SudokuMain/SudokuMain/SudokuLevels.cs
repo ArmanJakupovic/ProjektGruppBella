@@ -319,5 +319,21 @@ namespace SudokuMain
                 return false;
             return true;
         }
+
+        //Tömmer arrayen med lösningar i det aktuella spelet
+        public void ClearCurrentSolution()
+        {
+            for (int y = 0; y < 9; y++)
+                for (int x = 0; x < 9; x++)
+                {
+                    if (levels[currentLevel].Unsolved[y, x].Length > 1)
+                    {
+                        if (levels[currentLevel].Unsolved[y, x].Substring(0, 1) == "/")
+                            levels[currentLevel].Unsolved[y, x] = " ";
+                    }
+                    else
+                        levels[currentLevel].Unsolved[y, x] = " ";
+                }
+        }
     }
 }
