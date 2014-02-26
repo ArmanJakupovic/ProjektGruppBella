@@ -41,6 +41,7 @@ namespace SudokuMain
             catch
             {
                 _error = false;
+                SdkMsgBox.ShowBox("Music-player has failed or is missing on your computer. Game will continue without music.", "Error!", "DUDE!!! Cerealously!?", "Images\\cerealGuy.png", "Oh no..", "", "OK", false, true);
                 return _error;
             }
         }
