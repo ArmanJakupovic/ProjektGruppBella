@@ -597,8 +597,6 @@ namespace SudokuMain
 
             if (isOk && !_time.checkIfStopped())
             {
-                /*   //Här blir det ett anrop till GameOver-Form eller nåt
-                   MessageBox.Show("Game Over!", "Den här skylten ska givetvis bytas ut...");*/
                 int level = game.levels[game.currentLevel].level;
                 int diff = game.levels[game.currentLevel].difficulty;
                 _time.StopTime(); //Stannar klockan
@@ -609,32 +607,29 @@ namespace SudokuMain
                 else
                     mess = "Too slow";
 
+                string picture = "Images\\sadFace.png";
+
                 File.Delete("savedGame.sdk");//Tar bort eventuellt sparat spel
                 _gameFinished = true;//Indikerar att spelet är avslutat (kommer inte spara om man trycker X)
 
                 int score = _time.ConvertToScore();
-
                 int placement = _highscores.CompareScore(score, diff, level);//Ev highscore
-
-                bool winnerCheck = false;
+                
                 if (placement != -1 && !hasCheated)//Om highscore och ej har fuskat
                 {
                     string name = SdkMsgBox.showHighScoreBox("You made it to the highscore!", "Highscore!", "Type your name:", "Images\\goodJobFace.png", "Message");
                     if (!_mainSettings.getOnline())//Om man inte spelar mot DB
                     {
                         _highscores.InsertToHighscoreTxt(name.ToUpper(), score, diff, level, placement);
-                        winnerCheck = true;
+                        mess = "Winner!";
+                        picture = "Images\\goodJobFace.png";
                     }
                     else
                     {
                         if (_highscores.InsertToHighscoreDB(name.ToUpper(), score, diff, level, placement))//Om man lyckas skriva till DB eller platsar i lokal highscore
                         {
-                            winnerCheck = true;
                             mess = "Winner!";
-                        }
-                        else//Man lyckas inte skriva till DB eller platsar i lokal highscore.
-                        {
-                            winnerCheck = false;
+                            picture = "Images\\goodJobFace.png";
                         }
                     }
                     txtHighScore.Text = _highscores.GetHighScore(diff, level);
@@ -643,51 +638,24 @@ namespace SudokuMain
                 //Visar den nya boxen. 
                 //Det går kalla på en highsScoreBox också med SdkMsgBox.showHighScoreBox.
                 //Den returnerar ett namn istället. 
-
-
-                if (winnerCheck)
+               
+                string btnClicked = SdkMsgBox.ShowBox("Play this level again or try next?", "You made it!", mess,
+                        picture, "Message", "Retry", "Next", true, true);
+                
+                if (btnClicked == "right")
                 {
-                    string btnClicked = SdkMsgBox.ShowBox("Play this level again or try next?", "You made it!", mess,
-                        "Images\\goodJobFace.png", "Message", "Retry", "Next", true, true);
-                    winnerCheck = false;
-                    if (btnClicked == "left")
+                    level++;
+                    if (level > 4)
                     {
-
-                    }
-                    else
-                    {
-                        level++;
-                        if (level > 4)
-                        {
-                            level = 0;
-                            diff++;
-                            if (diff > 2)
-                                diff = 0;
-                            _mainSettings.setDifficulty(diff);
-                        }
+                        level = 0;
+                        diff++;
+                        if (diff > 2)
+                            diff = 0;
+                        _mainSettings.setDifficulty(diff);
                     }
                 }
-                else
-                {
-                    string btnClicked = SdkMsgBox.ShowBox("Play this level again or try next?", "Game over", mess,
-                       "Images\\sadFace.png", "Message", "Retry", "Next", true, true);
-                    if (btnClicked == "left")
-                    {
 
-                    }
-                    else
-                    {
-                        level++;
-                        if (level > 4)
-                        {
-                            level = 0;
-                            diff++;
-                            if (diff > 2)
-                                diff = 0;
-                            _mainSettings.setDifficulty(diff);
-                        }
-                    }
-                }
+                
                 //Tömmer arrayen med lösningar
                 game.ClearCurrentSolution();
                 
