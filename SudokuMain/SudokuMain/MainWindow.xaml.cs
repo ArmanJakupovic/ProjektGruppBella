@@ -340,7 +340,8 @@ namespace SudokuMain
                 "Music:\n" +
                 "1. Dream\n" +
                 "-Chan Wai Fat\n" +
-                "2.\n" +
+                "2. Unknown song\n" +
+                "-Kevin MacLeod\n" +
                 "3. I Knew a Guy\n" +
                 "-Kevin MacLeod\n" +
                 "4. Long Stroll\n" +
@@ -853,6 +854,7 @@ namespace SudokuMain
             {
                 _thisMusic.Shuffle(true);
                 _thisMusic.PlayMusic();
+                _thisMusic.Loop(true);
             }
 
         }
