@@ -65,7 +65,8 @@ namespace SudokuMain
             writer.WriteLine();//tomrad
 
             //Skriver diff,level
-            writer.WriteLine("[" + _mainSettings.getDifficulty().ToString() + "," + levels[currentLevel].level.ToString() + "]");
+            //writer.WriteLine("[" + _mainSettings.getDifficulty().ToString() + "," + levels[currentLevel].level.ToString() + "]");
+            writer.WriteLine("[" + levels[currentLevel].difficulty + "," + levels[currentLevel].level.ToString() + "]");
 
             //Skriver ner nuvarande spel
             for (int y = 0; y < 9; y++)
@@ -158,13 +159,14 @@ namespace SudokuMain
                         newLevel.Solved[y, x] = line[x].ToString();
                     }
                 }
+                currentDifficulty = newLevel.difficulty;
                 levels.Add(newLevel);
                 loadStream.Close();
                 currentLevel = 1;
             }
             catch (IOException e)
             {
-                System.Windows.MessageBox.Show(e.Message + "\nFel vid laddning av tidigare spel");
+                SdkMsgBox.ShowBox(e.Message + "\nError reading saved game.", "Error!", "File error...", "Images\\sPanda.png", "Oh no..", "", "OK", false, true);
             }
         }//laddar spel från textfil
 
@@ -225,8 +227,8 @@ namespace SudokuMain
                 inStream.Close();
             }
             catch (IOException e)
-            {
-                System.Windows.MessageBox.Show(e.Message + "\nEndast en bana är spelbar!");
+            { 
+                SdkMsgBox.ShowBox(e.Message + "\nYou will only be able to play one level.", "Error!", "File error...", "Images\\sPanda.png", "Oh no..", "", "OK", false, true);
             }
         } //readFromFile
 

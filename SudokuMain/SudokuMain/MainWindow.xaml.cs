@@ -80,7 +80,6 @@ namespace SudokuMain
             _time.StartTime();//startar klockan
             _rightClickMemory = false;
             _leftClickMemory = false;
-
         }
 
         //Fyller spelplanen med tecken från currentLevel.Unsolved
@@ -111,7 +110,6 @@ namespace SudokuMain
             y = 3 * (block / 3) + (ix / 3);
             x = 3 * (block % 3) + (ix % 3);
             //Obs! Matrisen är y,x
-            //MessageBox.Show("X = " + x.ToString() + ", Y = " + y.ToString());
 
             if (game.levels[game.currentLevel].Unsolved[y, x].Substring(0, 1) != "-")
             {
@@ -704,7 +702,8 @@ namespace SudokuMain
         //Hämtar information om difficulty och level labels och initierar dem.
         private void initInfoLabel()
         {
-            int x = _mainSettings.getDifficulty();
+            //int x = _mainSettings.getDifficulty();
+            int x = game.currentDifficulty;
             switch (x)
             {
                 case 0:
