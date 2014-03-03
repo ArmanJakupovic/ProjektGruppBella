@@ -61,14 +61,14 @@ namespace SudokuMain
             if (!loadGame)
             {
                 game.ReadFromFile();//Läs in alla banor från filen
-                game.SetLevel(_mainSettings.getDifficulty(), 0);//Läser in vilken bana som ska spelas
+                game.SetLevel(_mainSettings.GetDifficulty(), 0);//Läser in vilken bana som ska spelas
             }
             else
             {
                 game.LoadGame(ref _time, ref hasCheated);//Laddar tidagare spel från fil
             }
             _mainSettings.loadSettings();//läser in inställningar från fil
-            _highscores = new Highscores(_mainSettings.getOnline(), game.levels[game.currentLevel].difficulty, game.levels[game.currentLevel].level);//Skapar listan med highscores
+            _highscores = new Highscores(_mainSettings.GetOnline(), game.levels[game.currentLevel].difficulty, game.levels[game.currentLevel].level);//Skapar listan med highscores
             gameSettings();//tilldelar inställningarna till spelet
             EventManager.RegisterClassHandler(typeof(Window),
             Keyboard.KeyUpEvent, new KeyEventHandler(CubeWithLabels_KeyDown_1), true);
@@ -160,7 +160,7 @@ namespace SudokuMain
                     {
 
                         //if (_mainSettings.getPanel() && (cube.GetBackground(_lblIndex).ToString() != "#FFD8B087"))
-                        if (_mainSettings.getPanel() && game.NumberIsChangeable(_gridIndexNr, _lblIndex))
+                        if (_mainSettings.GetPanel() && game.NumberIsChangeable(_gridIndexNr, _lblIndex))
                         {
                             openPopup(ref myNr, ref _gridIndexNr, ref _lblIndex, ref ourWindow);
                         }
@@ -318,10 +318,10 @@ namespace SudokuMain
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
             _mainSettings.loadSettings();
-            showTimerMain.IsChecked       = _mainSettings.getTimer();
-            enableHighscoreMain.IsChecked = _mainSettings.getHighscore();
-            enablePanelMain.IsChecked     = _mainSettings.getPanel();
-            enableMusic.IsChecked         = _mainSettings.getMusic();
+            showTimerMain.IsChecked       = _mainSettings.GetTimer();
+            enableHighscoreMain.IsChecked = _mainSettings.GetHighscore();
+            enablePanelMain.IsChecked     = _mainSettings.GetPanel();
+            enableMusic.IsChecked         = _mainSettings.GetMusic();
 
             _myBoard = (Storyboard)this.Resources["showSettings"];
             _myBoard.Begin();
@@ -356,7 +356,7 @@ namespace SudokuMain
             _mainSettings.saveSettings();
             _mainSettings.loadSettings();
             gameSettings();
-            //TODO nya inställningar ska appliceras på klocka, scoreboard och sifferpanelen.
+
             _myBoard = (Storyboard)this.Resources["hideSettings"];
             _myBoard.Begin();
             btnHint.IsEnabled = true;
@@ -366,7 +366,6 @@ namespace SudokuMain
         //Avbryter menyn Settings och återgår till spelet utan förändring av inställningar
         private void btnSettings_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            //TODO trigga animering etc, EJ spara Settings
             _myBoard = (Storyboard)this.Resources["hideSettings"];
             _myBoard.Begin();
             btnHint.IsEnabled = true;
@@ -376,7 +375,7 @@ namespace SudokuMain
         //Visar eller gömmer Klocka, highscore och sifferpanel, samt hanterar on/off av musik.
         private void gameSettings()
         {
-            if (_mainSettings.getTimer())
+            if (_mainSettings.GetTimer())
             {
                 lblClock.Visibility = Visibility.Visible;
                 if (_time.checkIfStopped())
@@ -398,13 +397,13 @@ namespace SudokuMain
                 gridClockRow.Height = new GridLength(0);
                 gridRedArea.Height = new GridLength(40);
             }
-            if (_mainSettings.getHighscore())
+            if (_mainSettings.GetHighscore())
                 grpHighScore.Visibility = Visibility.Visible;
             else grpHighScore.Visibility = Visibility.Collapsed;
-            if (!_mainSettings.getPanel())
+            if (!_mainSettings.GetPanel())
                 keyPad_static.Visibility = Visibility.Visible;
             else keyPad_static.Visibility = Visibility.Collapsed;
-            if (_mainSettings.getMusic())
+            if (_mainSettings.GetMusic())
             {
                 btnNotMuted.Visibility = Visibility.Visible;
                 btnMuted.Visibility = Visibility.Collapsed;
@@ -617,7 +616,7 @@ namespace SudokuMain
                 if (placement != -1 && !hasCheated)//Om highscore och ej har fuskat
                 {
                     string name = SdkMsgBox.showHighScoreBox("You made it to the highscore!", "Highscore!", "Type your name:", "Images\\goodJobFace.png", "Message");
-                    if (!_mainSettings.getOnline())//Om man inte spelar mot DB
+                    if (!_mainSettings.GetOnline())//Om man inte spelar mot DB
                     {
                         _highscores.InsertToHighscoreTxt(name.ToUpper(), score, diff, level, placement);
                         mess = "Winner!";
@@ -650,7 +649,7 @@ namespace SudokuMain
                         diff++;
                         if (diff > 2)
                             diff = 0;
-                        _mainSettings.setDifficulty(diff);
+                        _mainSettings.SetDifficulty(diff);
                     }
                 }
 
@@ -760,7 +759,7 @@ namespace SudokuMain
                 game.ReadFromFile();
             game.SetLevel(diff, level);
             initBoard();//Fyller spelbrädet
-            if (_mainSettings.getOnline())//Om man spelar mot online highscore
+            if (_mainSettings.GetOnline())//Om man spelar mot online highscore
                 _highscores = new Highscores(true, diff, level);
             txtHighScore.Text = _highscores.GetHighScore(game.levels[game.currentLevel].difficulty, game.levels[game.currentLevel].level);//fyller highscore för specifik bana
             ourWindow = this;

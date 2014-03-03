@@ -410,12 +410,12 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150*"/>
             </Grid.ColumnDefinitions>
-            <CheckBox x:Name="showTimerMain"       Grid.Column="0" Grid.Row="1" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Show timer" Margin="0,0,1,0"/>
-            <CheckBox x:Name="enableHighscoreMain" Grid.Column="0" Grid.Row="2" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Enable highscore"/>
-            <CheckBox x:Name="enablePanelMain"     Grid.Column="0" Grid.Row="3" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Popup input"/>
-            <CheckBox x:Name="enableMusic"         Grid.Column="0" Grid.Row="4" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Enable music"/>
-            <Button x:Name="BtnSettings_Apply"     Grid.Column="0" Grid.Row="5" BorderBrush="Black" VerticalAlignment="Stretch" Click="btnSettings_Apply_Click"  Content="Apply"  Style="{StaticResource InformButton}"/>
-            <Button x:Name="BtnSettings_Cancel"    Grid.Column="0" Grid.Row="6" BorderBrush="Black" VerticalAlignment="Stretch" Click="btnSettings_Cancel_Click" Content="Cancel" Style="{StaticResource InformButton}" HorizontalAlignment="Stretch"/>
+                <CheckBox x:Name="showTimerMain"       Grid.Column="0" Grid.Row="1" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Show timer" Margin="0,0,1,0" Focusable="False"/>
+                <CheckBox x:Name="enableHighscoreMain" Grid.Column="0" Grid.Row="2" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Enable highscore" Focusable="False"/>
+                <CheckBox x:Name="enablePanelMain"     Grid.Column="0" Grid.Row="3" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Popup input" Focusable="False"/>
+                <CheckBox x:Name="enableMusic"         Grid.Column="0" Grid.Row="4" FlowDirection="LeftToRight" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Content="Enable music" Focusable="False"/>
+                <Button x:Name="BtnSettings_Apply"     Grid.Column="0" Grid.Row="5" BorderBrush="Black" VerticalAlignment="Stretch" Click="btnSettings_Apply_Click"  Content="Apply"  Style="{StaticResource InformButton}" Focusable="False"/>
+                <Button x:Name="BtnSettings_Cancel"    Grid.Column="0" Grid.Row="6" BorderBrush="Black" VerticalAlignment="Stretch" Click="btnSettings_Cancel_Click" Content="Cancel" Style="{StaticResource InformButton}" HorizontalAlignment="Stretch" Focusable="False"/>
             <GroupBox x:Name="grpCredits"          Grid.Column="0" Grid.Row="7" Header="Credits" Margin="5,0,5,3" BorderBrush="#FF761212" IsEnabled="False" FontFamily="Verdana">
             <Viewbox Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left">
                 <TextBlock x:Name="txtCredits" FontSize="12" TextWrapping="Wrap"/>
@@ -460,8 +460,8 @@
                     <ColumnDefinition Width="30*"></ColumnDefinition>
                     <ColumnDefinition Width="30*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Name="lblClock" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Background="#FF761212" Foreground="Moccasin"  FontFamily="Verdana"/>
-                <Button Name="btnPause" Grid.Row="0" Grid.Column="0" BorderThickness="0" IsHitTestVisible="True" Click="btnPausePlay_Click" Style="{StaticResource ImageButton}">
+                    <Label Name="lblClock" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Background="#FF761212" Foreground="Moccasin"  FontFamily="Verdana" Focusable="False"/>
+                    <Button Name="btnPause" Grid.Row="0" Grid.Column="0" BorderThickness="0" IsHitTestVisible="True" Click="btnPausePlay_Click" Style="{StaticResource ImageButton}" Focusable="False">
                     <Button.Background>
                         <ImageBrush ImageSource="Images/btnPause-icon3.png" Stretch="Uniform">
                             <ImageBrush.RelativeTransform>
@@ -475,7 +475,7 @@
                         </ImageBrush>
                     </Button.Background>
                 </Button>
-                <Button Visibility="Hidden" Name="btnPlay" Grid.Row="0" Grid.Column="0" BorderThickness="0" IsHitTestVisible="True" Click="btnPausePlay_Click" Style="{StaticResource ImageButton}">
+                    <Button Visibility="Hidden" Name="btnPlay" Grid.Row="0" Grid.Column="0" BorderThickness="0" IsHitTestVisible="True" Click="btnPausePlay_Click" Style="{StaticResource ImageButton}" Focusable="False">
                     <Button.Background>
                         <ImageBrush ImageSource="Images/btnPlay-icon2.png" Stretch="Uniform">
                             <ImageBrush.RelativeTransform>
@@ -489,7 +489,7 @@
                         </ImageBrush>
                     </Button.Background>
                 </Button>
-                <Button Grid.Row="1" Grid.Column="2" BorderThickness="0" IsHitTestVisible="True" Click="btnSettings_Click" Style="{StaticResource ImageButton}">
+                    <Button Grid.Row="1" Grid.Column="2" BorderThickness="0" IsHitTestVisible="True" Click="btnSettings_Click" Style="{StaticResource ImageButton}" Focusable="False">
                     <Button.Background>
                         <ImageBrush ImageSource="Images/setting-icon2.png" Stretch="Uniform">
                             <ImageBrush.RelativeTransform>
@@ -503,7 +503,7 @@
                         </ImageBrush>
                     </Button.Background>
                 </Button>
-                <Button Grid.Row="1" Grid.Column="3" BorderThickness="0" Style="{StaticResource ImageButton}" Click="btnHelp_Click" Background="Transparent" FontWeight="Bold" FontFamily="Verdana" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                    <Button Grid.Row="1" Grid.Column="3" BorderThickness="0" Style="{StaticResource ImageButton}" Click="btnHelp_Click" Background="Transparent" FontWeight="Bold" FontFamily="Verdana" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Focusable="False">
                     <Button.Foreground>
                         <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                             <GradientStop Color="#FFD8B087" Offset="0"/>
@@ -511,7 +511,7 @@
                         </LinearGradientBrush>
                     </Button.Foreground> ?
                 </Button>
-                <Button Name="btnMuted" Grid.Row="1" BorderThickness="0" Grid.Column="0" Style="{StaticResource ImageButton}" Click="btnMuteClick" Visibility="Collapsed"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                    <Button Name="btnMuted" Grid.Row="1" BorderThickness="0" Grid.Column="0" Style="{StaticResource ImageButton}" Click="btnMuteClick" Visibility="Collapsed"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Focusable="False">
                     <Button.Background>
                         <ImageBrush ImageSource="Images/btnMute-icon.png" Stretch="Uniform">
                             <ImageBrush.RelativeTransform>
@@ -524,7 +524,7 @@
                             </ImageBrush.RelativeTransform>
                         </ImageBrush>
                     </Button.Background></Button>
-                <Button Name="btnNotMuted" Grid.Row="1" Grid.Column="0" BorderThickness="0" Style="{StaticResource ImageButton}" Click="btnMuteClick" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                    <Button Name="btnNotMuted" Grid.Row="1" Grid.Column="0" BorderThickness="0" Style="{StaticResource ImageButton}" Click="btnMuteClick" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Focusable="False">
                     <Button.Background>
                         <ImageBrush ImageSource="Images/btnSound-icon.png" Stretch="Uniform">
                             <ImageBrush.RelativeTransform>
@@ -540,8 +540,8 @@
                 </Button>
             </Grid>
 
-            <Button Name="btnHint" Grid.Row="1" Grid.Column="0" Content="Hint" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Height="30" Click="Button_Hint_Click" Style="{StaticResource InformButton}"></Button>
-            <Button Name="btnCheck" Grid.Row="2" Grid.Column="0" Content="Check"  FontWeight="SemiBold" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" BorderBrush="Black" Click="Button_Check_Click" Style="{StaticResource InformButton}"></Button>
+                <Button Name="btnHint" Grid.Row="1" Grid.Column="0" Content="Hint" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" Height="30" Click="Button_Hint_Click" Style="{StaticResource InformButton}" Focusable="False"></Button>
+                <Button Name="btnCheck" Grid.Row="2" Grid.Column="0" Content="Check"  FontWeight="SemiBold" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" BorderBrush="Black" Click="Button_Check_Click" Style="{StaticResource InformButton}" Focusable="False"></Button>
             <StackPanel Grid.Row="3" Grid.Column="0">
                 <StackPanel Orientation="Horizontal">
                     <Label FontFamily="Verdana" FontWeight="Bold">Level: </Label>
@@ -558,15 +558,15 @@
             <GroupBox Name="keyPad_static" Header="Keypad" Grid.Row="5" Grid.Column="0" Margin="5,0,5,5" BorderBrush="#FF761212" Visibility="Visible" FontFamily="Verdana">
                 <Viewbox Stretch="Fill" >
                 <UniformGrid Name="mainWindowKeypad" Rows="3" Columns="3">
-                    <Button Name="one" Margin="2" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">1</Button>
-                        <Button Name="two"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">2</Button>
-                        <Button Name="three"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">3</Button>
-                        <Button Name="four"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">4</Button>
-                        <Button Name="five"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">5</Button>
-                        <Button Name="six"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">6</Button>
-                        <Button Name="seven"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">7</Button>
-                        <Button Name="eight"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">8</Button>
-                        <Button Name="nine"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}">9</Button>
+                            <Button Name="one" Margin="2" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}" Focusable="False">1</Button>
+                            <Button Name="two"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}" Focusable="False">2</Button>
+                            <Button Name="three"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}" Focusable="False">3</Button>
+                            <Button Name="four"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}" Focusable="False">4</Button>
+                            <Button Name="five"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}" Focusable="False">5</Button>
+                            <Button Name="six"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}" Focusable="False">6</Button>
+                            <Button Name="seven"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}" Focusable="False">7</Button>
+                            <Button Name="eight"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}" Focusable="False">8</Button>
+                            <Button Name="nine"  Margin="1" Height="30" Width="30" Click="returnNumpadValue" Style="{StaticResource InformButton}" Focusable="False">9</Button>
                 </UniformGrid>
                 </Viewbox>
             </GroupBox>

@@ -26,7 +26,7 @@ namespace SudokuMain
         public MenuWindow()
         {
             InitializeComponent();
-            if (_set.getOnline() == true)
+            if (_set.GetOnline() == true)
                 btnMulti.Content = "ON";
             else btnMulti.Content = "OFF";
 
@@ -71,10 +71,10 @@ namespace SudokuMain
         private void btnOptions_Click(object sender, RoutedEventArgs e)
         {
             _set.loadSettings();
-            showTimer.IsChecked       = _set.getTimer();
-            enableHighscore.IsChecked = _set.getHighscore();
-            enablePanel.IsChecked     = _set.getPanel();
-            enableMusic.IsChecked     = _set.getMusic();
+            showTimer.IsChecked       = _set.GetTimer();
+            enableHighscore.IsChecked = _set.GetHighscore();
+            enablePanel.IsChecked     = _set.GetPanel();
+            enableMusic.IsChecked     = _set.GetMusic();
 
             /*******ANIMATIONER***************/
             _myBoard = (Storyboard)this.Resources["moveButtonsDown"];
@@ -118,11 +118,11 @@ namespace SudokuMain
         {
             Button btnDiff = (Button)sender;
             if (btnDiff.Content.ToString() == "Beginner")
-                _set.setDifficulty(0);
+                _set.SetDifficulty(0);
             if (btnDiff.Content.ToString() == "Experienced")
-                _set.setDifficulty(1);
+                _set.SetDifficulty(1);
             if(btnDiff.Content.ToString() == "Veteran")
-                _set.setDifficulty(2);
+                _set.SetDifficulty(2);
             _set.saveSettings();
 
             MainWindow game = new MainWindow(false);
@@ -131,7 +131,6 @@ namespace SudokuMain
 
             _myBoard = (Storyboard)this.Resources["moveButtonsUpDiffDown"];
             _myBoard.Begin();
-            //this.Hide();
         }
 
         //Knapp som togglar cloudhighscore av eller på

@@ -15,24 +15,23 @@ namespace SudokuMain
         bool _online;
         bool _musicOn;
 
-        //konstruktor för inladdning
         public Settings() { loadSettings(); }
 
-        public bool getTimer() { return _timer; }
-        public bool getHighscore() { return _highScore; }
-        public bool getPanel() { return _panel; }
-        public int getDifficulty() { return Convert.ToInt16(_difficulty); }
-        public bool getOnline() { return _online; }
-        public bool getMusic() { return _musicOn; }
+        public bool GetTimer() { return _timer; }
+        public bool GetHighscore() { return _highScore; }
+        public bool GetPanel() { return _panel; }
+        public int GetDifficulty() { return Convert.ToInt16(_difficulty); }
+        public bool GetOnline() { return _online; }
+        public bool GetMusic() { return _musicOn; }
 
-        public void setDifficulty(int diff) { _difficulty = diff; }
+        public void SetDifficulty(int diff) { _difficulty = diff; }
         public void SetTimer(bool timer) { _timer = timer; }
         public void SetHighscore(bool highscore) { _highScore = highscore; }
         public void SetPopupPanel(bool panel) { _panel = panel; }
         public void SetOnline(bool online) { _online = online; }
         public void SetMusic(bool music) { _musicOn = music; }
 
-        //Konstruktor
+        /*//Konstruktor
         public Settings(bool time, bool score, bool panel, int diff)
         {
             _timer = time;
@@ -48,7 +47,8 @@ namespace SudokuMain
             _highScore = score;
             _panel = panel;
         }
-        
+        *///Bortkommenterad kod
+
         //Sparar inställningar till fil.
         public void saveSettings()
         {
