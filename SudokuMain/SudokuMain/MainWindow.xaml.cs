@@ -50,10 +50,9 @@ namespace SudokuMain
         #endregion
 
 
-        public MainWindow(bool loadGame = false, bool multiplayer = false)
+        public MainWindow(bool loadGame = false)
         {
             InitializeComponent();
-            //_multiplayer = multiplayer;//Indikerar om man spelar mot DB eller inte.
             // DBConnection.DeleteTable(); //Används för att tömma DB
             // DBConnection.FillTable(3, 5, 5);//Används för att fylla DB
             Music(); //Bortkommenterad under visningen.
