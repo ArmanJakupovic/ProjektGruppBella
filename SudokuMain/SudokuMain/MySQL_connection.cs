@@ -122,46 +122,6 @@ namespace SudokuMain
                 return null;
             
         }
-
-        //Fyller databasen med standardvärden
-        public bool FillTable(int numberOfDiff, int numberOfLvls, int numberOfNames)
-        {
-            if (openConnection())//Om det går att öppna anslutningen
-            {
-                for (int i = 0; i < numberOfDiff; i++)
-                {
-                    for (int j = 0; j < numberOfLvls; j++)
-                    {
-                        for (int ix = 0; ix < numberOfNames; ix++)
-                        {
-                            _query = "INSERT INTO Highscore (Name, Score, Diff, Level) VALUES ('DB" + i.ToString()+j.ToString() + "-','3600', '" + i + "','" + j + "')";
-                            _command = new MySqlCommand(_query, _connection);
-                            _command.ExecuteNonQuery();
-                        }
-                    }
-                }
-                closeConnection();
-                return true;
-            }
-            else
-                return false;
-        }
-
-        //Rensar databasen
-        public bool DeleteTable()
-        {
-           _query = "DELETE FROM Highscore";
-
-            if (openConnection())
-            {
-                _command = new MySqlCommand(_query, _connection);
-                _command.ExecuteNonQuery();
-                closeConnection();
-                return true;
-            }
-            else
-                return false;
-        }
     }
 }
 
