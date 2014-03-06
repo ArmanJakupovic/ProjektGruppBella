@@ -31,24 +31,6 @@ namespace SudokuMain
         public void SetOnline(bool online) { _online = online; }
         public void SetMusic(bool music) { _musicOn = music; }
 
-        /*//Konstruktor
-        public Settings(bool time, bool score, bool panel, int diff)
-        {
-            _timer = time;
-            _highScore = score;
-            _panel = panel;
-            _difficulty = diff; // 0 = beginner, 1 = experienced, 2 = veteran 
-        }
-
-        //Konstruktor för MenuWindow (kan vara en dålig idé)
-        public Settings(bool time, bool score, bool panel)
-        {
-            _timer = time;
-            _highScore = score;
-            _panel = panel;
-        }
-        *///Bortkommenterad kod
-
         //Sparar inställningar till fil.
         public void saveSettings()
         {

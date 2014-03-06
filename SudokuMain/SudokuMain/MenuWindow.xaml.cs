@@ -80,7 +80,6 @@ namespace SudokuMain
             _myBoard = (Storyboard)this.Resources["moveButtonsDown"];
             _myBoard.Begin();
             /******SLUT*PÅ*ANIMATIONER*******/
-
         }
 
         //Tillbaka till Menu utan att spara inställningar
