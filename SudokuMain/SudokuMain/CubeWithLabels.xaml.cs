@@ -42,7 +42,7 @@ namespace SudokuMain
             return CurrentNumber;
         }
 
-        //Hämtar innehållet i den label ix (0-9);
+        //Hämtar innehållet i den label med index ix (0-9);
         public string GetLabelContent(int ix)
         {
             UniformGrid uGrd = this.field;
@@ -75,23 +75,6 @@ namespace SudokuMain
                 rectActive.Stroke = Brushes.Black;
             }
         }
-
-        /*
-        public Brush GetBackground(int ix)
-        {
-            try
-            {
-                UniformGrid uGrd = this.field;
-                Grid grd = uGrd.Children[ix] as Grid;
-                Label lbl = grd.Children[0] as Label;
-                return lbl.Background;
-            }
-            catch (ArgumentOutOfRangeException ex)
-            {
-                return null;
-            }
-        }
-        */
 
         //Sätter texten till fet i aktuell label om active=true
         public void setTextProperty(int ix, bool active)

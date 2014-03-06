@@ -25,7 +25,7 @@ namespace SudokuMain
             currentLevel = 0;
             currentDifficulty = 0;
             levels = new List<Level>();
-            levelZero();                //Hämtar en bana som finns ifall det filen med levels saknas
+            levelZero();                //Hämtar en bana som finns ifall filen med levels saknas
         }
 
         //Begär en ny bana med diff=0-2 och nr=0-4
@@ -176,7 +176,6 @@ namespace SudokuMain
             char[] delimiters = new char[] { '[', ']', ',' }; //För att ta bort oönskade tecken
             string[] info = new string[2];
 
-
             try
             {
                 StreamReader inStream = new StreamReader(@"SudokuLevels.sdk");
@@ -287,7 +286,7 @@ namespace SudokuMain
             return errorList;
         } //CheckMatch
 
-        //Returnerar en position i matrisen som inte är satt
+        //Returnerar en (slumpvald) position i matrisen som inte är satt
         public int GetHint()
         {
             Random rnd = new Random();

@@ -36,8 +36,8 @@ namespace SudokuMain
         private CubeWithLabels prevBlockIx;
         private CubeWithLabels cube;
         private int prevIx = 0;
-        private int xPos = 0; //Ska hålla reda på vilken pos man är i (0-8)
-        private int yPos = 0;
+        private int xPos = 4; //Ska hålla reda på vilken pos man är i (0-8)
+        private int yPos = 4;
         private Storyboard _myBoard;
         private bool _gameFinished = false;
         private bool _newGame = false;
@@ -138,7 +138,6 @@ namespace SudokuMain
                 CubeWithLabels cubeCompair = grdBoard.Children[ix] as CubeWithLabels;
                 if (cubeCompair == cube)
                 {
-                    //MessageBox.Show(ix.ToString());
                     indexnr = ix;
                     lblIndex = cube.FindClickedLabel();
 
@@ -155,8 +154,6 @@ namespace SudokuMain
                     showNumbers();
                     try
                     {
-
-                        //if (_mainSettings.getPanel() && (cube.GetBackground(_lblIndex).ToString() != "#FFD8B087"))
                         if (_mainSettings.GetPanel() && game.NumberIsChangeable(_gridIndexNr, _lblIndex))
                         {
                             openPopup(ref myNr, ref _gridIndexNr, ref _lblIndex, ref ourWindow);
@@ -432,10 +429,8 @@ namespace SudokuMain
             markedGridPosUpdate(_gridIndexNr, _lblIndex, x.Content.ToString());
         }
 
-
-        //Låter användaren skriva in siffor med tangentbordet
-        //Det går att göra det möjligt att navigera med piltangenterna men det
-        //blir komplicerat eftersom MainWindow består av block
+ 
+        //Hanterar all input från tangentbordet (siffror, pilangenter, pause etc)
         private void CubeWithLabels_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (_gameFinished)
@@ -692,7 +687,6 @@ namespace SudokuMain
         //Hämtar information om difficulty och level labels och initierar dem.
         private void initInfoLabel()
         {
-            //int x = _mainSettings.getDifficulty();
             int x = game.currentDifficulty;
             switch (x)
             {
